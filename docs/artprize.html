@@ -64,7 +64,7 @@
           </div>
           <div class="group relative h-48 overflow-hidden rounded-lg border border-white/10">
             <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery planner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP_bgnrDbZ0QtiVYKSYRkSQeRG7Q1i-lv1yydG6XY8XGnzKAbXUHuDuXdZ_vymd3zHt4Gw0IjzEOWhQapSh_BqkgsL7m2EwhcRXhJZlpx2-DS6p78MlGRNPgC1zUokCMy9lIup4pEICkbj0ZX4z8l6H5xaeMS7O75ukozCMNVLR-ZrLBPI-y37X6NOkjlmHPwAEy_mmbhe24U3LLQ-btMsxHGX1EhcdAzgjptiGKeCmRos4l9J9IZx5Yfa-988_bYUJmmG0HLKZVM">
-            <div class="absolute inset-0 flex items-end bg-gradient-to-t from-surface-container-lowest to-transparent p-4"><button class="w-full rounded-lg border border-white/20 bg-white/10 py-2 text-xs font-label-md backdrop-blur-md">Launch Simulator</button></div>
+            <div class="absolute inset-0 flex items-end bg-gradient-to-t from-surface-container-lowest to-transparent p-4"><button class="w-full rounded-lg border border-white/20 bg-white/10 py-2 text-xs font-label-md backdrop-blur-md" data-action="launch-simulator">Launch Simulator</button></div>
           </div>
         </section>
 
@@ -92,7 +92,7 @@
         <section class="glass-card flex flex-col items-center justify-center gap-4 rounded-xl p-8 text-center md:col-span-3">
           <div class="w-24 rounded-xl bg-white p-2"><div class="flex h-20 w-full items-center justify-center border-4 border-surface bg-surface text-primary-fixed-dim"><span class="material-symbols-outlined text-4xl">qr_code_2</span></div></div>
           <div><p class="font-label-md text-on-surface">Dynamic QR Code</p><p class="text-xs text-on-surface-variant">Links to your NovaCanvas Portfolio</p></div>
-          <button class="w-full rounded-lg bg-secondary-container py-2 text-xs font-bold uppercase tracking-wider text-on-secondary-container">Download SVG</button>
+          <button class="w-full rounded-lg bg-secondary-container py-2 text-xs font-bold uppercase tracking-wider text-on-secondary-container" data-action="download-qr-svg">Download SVG</button>
         </section>
       </div>
 
@@ -117,5 +117,6 @@
     </main>
     <script src="./firebase-config.example.js"></script>
     <script type="module" src="./firebase-init.js"></script>
+    <script type="module" src="./interactions.js"></script>
   </body>
 </html>
