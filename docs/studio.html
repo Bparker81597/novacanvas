@@ -12,7 +12,7 @@
     <script src="./theme.js"></script>
     <link rel="stylesheet" href="./app.css">
   </head>
-  <body class="bg-background font-body-md text-on-background page-shell">
+  <body class="bg-background font-body-md text-on-background page-shell" data-page="studio">
     <header class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
       <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
         <div class="flex items-center gap-8">
@@ -49,8 +49,8 @@
           <section class="glass-panel rounded-xl p-8 md:col-span-8">
             <div class="mb-6 flex items-start justify-between">
               <div>
-                <h2 class="mb-2 font-headline-md text-headline-md text-primary">Active Canvas</h2>
-                <p class="text-on-surface-variant">Flow Analysis: Neo-Traditional Backpiece v2</p>
+                <h2 class="mb-2 font-headline-md text-headline-md text-primary" data-active-project-title>Active Canvas</h2>
+                <p class="text-on-surface-variant" data-active-project-summary>Flow Analysis: Neo-Traditional Backpiece v2</p>
               </div>
               <div class="flex gap-2">
                 <span class="rounded-full border border-on-tertiary-container/30 bg-on-tertiary-container/20 px-3 py-1 font-mono-sm text-mono-sm text-on-tertiary-container">ArtPrize Prep</span>
@@ -141,6 +141,6 @@
     </button>
 
     <script src="./firebase-config.example.js"></script>
-    <script src="./firebase-init.js"></script>
+    <script type="module" src="./firebase-init.js"></script>
   </body>
 </html>

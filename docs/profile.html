@@ -12,7 +12,7 @@
     <script src="./theme.js"></script>
     <link rel="stylesheet" href="./app.css">
   </head>
-  <body class="bg-background font-body-md text-on-surface antialiased page-shell">
+  <body class="bg-background font-body-md text-on-surface antialiased page-shell" data-page="profile">
     <header class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
       <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
         <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
@@ -44,19 +44,19 @@
           <div class="flex-1 space-y-6">
             <div>
               <div class="mb-2 flex flex-wrap items-center gap-4">
-                <h1 class="font-headline-lg text-headline-lg text-white">Elora Vance</h1>
+                <h1 class="font-headline-lg text-headline-lg text-white" data-profile-name>Elora Vance</h1>
                 <div class="flex gap-2">
                   <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Muralist</span>
                   <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">Cyber-Illustrator</span>
                 </div>
               </div>
-              <p class="max-w-2xl font-body-lg text-on-surface-variant">Architect of digital dreamscapes and urban neon narratives. Specializing in high-fidelity glassmorphism and large-scale augmented reality murals that bridge the physical and digital void.</p>
+              <p class="max-w-2xl font-body-lg text-on-surface-variant" data-profile-bio>Architect of digital dreamscapes and urban neon narratives. Specializing in high-fidelity glassmorphism and large-scale augmented reality murals that bridge the physical and digital void.</p>
             </div>
             <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Followers</div><div class="font-headline-md text-headline-md text-primary-fixed-dim">12.8k</div></div>
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Artworks</div><div class="font-headline-md text-headline-md text-white">342</div></div>
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">ArtPrize Wins</div><div class="font-headline-md text-headline-md text-on-tertiary-container">12</div></div>
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Streak</div><div class="font-headline-md text-headline-md text-secondary">48<span class="ml-1 text-label-md font-normal">days</span></div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Followers</div><div class="font-headline-md text-headline-md text-primary-fixed-dim" data-stat-followers>12.8k</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Artworks</div><div class="font-headline-md text-headline-md text-white" data-stat-artworks>342</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">ArtPrize Wins</div><div class="font-headline-md text-headline-md text-on-tertiary-container" data-stat-artprize-wins>12</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Streak</div><div class="font-headline-md text-headline-md text-secondary"><span data-stat-streak>48</span><span class="ml-1 text-label-md font-normal">days</span></div></div>
             </div>
           </div>
         </div>
@@ -103,15 +103,15 @@
       <div class="glass-card absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-white/10 p-8 shadow-2xl">
         <div class="mb-10 flex items-center justify-between"><h2 class="text-2xl font-headline-md text-white">Profile Settings</h2><button class="text-on-surface-variant hover:text-white" onclick="document.getElementById('edit-profile-panel').classList.add('translate-x-full')"><span class="material-symbols-outlined">close</span></button></div>
         <div class="flex-1 space-y-8">
-          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Display Name</label><input class="w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" type="text" value="Elora Vance"></div>
-          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Bio Preview</label><textarea class="h-32 w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim">Architect of digital dreamscapes and urban neon narratives...</textarea></div>
+          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Display Name</label><input class="w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" data-profile-input="displayName" type="text" value="Elora Vance"></div>
+          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Bio Preview</label><textarea class="h-32 w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" data-profile-input="bio">Architect of digital dreamscapes and urban neon narratives...</textarea></div>
           <div class="rounded-2xl border border-primary-container/10 bg-primary-container/5 p-6"><div class="flex items-center gap-4 text-primary-fixed-dim"><span class="material-symbols-outlined">verified</span><div class="text-label-md">Verified Artist Status Active</div></div></div>
         </div>
-        <div class="mt-auto flex flex-col gap-4"><button class="w-full rounded-full bg-primary-container py-4 font-label-md text-on-primary-container shadow-lg shadow-primary-container/20 transition-all hover:scale-[1.02]">Save Changes</button><button class="w-full rounded-full border border-white/10 py-4 font-label-md uppercase tracking-widest text-on-surface-variant transition-all hover:bg-white/5" onclick="document.getElementById('edit-profile-panel').classList.add('translate-x-full')">Cancel</button></div>
+        <div class="mt-auto flex flex-col gap-4"><button class="w-full rounded-full bg-primary-container py-4 font-label-md text-on-primary-container shadow-lg shadow-primary-container/20 transition-all hover:scale-[1.02]" id="save-profile-button">Save Changes</button><button class="w-full rounded-full border border-white/10 py-4 font-label-md uppercase tracking-widest text-on-surface-variant transition-all hover:bg-white/5" onclick="document.getElementById('edit-profile-panel').classList.add('translate-x-full')">Cancel</button></div>
       </div>
     </div>
 
     <script src="./firebase-config.example.js"></script>
-    <script src="./firebase-init.js"></script>
+    <script type="module" src="./firebase-init.js"></script>
   </body>
 </html>

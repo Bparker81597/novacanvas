@@ -12,7 +12,7 @@
     <script src="./theme.js"></script>
     <link rel="stylesheet" href="./app.css">
   </head>
-  <body class="particle-bg font-body-md text-body-md text-on-surface page-shell">
+  <body class="particle-bg font-body-md text-body-md text-on-surface page-shell" data-page="challenges">
     <nav class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
       <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
         <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
@@ -34,7 +34,7 @@
             <h1 class="neon-gradient-text font-display-lg text-display-lg">Challenges</h1>
             <p class="mt-4 max-w-2xl font-body-lg text-body-lg text-on-surface-variant">Master your craft through focused creative missions. Earn XP, unlock exclusive digital pigments, and climb the NovaCanvas elite ranks.</p>
           </div>
-          <div class="glass-card flex items-center gap-4 rounded-xl px-6 py-4"><div class="rounded-lg bg-primary-container/10 p-3"><span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">military_tech</span></div><div><div class="font-mono-sm text-mono-sm uppercase text-on-surface-variant">Global Rank</div><div class="font-headline-md text-headline-md">#482</div></div></div>
+          <div class="glass-card flex items-center gap-4 rounded-xl px-6 py-4"><div class="rounded-lg bg-primary-container/10 p-3"><span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">military_tech</span></div><div><div class="font-mono-sm text-mono-sm uppercase text-on-surface-variant">Global Rank</div><div class="font-headline-md text-headline-md" data-user-rank>#482</div></div></div>
         </div>
       </header>
       <div class="grid grid-cols-1 gap-gutter lg:grid-cols-12">
@@ -79,11 +79,11 @@
             <div class="mb-8 text-center">
               <div class="relative inline-flex h-32 w-32 items-center justify-center rounded-full border-4 border-primary-container/20">
                 <div class="absolute inset-0 rotate-45 rounded-full border-4 border-primary-container border-t-transparent"></div>
-                <div><div class="text-4xl font-display-lg">14</div><div class="font-mono-sm text-mono-sm text-on-surface-variant">LEVEL</div></div>
+                <div><div class="text-4xl font-display-lg" data-user-level>14</div><div class="font-mono-sm text-mono-sm text-on-surface-variant">LEVEL</div></div>
               </div>
               <div class="mt-4 font-label-md text-label-md text-primary-fixed-dim">VANGUARD CREATOR</div>
             </div>
-            <div class="space-y-4"><div class="flex justify-between text-sm"><span class="text-on-surface-variant">Next Tier: Master</span><span>2,450 / 5,000 XP</span></div><div class="h-1.5 w-full rounded-full bg-white/5"><div class="h-full w-[49%] bg-gradient-to-r from-primary-container to-secondary-container"></div></div></div>
+            <div class="space-y-4"><div class="flex justify-between text-sm"><span class="text-on-surface-variant">Next Tier: Master</span><span data-user-xp>2,450 / 5,000 XP</span></div><div class="h-1.5 w-full rounded-full bg-white/5"><div class="h-full w-[49%] bg-gradient-to-r from-primary-container to-secondary-container" data-user-xp-bar></div></div></div>
           </section>
 
           <section class="glass-card rounded-2xl p-8">
@@ -110,6 +110,6 @@
       </div>
     </main>
     <script src="./firebase-config.example.js"></script>
-    <script src="./firebase-init.js"></script>
+    <script type="module" src="./firebase-init.js"></script>
   </body>
 </html>
