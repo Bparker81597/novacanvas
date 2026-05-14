@@ -1,0 +1,121 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NovaCanvas | ArtPrize Prep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="./theme.js"></script>
+    <link rel="stylesheet" href="./app.css">
+  </head>
+  <body class="bg-background font-body-md text-on-surface page-shell">
+    <nav class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
+      <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
+        <div class="flex items-center gap-8">
+          <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
+          <div class="hidden gap-6 lg:flex">
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./dashboard.html">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
+            <a class="active-nav font-label-md text-label-md" href="./artprize.html">ArtPrize Prep</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
+          </div>
+        </div>
+        <a class="rounded-full px-6 py-2 font-label-md text-label-md neon-gradient text-on-primary" href="./studio.html">Enter Studio</a>
+      </div>
+    </nav>
+    <main class="mx-auto max-w-container-max px-margin-mobile py-12 md:px-margin-desktop">
+      <header class="glass-card relative mb-16 overflow-hidden rounded-3xl border-white/5 p-12 lg:p-24">
+        <div class="absolute inset-0 z-0 opacity-20"><img class="h-full w-full object-cover grayscale" alt="ArtPrize hero" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnPhVoa8fFB2jsZBGYaLbqwowY5_fCgjBCOFMJo0m9t7cq0nTB9b8zwPZjLdQ9blzDNhhlLtQaVJw-bzmCO7QBQoOcj3alLm6wuAmXU-V_6Wt-JBegzwkS_8-8PwHhqFM1VHuzRKmtXowGcPkRi7FTUXAx39UXrtzTW_hZpDdMhW2m_TbYNMs3LURG5Pa5tz7dUKqeF6zE96QCRual9tNsrYUVDOYjJVVCkoNKG2rNzndVmr2oHsBSOoI1z7q0Lyt-hX0ZWHhm0aE"></div>
+        <div class="relative z-10 max-w-2xl">
+          <span class="mb-4 block font-mono-sm text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Grand Rapids ArtPrize</span>
+          <h1 class="mb-6 font-display-lg text-display-lg text-primary-fixed-dim">Elevate Your Exhibition</h1>
+          <p class="mb-8 font-body-lg text-body-lg text-on-surface-variant">The ultimate digital cockpit for Grand Rapids artists. Prepare, manage, and amplify your ArtPrize presence with cyber-luxe tools designed for the modern creator.</p>
+          <div class="flex gap-4">
+            <a class="rounded-xl px-8 py-3 font-label-md shadow-[0_0_20px_rgba(0,243,255,0.3)] neon-gradient text-on-primary" href="#tracker">Begin Prep Tracker</a>
+            <a class="rounded-xl border border-white/10 bg-white/5 px-8 py-3 font-label-md text-on-surface transition-all hover:bg-white/10" href="./profile.html">View Showcase</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="mb-16 grid grid-cols-1 gap-gutter md:grid-cols-12" id="tracker">
+        <section class="glass-card rounded-xl p-8 md:col-span-8">
+          <div class="mb-6 flex items-center justify-between">
+            <h2 class="font-headline-md text-headline-md text-primary-fixed-dim">Exhibit Prep Tracker</h2>
+            <span class="rounded-full border border-primary-fixed-dim/30 bg-primary-container/20 px-3 py-1 font-mono-sm text-mono-sm text-primary-fixed-dim">65% Complete</span>
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4 rounded-lg border border-white/5 bg-surface-container-low p-4"><span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">check_circle</span><div class="flex-1"><p class="font-label-md text-on-surface">Venue Selection &amp; Approval</p><p class="text-xs text-on-surface-variant">Confirmed with Blue Bridge Gallery</p></div><span class="text-xs text-on-surface-variant">Aug 12</span></div>
+            <div class="flex items-center gap-4 rounded-lg border border-white/5 bg-surface-container-low p-4"><span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">check_circle</span><div class="flex-1"><p class="font-label-md text-on-surface">Artist Statement Finalization</p><p class="text-xs text-on-surface-variant">Using NovaCanvas Statement Tool</p></div><span class="text-xs text-on-surface-variant">Aug 24</span></div>
+            <div class="glow-border flex items-center gap-4 rounded-lg border border-primary-fixed-dim/30 bg-white/5 p-4"><span class="material-symbols-outlined text-on-surface-variant">radio_button_unchecked</span><div class="flex-1"><p class="font-label-md text-on-surface">Installation Planning &amp; Logistics</p><p class="text-xs text-on-surface-variant">Pending lighting hardware list</p></div><span class="text-xs text-primary-fixed-dim">Next Step</span></div>
+            <div class="flex items-center gap-4 rounded-lg border border-white/5 bg-surface-container-low p-4 opacity-50"><span class="material-symbols-outlined text-on-surface-variant">radio_button_unchecked</span><div class="flex-1"><p class="font-label-md text-on-surface">QR Portfolio Setup</p><p class="text-xs text-on-surface-variant">Awaiting final asset upload</p></div><span class="text-xs text-on-surface-variant">Sep 05</span></div>
+          </div>
+        </section>
+
+        <section class="glass-card flex flex-col justify-between rounded-xl p-8 md:col-span-4">
+          <div>
+            <span class="material-symbols-outlined mb-4 text-4xl text-tertiary-fixed-dim">architecture</span>
+            <h2 class="mb-2 font-headline-md text-headline-md text-on-surface">Spatial Simulation</h2>
+            <p class="mb-6 text-body-md text-on-surface-variant">Preview your installation in a digital twin of Grand Rapids venues.</p>
+          </div>
+          <div class="group relative h-48 overflow-hidden rounded-lg border border-white/10">
+            <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Gallery planner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP_bgnrDbZ0QtiVYKSYRkSQeRG7Q1i-lv1yydG6XY8XGnzKAbXUHuDuXdZ_vymd3zHt4Gw0IjzEOWhQapSh_BqkgsL7m2EwhcRXhJZlpx2-DS6p78MlGRNPgC1zUokCMy9lIup4pEICkbj0ZX4z8l6H5xaeMS7O75ukozCMNVLR-ZrLBPI-y37X6NOkjlmHPwAEy_mmbhe24U3LLQ-btMsxHGX1EhcdAzgjptiGKeCmRos4l9J9IZx5Yfa-988_bYUJmmG0HLKZVM">
+            <div class="absolute inset-0 flex items-end bg-gradient-to-t from-surface-container-lowest to-transparent p-4"><button class="w-full rounded-lg border border-white/20 bg-white/10 py-2 text-xs font-label-md backdrop-blur-md">Launch Simulator</button></div>
+          </div>
+        </section>
+
+        <section class="glass-card rounded-xl p-8 md:col-span-4">
+          <span class="material-symbols-outlined mb-4 text-4xl text-primary-fixed-dim">edit_note</span>
+          <h2 class="mb-2 font-headline-md text-headline-md text-on-surface">Statement Forge</h2>
+          <p class="mb-6 text-body-md text-on-surface-variant">AI-assisted professional statements tailored for the Grand Rapids jury.</p>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between rounded border border-white/5 bg-white/5 p-3"><span class="text-xs font-label-md">Conceptual Narrative</span><span class="material-symbols-outlined text-xs">arrow_forward</span></div>
+            <div class="flex items-center justify-between rounded border border-white/5 bg-white/5 p-3"><span class="text-xs font-label-md">Technical Process</span><span class="material-symbols-outlined text-xs">arrow_forward</span></div>
+            <div class="flex items-center justify-between rounded border border-white/5 bg-white/5 p-3"><span class="text-xs font-label-md">Community Impact</span><span class="material-symbols-outlined text-xs">arrow_forward</span></div>
+          </div>
+        </section>
+
+        <section class="glass-card relative overflow-hidden rounded-xl p-8 md:col-span-5">
+          <h2 class="mb-2 font-headline-md text-headline-md text-on-surface">Social Pulse</h2>
+          <p class="mb-6 text-body-md text-on-surface-variant">Schedule teaser drops and engagement posts leading up to opening night.</p>
+          <div class="flex gap-3">
+            <img class="h-20 w-20 rounded-lg border border-white/10 object-cover grayscale transition-all hover:grayscale-0" alt="Social teaser" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhI4UcqQFbk5nIrYqKgCB9p_LIRu1IJFRhtNN1eDnlzdd0U5cJUl8WCJh5gMVXc8IoZpn2s80yn4vv2JBWlPcvpBwDmYHF0WR407h6m9wVg6CWXCD1iz-zbQ-3d_2CDRDqhQemnvTAuSU6tBpw5kRNjpn2XLG3dFjBgi_gfDto9mlywIcOs44Mdq9kxOzB-hkOz1PvdPCApR70xLuVbM3ONxc_EcnFKvjtbtG9vsHcrOAJhuSvDD4UfQttHV9JAAd9xaZ1wLWlbMA">
+            <img class="h-20 w-20 rounded-lg border border-white/10 object-cover grayscale transition-all hover:grayscale-0" alt="Work in progress teaser" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvllHzri01wLlbyRipcdUp3DDHfzhbdxKRVVXjVnhDb-K5XK4Y2rHclAtaH1m0UIGMO1HuJ7_j6YlMZKzok6FUhAw9IN_pfn9_EgobuquGJz8PfB-ZZ12UoSHfzbqMJiztv7BXhcTnmjQYu4b7zIgBh27EMkqBL5ntVkGEn7KRPL3-TDa4cQRJ_-bKK-63P6O5Kg6RLcQ6ktCc8V000rQg2qYneo0_WEMLePerJEKCgF3LNWg-Y35IdmhoFzede0A9sZuHVYDF5eU">
+            <div class="flex h-20 w-20 cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-primary-container/10 transition-all hover:bg-primary-container/20"><span class="material-symbols-outlined text-primary-fixed-dim">add_photo_alternate</span></div>
+          </div>
+        </section>
+
+        <section class="glass-card flex flex-col items-center justify-center gap-4 rounded-xl p-8 text-center md:col-span-3">
+          <div class="w-24 rounded-xl bg-white p-2"><div class="flex h-20 w-full items-center justify-center border-4 border-surface bg-surface text-primary-fixed-dim"><span class="material-symbols-outlined text-4xl">qr_code_2</span></div></div>
+          <div><p class="font-label-md text-on-surface">Dynamic QR Code</p><p class="text-xs text-on-surface-variant">Links to your NovaCanvas Portfolio</p></div>
+          <button class="w-full rounded-lg bg-secondary-container py-2 text-xs font-bold uppercase tracking-wider text-on-secondary-container">Download SVG</button>
+        </section>
+      </div>
+
+      <section class="mb-16">
+        <div class="mb-8 flex items-center gap-4"><h2 class="font-headline-md text-headline-md text-primary-fixed-dim">Engagement Architect</h2><div class="h-px flex-1 bg-white/10"></div></div>
+        <div class="grid grid-cols-1 gap-gutter md:grid-cols-3">
+          <div class="rounded-2xl border border-white/5 bg-surface-container-highest/30 p-6 backdrop-blur-sm transition-all hover:border-primary-fixed-dim/40"><div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-primary-container/10"><span class="material-symbols-outlined text-primary-fixed-dim">diversity_3</span></div><h3 class="mb-3 font-label-md text-on-surface">Live Digital Sketching</h3><p class="text-body-md text-on-surface-variant">Host a 2-hour daily window where visitors watch you create live on your NovaCanvas Studio.</p></div>
+          <div class="rounded-2xl border border-white/5 bg-surface-container-highest/30 p-6 backdrop-blur-sm transition-all hover:border-tertiary-fixed-dim/40"><div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-tertiary-container/10"><span class="material-symbols-outlined text-tertiary-fixed-dim">interactive_space</span></div><h3 class="mb-3 font-label-md text-on-surface">AR Easter Eggs</h3><p class="text-body-md text-on-surface-variant">Embed hidden AR layers in your physical piece that visitors unlock using the NovaCanvas mobile app.</p></div>
+          <div class="rounded-2xl border border-white/5 bg-surface-container-highest/30 p-6 backdrop-blur-sm transition-all hover:border-secondary-fixed-dim/40"><div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-secondary-container/10"><span class="material-symbols-outlined text-secondary-fixed-dim">forum</span></div><h3 class="mb-3 font-label-md text-on-surface">Real-time Q&amp;A</h3><p class="text-body-md text-on-surface-variant">Set up a digital suggestion box that feeds directly into your artist dashboard.</p></div>
+        </div>
+      </section>
+
+      <section class="glass-card overflow-hidden rounded-3xl">
+        <div class="flex items-center justify-between border-b border-white/10 p-8"><h2 class="font-headline-md text-headline-md text-on-surface">Presentation Checklist</h2><span class="inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span></div>
+        <div class="grid grid-cols-1 divide-y divide-white/10 md:grid-cols-2 md:divide-x md:divide-y-0 lg:grid-cols-4">
+          <div class="space-y-4 p-8"><h3 class="text-[10px] font-label-md uppercase tracking-widest text-primary-fixed-dim">Physical Prep</h3><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Framing/Mounting</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Hardware Audit</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Touch-up Kit</label></div>
+          <div class="space-y-4 p-8"><h3 class="text-[10px] font-label-md uppercase tracking-widest text-primary-fixed-dim">Digital Prep</h3><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">4K Portfolio Assets</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Video Sizzle Reel</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Newsletter Signup</label></div>
+          <div class="space-y-4 p-8"><h3 class="text-[10px] font-label-md uppercase tracking-widest text-primary-fixed-dim">Promotional</h3><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Business Cards</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Stickers/Swag</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Social Schedule</label></div>
+          <div class="space-y-4 p-8"><h3 class="text-[10px] font-label-md uppercase tracking-widest text-primary-fixed-dim">Logistics</h3><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Transport Plan</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Load-in Permit</label><label class="flex items-center gap-3 text-sm text-on-surface-variant"><input class="rounded border-white/20 bg-white/5 text-primary-container" type="checkbox">Insurance Docs</label></div>
+        </div>
+      </section>
+    </main>
+    <script src="./firebase-config.example.js"></script>
+    <script src="./firebase-init.js"></script>
+  </body>
+</html>

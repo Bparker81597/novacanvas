@@ -1,20 +1,163 @@
 <!doctype html>
-<html lang="en">
+<html class="dark" lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NovaCanvas</title>
+    <title>NovaCanvas | Build. Refine. Present.</title>
     <meta
       name="description"
-      content="NovaCanvas is a live GitHub Pages site."
+      content="NovaCanvas is a creative growth ecosystem for artists, now wired for Firebase-backed experiences."
     >
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="./theme.js"></script>
+    <link rel="stylesheet" href="./app.css">
   </head>
-  <body>
-    <main class="hero">
-      <p class="eyebrow">GitHub Pages</p>
-      <h1>NovaCanvas</h1>
-      <p class="lede">A clean starter site published directly from the repository.</p>
+  <body class="bg-background text-on-background font-body-md page-shell">
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 backdrop-blur-2xl shadow-2xl">
+      <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
+        <div class="flex items-center gap-8">
+          <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
+          <nav class="hidden items-center gap-6 lg:flex">
+            <a class="active-nav font-label-md text-label-md" href="./index.html">Home</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./profile.html">Portfolio</a>
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="hidden sm:inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span>
+          <a class="rounded-full bg-primary-container px-6 py-2 font-label-md text-label-md text-on-primary-container transition-transform active:scale-95" href="./dashboard.html">Open Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="relative flex min-h-[88vh] items-center overflow-hidden px-margin-mobile pt-20 md:px-margin-desktop">
+        <div class="absolute inset-0 z-0">
+          <div class="absolute top-1/4 -left-20 h-96 w-96 opacity-50 blur-3xl" style="background: radial-gradient(circle, rgba(0,220,230,0.12) 0%, rgba(17,20,23,0) 70%);"></div>
+          <div class="absolute bottom-1/4 -right-20 h-[500px] w-[500px] opacity-30 blur-3xl" style="background: radial-gradient(circle, rgba(197,192,255,0.18) 0%, rgba(17,20,23,0) 70%);"></div>
+          <img alt="Cinematic artistic background" class="h-full w-full object-cover opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJidMlj5htU28aOtHtOd3QMVFmsEOBlwelPQ3Xjj0r8hsec5YywN1uKZ5A9-zQWwbhKr_0UHJCYiY_ow_oyexUjt5rl83wxLAKR_9euvLf0ju-pPVh_3MIXLpOqfSzaicD5eAo4WqWXCSCBQwOcaIspNZUISmxQhEOY6YssbCzHeIDviEaIbQ4ws_Y0aUnwmPrvF8OXCFS2JAQ4hag4UXU-Ds9aQI-P210xgk4YQvTo7Cz5CI33sRNAn3Cidmf0UpfKzz6HyuWtI0">
+        </div>
+        <div class="relative z-10 mx-auto grid w-full max-w-container-max grid-cols-1 items-center gap-16 lg:grid-cols-2">
+          <div class="space-y-8">
+            <div class="inline-block rounded-full border border-primary/20 glass-card px-4 py-1.5">
+              <span class="font-mono-sm text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Version 2.0 Digital Atelier</span>
+            </div>
+            <h1 class="font-display-lg text-[3.6rem] leading-none text-white md:text-display-lg">
+              Build. Refine.<br>
+              <span class="bg-gradient-to-r from-primary-fixed-dim to-secondary-fixed-dim bg-clip-text text-transparent">Present Your Vision.</span>
+            </h1>
+            <p class="max-w-xl font-body-lg text-body-lg text-on-surface-variant">
+              A creative growth ecosystem designed to help artists grow, not replace them. NovaCanvas now has a GitHub Pages front end and a Firebase foundation for auth, projects, portfolios, and community workflows.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-4">
+              <a class="rounded-xl bg-gradient-to-r from-primary-container to-secondary-container px-8 py-4 font-label-md text-label-md font-bold text-white shadow-[0_0_24px_rgba(0,220,230,0.28)] transition-all hover:scale-105 active:scale-95" href="./studio.html">Launch Creator Studio</a>
+              <a class="rounded-xl border border-white/20 glass-card px-8 py-4 font-label-md text-label-md font-bold text-white transition-all hover:bg-white/10" href="./artprize.html">Explore ArtPrize Tools</a>
+            </div>
+          </div>
+          <div class="relative hidden lg:block">
+            <div class="glass-card relative overflow-hidden rounded-2xl border-white/10 p-4 shadow-2xl">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50"></div>
+              <img alt="Creative dashboard preview" class="aspect-[4/3] w-full rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKHoexreDQIb31FMCudWgLRHzxqhsYmXYnLU9k9aGG9y8Jp_SbFa4ofCKm94PBpS4_BpwaHzuB88ewYbchLZC1Pog8rvRl_FZxrQcAMBYh-qH92XVtYL9Al4GOTCcgQfgpsuRZTj_mXsDumh4Ri-HYN65XLFp31A1sVv-NzGpmNj8NhVrf7TWmdh5eb2edbggQKtVi60TL_tNubhBFUVGaJnpzEXnnEvpnFRW9V1HucVO_JrDQ3lvs-2KCEWs0v9qpWKouudmS860">
+              <div class="absolute top-8 -left-12 w-48 rounded-xl border border-primary/30 glass-card p-4 shadow-xl">
+                <div class="mb-2 flex items-center gap-3">
+                  <span class="material-symbols-outlined text-primary-fixed-dim">brush</span>
+                  <span class="font-label-md text-label-md text-white">Dynamic Flow</span>
+                </div>
+                <div class="h-1 w-full overflow-hidden rounded-full bg-white/10">
+                  <div class="h-full w-2/3 bg-primary-fixed-dim"></div>
+                </div>
+              </div>
+              <div class="absolute bottom-12 -right-8 w-56 rounded-xl border border-secondary/30 glass-card p-4 shadow-xl">
+                <div class="mb-2 flex items-center gap-3">
+                  <span class="material-symbols-outlined text-secondary-fixed-dim">layers</span>
+                  <span class="font-label-md text-label-md text-white">ArtPrize Entry</span>
+                </div>
+                <div class="flex gap-1">
+                  <div class="h-8 w-8 rounded bg-surface-container"></div>
+                  <div class="h-8 w-8 rounded bg-surface-container-high"></div>
+                  <div class="h-8 w-8 rounded bg-primary-container/20"></div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute inset-0 -z-10 blur-2xl" style="background: linear-gradient(135deg, rgba(0,243,255,0.08), transparent 40%, rgba(64,9,255,0.12));"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-container-max px-margin-mobile py-24 md:px-margin-desktop">
+        <div class="grid grid-cols-1 gap-gutter md:grid-cols-12">
+          <div class="glass-card relative col-span-1 flex h-[400px] flex-col justify-end overflow-hidden rounded-3xl border-white/5 p-10 md:col-span-8">
+            <div class="absolute right-0 top-0 p-8">
+              <span class="material-symbols-outlined text-5xl text-primary-fixed-dim">draw</span>
+            </div>
+            <div class="relative z-10">
+              <h3 class="mb-4 font-headline-md text-headline-md text-white">Precision Canvas Engine</h3>
+              <p class="max-w-lg font-body-md text-body-md text-on-surface-variant">Use the Studio, Dashboard, and Explore surfaces as the public shell while Firebase powers projects, progress, critiques, and artist identity behind the scenes.</p>
+            </div>
+            <div class="absolute inset-0 -z-10 opacity-40">
+              <img alt="Engine detail" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7IHqeyICj8vVSi6OPjXoVLhiH6ZfBWMZ2XIb9M6QhB8UH2QsKx37W1d_lB-K_AxB-wdnGjS77zKeST0dJ2hsPiFgMinr7qxxgKHYwURS-ZCxLLr1tZNTTGsWXMkT0G_DwICK68IBSQDS_SQhdiAmtSLDSFGZ9Bprj6RFY8uQ7xxRhxKCieUAQuFOVWcnjxab1BC13TV59rtSlnw9_smrSkrwoeZiSgjIFtjNMTQuODL3wiG6c7mYN2FtOfq8eextnzXYUQDqZtkw">
+            </div>
+          </div>
+
+          <div class="glass-card col-span-1 flex flex-col justify-between rounded-3xl border-white/5 bg-primary-container/5 p-10 md:col-span-4">
+            <div>
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-container/20">
+                <span class="material-symbols-outlined text-primary-fixed-dim">cloud_sync</span>
+              </div>
+              <h3 class="mb-4 font-headline-md text-headline-md text-white">Firebase Backbone</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant">Project `novacanvas` is registered and ready for auth, Firestore, and later Functions/Storage once Firebase provisioning is finished.</p>
+            </div>
+            <a class="mt-8 flex items-center gap-2 font-label-md text-label-md text-primary-fixed-dim" href="./dashboard.html">
+              View live surfaces
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-surface-container-lowest/30 py-24">
+        <div class="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">
+          <div class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 class="mb-4 font-headline-lg text-headline-lg text-white">Core Routes</h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant">The pasted designs are now mapped into actual pages you can iterate on.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./dashboard.html"><h3 class="mb-2 font-headline-md text-white">Dashboard</h3><p class="text-on-surface-variant">Creative cockpit home, progress snapshots, and system status.</p></a>
+            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./studio.html"><h3 class="mb-2 font-headline-md text-white">Creator Studio</h3><p class="text-on-surface-variant">Upload, analyze, critique, and iterate on active work.</p></a>
+            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./explore.html"><h3 class="mb-2 font-headline-md text-white">Explore Community</h3><p class="text-on-surface-variant">Feed, spotlights, collaborations, and creator discovery.</p></a>
+            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./artprize.html"><h3 class="mb-2 font-headline-md text-white">ArtPrize Prep</h3><p class="text-on-surface-variant">Exhibit planning, statement tools, checklist, and engagement prep.</p></a>
+            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./challenges.html"><h3 class="mb-2 font-headline-md text-white">Challenges</h3><p class="text-on-surface-variant">XP loops, missions, tiers, and leaderboard logic surface.</p></a>
+            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./profile.html"><h3 class="mb-2 font-headline-md text-white">Artist Profile</h3><p class="text-on-surface-variant">Portfolio, creator bio, badges, and profile editing shell.</p></a>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="w-full rounded-t-xl border-t border-white/5 bg-surface-container-lowest">
+      <div class="mx-auto flex w-full max-w-container-max flex-col items-center justify-between px-margin-mobile py-12 md:flex-row md:px-margin-desktop">
+        <div class="mb-8 md:mb-0">
+          <span class="mb-2 block font-headline-md text-headline-md font-bold tracking-tight text-on-surface">NovaCanvas</span>
+          <p class="max-w-xs font-body-md text-body-md text-on-surface-variant">Empowering the next generation of digital masters with a cyber-luxe creative cockpit.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8">
+          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./dashboard.html">Dashboard</a>
+          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./studio.html">Studio</a>
+          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./explore.html">Explore</a>
+          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./profile.html">Profile</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./firebase-config.example.js"></script>
+    <script src="./firebase-init.js"></script>
   </body>
 </html>

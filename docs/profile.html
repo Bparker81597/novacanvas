@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NovaCanvas | Creator Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="./theme.js"></script>
+    <link rel="stylesheet" href="./app.css">
+  </head>
+  <body class="bg-background font-body-md text-on-surface antialiased page-shell">
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
+      <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
+        <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
+        <nav class="hidden items-center gap-8 md:flex">
+          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./dashboard.html">Home</a>
+          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
+          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
+          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
+          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
+          <a class="active-nav" href="./profile.html">Portfolio</a>
+        </nav>
+        <button class="rounded-full bg-primary-container px-6 py-2 font-label-md text-on-primary-container" onclick="document.getElementById('edit-profile-panel').classList.remove('translate-x-full')">Edit Profile</button>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-container-max px-margin-mobile py-12 md:px-margin-desktop">
+      <section class="relative mb-20">
+        <div class="absolute -left-24 -top-24 -z-10 h-96 w-96 rounded-full bg-primary-container/10 blur-[120px]"></div>
+        <div class="absolute right-0 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-secondary-container/5 blur-[150px]"></div>
+        <div class="flex flex-col items-start gap-12 md:flex-row md:items-center">
+          <div class="group relative">
+            <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary-fixed-dim to-secondary-fixed-dim opacity-20 blur-xl transition-opacity group-hover:opacity-40"></div>
+            <div class="glass-card h-48 w-48 rounded-2xl p-1 md:h-64 md:w-64">
+              <img class="h-full w-full rounded-xl object-cover" alt="Elora Vance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDKYM6ylSMTg48ogJNdVDZqUxXliTkSwx8MUYMf9I8Jlq21Oawlswva_kHh_E5lSfRy8dJmE4jpGyHlM_LSo4_UZRxzmkLw2hZlBYu0AKqb355fEaJPtlX8dxxMyoOB1EVc3wUCcIm-2iDkPCBcl61YhononbO3IWcGtqcjpL3-zKkuF51nY6tJzVQKeiPcSHax2G9Zvv7moaLF6HYe93Hp4owumunoMHtQvv-IgtlvN37Lk2OvreTVYNgXpJcoMdQC9pq_qc_QSg">
+            </div>
+            <div class="absolute -bottom-4 -right-4 flex items-center gap-2 rounded-xl border border-white/10 bg-surface-container-highest px-4 py-2"><span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">verified</span><span class="font-label-md text-on-surface">Pro Master</span></div>
+          </div>
+
+          <div class="flex-1 space-y-6">
+            <div>
+              <div class="mb-2 flex flex-wrap items-center gap-4">
+                <h1 class="font-headline-lg text-headline-lg text-white">Elora Vance</h1>
+                <div class="flex gap-2">
+                  <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Muralist</span>
+                  <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">Cyber-Illustrator</span>
+                </div>
+              </div>
+              <p class="max-w-2xl font-body-lg text-on-surface-variant">Architect of digital dreamscapes and urban neon narratives. Specializing in high-fidelity glassmorphism and large-scale augmented reality murals that bridge the physical and digital void.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Followers</div><div class="font-headline-md text-headline-md text-primary-fixed-dim">12.8k</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Artworks</div><div class="font-headline-md text-headline-md text-white">342</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">ArtPrize Wins</div><div class="font-headline-md text-headline-md text-on-tertiary-container">12</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Streak</div><div class="font-headline-md text-headline-md text-secondary">48<span class="ml-1 text-label-md font-normal">days</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid grid-cols-1 gap-gutter lg:grid-cols-12">
+        <aside class="space-y-8 lg:col-span-4">
+          <section class="glass-card rounded-2xl p-8">
+            <h2 class="mb-6 text-[24px] font-headline-md text-white">Mission Badges</h2>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="flex flex-col items-center gap-2"><div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-surface-container-highest"><span class="material-symbols-outlined text-primary-fixed-dim">palette</span></div><span class="text-center text-mono-sm">Color Theory Expert</span></div>
+              <div class="flex flex-col items-center gap-2"><div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-surface-container-highest"><span class="material-symbols-outlined text-secondary-fixed-dim">architecture</span></div><span class="text-center text-mono-sm">Structuralist</span></div>
+              <div class="flex flex-col items-center gap-2"><div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-surface-container-highest"><span class="material-symbols-outlined text-on-tertiary-container">rocket_launch</span></div><span class="text-center text-mono-sm">Early Adopter</span></div>
+            </div>
+          </section>
+
+          <section class="glass-card rounded-2xl p-8">
+            <h2 class="mb-6 text-[24px] font-headline-md text-white">Collaborations</h2>
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 rounded-xl border border-transparent p-3 transition-colors hover:border-white/5 hover:bg-white/5"><img class="h-12 w-12 rounded-lg object-cover" alt="Kael AI" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJSHCRZGCd2ubfr8l0aWl5XCMo8JIDujAgbkHJBt9bLyGqmfCPr5STuuW3DudtXWFYwbfPq5ey5xVtbyhoCoGWafeAYRwtRYh5yJGGkawibkIXmLryYuGX1SdMhI94EVScadwR67rzQ8TmhFJNi6jnK1ZR25jDhjgWgRnYLPleIJt79etbLcJXmEhLX5Flgwi23acmj7z-Hbagf8FTovcWVQi6PeEHN5uzDUU9GCiY2-RhbflIZHJdEOwanyHFef_PpCmxUN-oCBQ"><div><div class="font-label-md text-white">NeonCity Project</div><div class="text-mono-sm text-on-surface-variant">Lead Illustrator with @Kael.AI</div></div></div>
+              <div class="flex items-center gap-4 rounded-xl border border-transparent p-3 transition-colors hover:border-white/5 hover:bg-white/5"><img class="h-12 w-12 rounded-lg object-cover" alt="Sia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjSR6eAaBIGndcjFa8ZGt-HAmdW3cotXPvMELoHv4Mr5jcZWKT2ASNIkfl8Rxd7z6v7nkkVZw_fMs6TRnyo75XgyxeUTJ3LhQLgFDs4Hb52InlN8nb--xbod0NyrNRgeh57_qkS2fzfNbfS5_DWlDrD8t-uduvpKfM3DZjOwr_3m8hEB-MV2DN1qrdjJTZucpiSgVrdcQqMA-9ll0lTEoyEEFVyjosFG8Up4AxduYB5L8_Drr28FzQb4WqwUV9wx3XKNNs6SKVwZY"><div><div class="font-label-md text-white">ArtPrize ‘24 Collab</div><div class="text-mono-sm text-on-surface-variant">Interactive Installation with @Sia</div></div></div>
+            </div>
+          </section>
+        </aside>
+
+        <section class="lg:col-span-8">
+          <div class="mb-8 flex items-end justify-between">
+            <div><h2 class="font-headline-md text-white">Featured Portfolio</h2><p class="text-on-surface-variant">Latest curated works and ArtPrize entries</p></div>
+            <span class="inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span>
+          </div>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <article class="glass-card overflow-hidden rounded-2xl md:col-span-2">
+              <div class="relative aspect-[16/9] w-full"><img class="h-full w-full object-cover transition-transform duration-700 hover:scale-105" alt="Obsidian Genesis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8XkYPJrpw-qn7EjqmgskbxXYuqHCIDbn4TGMV0Ff41-cYmuQMpvI1zNfEdwg2ZyfjmTQkTc9o7LFXZEHipSkyhH7F8usvHB0Nj-DhVTtOO84Eo5rzULyGwPoCfYQQcD5iXtLvPKfu_UMbLInM4EMRubESqrIuCmWlrmcCwFZbmrkEuzJ-FS2MS2blEYnqgo9pjlKiVDJVvc-cC8HiuqJVMPSxzYLCu1FtYU7ahwVYKrhGAcVwQhWLwfRvcL19DqH_sMc5K2GeSsM"><div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background/90 via-transparent to-transparent p-8"><div class="flex items-end justify-between"><div><span class="mb-2 inline-block rounded-full bg-on-tertiary-container px-3 py-1 text-mono-sm text-white">ArtPrize Gold Selection</span><h3 class="text-[28px] font-headline-md text-white">Obsidian Genesis</h3><p class="text-on-surface-variant">Mixed Media Digital Collage • 2024</p></div><button class="rounded-full bg-primary-container px-6 py-2 font-label-md text-on-primary-container">View Details</button></div></div></div>
+            </article>
+            <article class="glass-card overflow-hidden rounded-2xl"><img class="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" alt="Neural Flux" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6DNR48iap1pBu5-8M_tv4qP-qgxuAeULc2ZbtincEJyrVT21N_w4kz7ZS4asL-eM53yUh5BFEyn7aVsFNa19E-s5mY2ARtusSXWN0H9zo1e7d_4GLEWdPByrcZPrVXwmSOjVsNet7W-biy1JpclYJsLwYcBZ07n5nd8us5M2_O_2EGMt4GAuozaIUXW2qUGNvEHNZelQWEWvxPgLv9ag_JPPBo9QwDFyBsCI7eiDzNzos8amQBPfnbk955OzRm1yVz1BjvMKpTBA"><div class="p-6"><h3 class="text-[20px] font-headline-md text-white">Neural Flux</h3><p class="text-mono-sm text-on-surface-variant">Generative Sculpture</p></div></article>
+            <article class="glass-card overflow-hidden rounded-2xl"><img class="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" alt="Chroma Spike" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKUnLwvKmtEzZYn4pqK61SKSR1HmGOXArQJDBh7Accx_N34T28Ls-0OBpVVEF1wJii9N_5DWx93PggfKGR7qEBr9dQhjeDCtoCKDotC5CqxdosGFGeLQdkf45KJSKgRL6GGdltFpdo4glIG5YXN9nMX8g2T1I8Ug3ydamod-pjN_UaEWrh8YUp0xL3NhCV4jwmjtNv_am2kWCbCe1u1Z5tiXraHxY07lu1XxZZjoBwlH-5cFWLAvSPxpusQjRj4lMYI9KnfobelJs"><div class="p-6"><h3 class="text-[20px] font-headline-md text-white">Chroma Spike</h3><p class="text-mono-sm text-on-surface-variant">AR Mural Concept</p></div></article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500" id="edit-profile-panel">
+      <div class="absolute inset-0 bg-background/60 backdrop-blur-sm" onclick="document.getElementById('edit-profile-panel').classList.add('translate-x-full')"></div>
+      <div class="glass-card absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-white/10 p-8 shadow-2xl">
+        <div class="mb-10 flex items-center justify-between"><h2 class="text-2xl font-headline-md text-white">Profile Settings</h2><button class="text-on-surface-variant hover:text-white" onclick="document.getElementById('edit-profile-panel').classList.add('translate-x-full')"><span class="material-symbols-outlined">close</span></button></div>
+        <div class="flex-1 space-y-8">
+          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Display Name</label><input class="w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" type="text" value="Elora Vance"></div>
+          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Bio Preview</label><textarea class="h-32 w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim">Architect of digital dreamscapes and urban neon narratives...</textarea></div>
+          <div class="rounded-2xl border border-primary-container/10 bg-primary-container/5 p-6"><div class="flex items-center gap-4 text-primary-fixed-dim"><span class="material-symbols-outlined">verified</span><div class="text-label-md">Verified Artist Status Active</div></div></div>
+        </div>
+        <div class="mt-auto flex flex-col gap-4"><button class="w-full rounded-full bg-primary-container py-4 font-label-md text-on-primary-container shadow-lg shadow-primary-container/20 transition-all hover:scale-[1.02]">Save Changes</button><button class="w-full rounded-full border border-white/10 py-4 font-label-md uppercase tracking-widest text-on-surface-variant transition-all hover:bg-white/5" onclick="document.getElementById('edit-profile-panel').classList.add('translate-x-full')">Cancel</button></div>
+      </div>
+    </div>
+
+    <script src="./firebase-config.example.js"></script>
+    <script src="./firebase-init.js"></script>
+  </body>
+</html>

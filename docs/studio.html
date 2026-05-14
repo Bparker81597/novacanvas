@@ -1,0 +1,146 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NovaCanvas | Creator Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="./theme.js"></script>
+    <link rel="stylesheet" href="./app.css">
+  </head>
+  <body class="bg-background font-body-md text-on-background page-shell">
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
+      <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
+        <div class="flex items-center gap-8">
+          <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
+          <nav class="hidden gap-6 md:flex">
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./dashboard.html">Home</a>
+            <a class="active-nav font-label-md text-label-md" href="./studio.html">Studio</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
+            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
+          </nav>
+        </div>
+        <a class="rounded-full border border-primary-fixed-dim/30 bg-primary-container/20 px-5 py-2 font-label-md text-label-md text-primary-fixed-dim" href="./profile.html">Artist Profile</a>
+      </div>
+    </header>
+    <main class="flex min-h-screen pt-4">
+      <aside class="fixed left-0 hidden h-[calc(100vh-80px)] w-[280px] flex-col border-r border-white/10 bg-surface-container-lowest/60 py-8 backdrop-blur-2xl md:flex">
+        <div class="mb-8 px-6"><h2 class="font-headline-md text-label-md uppercase tracking-widest text-primary-fixed-dim">Workspace</h2></div>
+        <nav class="flex flex-1 flex-col">
+          <a class="flex items-center gap-4 border-l-4 border-primary-fixed-dim bg-primary-container/20 px-6 py-3 text-primary-fixed-dim" href="./studio.html"><span class="material-symbols-outlined">draw</span><span class="font-label-md">Art Lab</span></a>
+          <a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface" href="./dashboard.html"><span class="material-symbols-outlined">dashboard</span><span class="font-label-md">Inspiration Board</span></a>
+          <a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface" href="./dashboard.html"><span class="material-symbols-outlined">palette</span><span class="font-label-md">Color Theory</span></a>
+          <a class="flex items-center gap-4 px-6 py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface" href="./explore.html"><span class="material-symbols-outlined">forum</span><span class="font-label-md">Critique Hub</span></a>
+        </nav>
+        <div class="px-6 pt-8"><span class="inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span></div>
+      </aside>
+
+      <section class="flex-1 px-margin-mobile py-8 md:ml-[280px] md:px-margin-desktop">
+        <div class="mb-12">
+          <h1 class="mb-4 font-display-lg text-display-lg text-primary-fixed-dim">Digital Art Lab</h1>
+          <p class="max-w-2xl font-body-lg text-body-lg text-on-surface-variant">Refine your vision in an immersive cockpit designed for the modern digital artisan. This route is now ready to attach uploads, project docs, and Firestore-backed critique threads.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-gutter md:grid-cols-12">
+          <section class="glass-panel rounded-xl p-8 md:col-span-8">
+            <div class="mb-6 flex items-start justify-between">
+              <div>
+                <h2 class="mb-2 font-headline-md text-headline-md text-primary">Active Canvas</h2>
+                <p class="text-on-surface-variant">Flow Analysis: Neo-Traditional Backpiece v2</p>
+              </div>
+              <div class="flex gap-2">
+                <span class="rounded-full border border-on-tertiary-container/30 bg-on-tertiary-container/20 px-3 py-1 font-mono-sm text-mono-sm text-on-tertiary-container">ArtPrize Prep</span>
+                <span class="rounded-full border border-primary-fixed-dim/30 bg-primary-container/10 px-3 py-1 font-mono-sm text-mono-sm text-primary-fixed-dim">WIP</span>
+              </div>
+            </div>
+            <div class="relative aspect-video w-full cursor-crosshair overflow-hidden rounded-lg border border-white/5 bg-surface-container">
+              <img class="h-full w-full object-cover opacity-80 transition-opacity hover:opacity-100" alt="Active canvas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAW_bxUaLDs0NuKQ-wJGhmqX-dlkXyefFMPxfoOEGRWiQyd8ZBIxT0aGKXh8wj6cCesjelEnrT3ELP4-ompC1NEIE96lUJBbaDrylKOXDNPZ72AiHAaqyg8oJX_UZNTSu4nUHaCEjERGcwb0VHV2E3jB68ctmyLhxGV9HFvHr862gFg72y1qBvkpNzXCan6gMeuJcrAA_7Cqah5Dh8g9-2yOvbpcJ8-9zKa_pdEYqQKxvi-T7q-TAi_VgAYIryjv8SKBKSVNQaK6A">
+              <div class="pointer-events-none absolute inset-0 rounded-lg border-2 border-primary-fixed-dim/20">
+                <div class="absolute left-1/4 top-1/4 h-32 w-32 animate-pulse rounded-full border border-primary-fixed-dim/40"></div>
+                <div class="absolute bottom-1/3 right-1/4 flex flex-col items-end gap-1"><span class="rounded bg-primary-fixed-dim/80 px-2 py-0.5 text-[10px] font-bold text-on-primary-fixed">COMPOSITION PEAK</span><div class="h-px w-40 bg-primary-fixed-dim/80"></div></div>
+              </div>
+            </div>
+            <div class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+              <div class="glass-panel cursor-pointer rounded-lg border-white/5 p-4 transition-all hover:bg-white/5"><span class="material-symbols-outlined mb-2 text-primary-fixed-dim">upload_file</span><p class="font-label-md text-on-surface">Upload Sketch</p></div>
+              <div class="glass-panel cursor-pointer rounded-lg border-white/5 p-4 transition-all hover:bg-white/5"><span class="material-symbols-outlined mb-2 text-primary-fixed-dim">auto_awesome</span><p class="font-label-md text-on-surface">Flow Check</p></div>
+              <div class="glass-panel cursor-pointer rounded-lg border-white/5 p-4 transition-all hover:bg-white/5"><span class="material-symbols-outlined mb-2 text-primary-fixed-dim">layers</span><p class="font-label-md text-on-surface">Layer Ops</p></div>
+              <div class="glass-panel cursor-pointer rounded-lg border-white/5 p-4 transition-all hover:bg-white/5"><span class="material-symbols-outlined mb-2 text-primary-fixed-dim">share</span><p class="font-label-md text-on-surface">Export Lab</p></div>
+            </div>
+          </section>
+
+          <section class="glass-panel flex flex-col rounded-xl p-6 md:col-span-4">
+            <h2 class="mb-6 font-headline-md text-label-md uppercase tracking-widest text-primary-fixed-dim">Creative Feedback</h2>
+            <div class="flex-1 space-y-6">
+              <div class="rounded-lg border-l-4 border-secondary-container bg-surface-container-high/40 p-4">
+                <div class="mb-2 flex gap-3">
+                  <div class="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-container/20"><span class="material-symbols-outlined text-sm text-secondary">smart_toy</span></div>
+                  <span class="font-label-md text-secondary">Nova AI Assistant</span>
+                </div>
+                <p class="text-sm text-on-surface-variant">“The curvature of the primary body could be tightened around the shoulder blade for better anatomical flow.”</p>
+              </div>
+              <div class="rounded-lg border border-white/10 bg-white/5 p-4">
+                <div class="mb-2 flex gap-3">
+                  <img alt="Peer user" class="h-8 w-8 rounded-full border border-white/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv72SvSADeBJwboTDdnS2AT4kVTQfZJiEkIQws_HAkShEd7gbCW2jEx-QvJMa5CbA_dzj9Loj6fQh_uhck35_oh6ADU3ODYyW7f6DHqr4zgB1H_CMCKNYTdkv2u6KgcoFM_clZ5DOFsZcCnsSB3rtwYnVdHlnSnPidZ5_0lbzURHLNY20yMFsMOf0Ng2QzQR6mWSFlvmkcA2ZQOfJrMRHkjJk1RMK6fjqRWpcirASsH-Jg0A0gSrWbEgnK5lEqQ6-VKV8IdPdRyVU">
+                  <span class="font-label-md text-on-surface">Marcus Chen <span class="ml-2 text-xs font-normal text-on-surface-variant/50">Master Artist</span></span>
+                </div>
+                <p class="text-sm text-on-surface-variant">“Solid contrast, but try a warmer secondary highlight to make the focal eye pop more.”</p>
+              </div>
+            </div>
+            <div class="mt-6 border-t border-white/10 pt-6">
+              <div class="flex items-center rounded-xl border border-white/5 bg-surface-container-lowest px-4 py-3">
+                <input class="flex-1 border-none bg-transparent text-sm focus:ring-0" type="text" placeholder="Request specific feedback...">
+                <span class="material-symbols-outlined cursor-pointer text-primary-fixed-dim">send</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="glass-panel rounded-xl p-8 md:col-span-6">
+            <div class="mb-6 flex items-center justify-between">
+              <h2 class="font-headline-md text-headline-md text-primary">Inspiration Board</h2>
+              <a class="flex items-center gap-2 font-label-md text-primary-fixed-dim" href="./explore.html"><span class="material-symbols-outlined text-sm">add</span> New Board</a>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+              <img class="aspect-square rounded-lg border border-white/5 object-cover grayscale transition-all hover:scale-95 hover:grayscale-0" alt="Oil board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlrYDslG3BOtYyh3Lc6cKKO4in55ZnBkKwUe6jUlmaj6wqrTVG2qJHThD_UnTEf_Z7V9XtsiKmAHRj2TfGg8dQls53romNDbTIqLyqdQio3aroRzNFxUEebk2WgZSK3AE76ujXinGOAeVOdthVrRPfNWUw8oErAq0KJ9sXI9HAiVPmixGGQGjW_5YzRtKP5Z7e6Jgj2BejEO5Vurgp-9i4DdCcI2aJouwT8ky6nNWr9uTvN8bN5tBeGnra6yCyEqpzLr02IKd35S4">
+              <img class="aspect-square rounded-lg border border-white/5 object-cover grayscale transition-all hover:scale-95 hover:grayscale-0" alt="Material board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg5mahHQwq-l89z6uV6XrhVnWN2FJL01IUb7tgk2vxVcqz7fIrZypmvqMX25PMXIJi1kjNhv1P-rnDT3v-cwZh8BkOtdI0uvVhUCvHI6Lsg7R0oMbti26wt_LszTk0AiBAB_ntBAicRjF0x92p4zyS89GFQHb422YexoLe3VnCtkmWPIaPJr4aQyoTiwSc7LWU50ELaGmDgu6zWO0AAkp-_mCw5azhOEvX-f5-8ay2OWHL-d4YKE-p2JU0VjsEXdI3rEjwLIexYKU">
+              <img class="aspect-square rounded-lg border border-white/5 object-cover grayscale transition-all hover:scale-95 hover:grayscale-0" alt="Fluid board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEWAYRnBJP5fhH1f0b_oecVYjN4ZcmjZFfaS-0SJU_Z6qWK1qwLdM4X6bQ4EvvpZi28Mc8UjMzrPEY4tITEctO-VjWQqw8XGNFFl8M2K2pt5CI-jrlUs50tWllXqo7TgXKlcsAasE4Y4n4jMdSnaaT7C8mftk4DXEzSRNy-E1udtuZa9heJjmK1Bgn6-rPOOB0UeA7Ro3G3XRBx-8sE4Z_jXXi9m67db7UnEz0iUZ42owsO50iMDrsjGGzHMqFb3_FJG2gfG5110A">
+            </div>
+          </section>
+
+          <section class="glass-panel rounded-xl p-8 md:col-span-6">
+            <h2 class="mb-6 font-headline-md text-headline-md text-primary">Color Theory Lab</h2>
+            <div class="flex flex-col gap-6">
+              <div class="flex h-16 w-full overflow-hidden rounded-xl border border-white/10">
+                <div class="flex-1 bg-[#111417]"></div>
+                <div class="flex-1 bg-[#00dce6]"></div>
+                <div class="flex-1 bg-[#4009ff]"></div>
+                <div class="flex-1 bg-[#c5c0ff]"></div>
+                <div class="flex-1 bg-[#f5cfff]"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <p class="mb-2 text-xs text-on-surface-variant">Contrast Ratio</p>
+                  <div class="flex items-center justify-between"><span class="font-headline-md text-headline-md text-primary-fixed-dim">12.4:1</span><span class="rounded bg-primary-container/20 px-2 py-0.5 text-[10px] text-on-primary-container">AAA</span></div>
+                </div>
+                <div class="rounded-lg border border-white/10 bg-white/5 p-4">
+                  <p class="mb-2 text-xs text-on-surface-variant">Dominant Tone</p>
+                  <div class="flex items-center gap-2"><div class="h-4 w-4 rounded-full bg-primary-fixed-dim"></div><span class="font-label-md text-on-surface">Neon Cyan</span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <button class="fixed bottom-10 right-10 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-tr from-primary-fixed-dim to-secondary-container text-on-primary shadow-2xl shadow-primary-container/40 transition-transform hover:scale-110 active:scale-90">
+      <span class="material-symbols-outlined text-3xl">ink_pen</span>
+    </button>
+
+    <script src="./firebase-config.example.js"></script>
+    <script src="./firebase-init.js"></script>
+  </body>
+</html>
