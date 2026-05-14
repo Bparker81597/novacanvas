@@ -8,7 +8,7 @@ export const healthCheck = onCall(
   {
     region: "us-central1",
   },
-  async (request) => {
+  (request) => {
     return {
       ok: true,
       projectId: admin.app().options.projectId ?? "novacanvas",
