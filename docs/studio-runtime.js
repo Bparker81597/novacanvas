@@ -203,11 +203,54 @@ async function runFlowCheck(imageDataUrl) {
 
   let brightnessSum = 0;
   const values = new Array(width * height);
+  let warmSum = 0;
+  let coolSum = 0;
+  let saturationSum = 0;
+  let centerWeight = 0;
+  let outerWeight = 0;
+  let leftWeight = 0;
+  let rightWeight = 0;
+  let topWeight = 0;
+  let bottomWeight = 0;
+
   for (let i = 0; i < values.length; i += 1) {
     const offset = i * 4;
-    const value = 0.2126 * data[offset] + 0.7152 * data[offset + 1] + 0.0722 * data[offset + 2];
+    const r = data[offset];
+    const g = data[offset + 1];
+    const b = data[offset + 2];
+    const value = 0.2126 * r + 0.7152 * g + 0.0722 * b;
     values[i] = value;
     brightnessSum += value;
+
+    const x = i % width;
+    const y = Math.floor(i / width);
+    const dx = Math.abs(x - width / 2) / (width / 2);
+    const dy = Math.abs(y - height / 2) / (height / 2);
+    const radialDistance = Math.sqrt(dx * dx + dy * dy);
+    const maxRgb = Math.max(r, g, b);
+    const minRgb = Math.min(r, g, b);
+    const saturation = maxRgb === 0 ? 0 : ((maxRgb - minRgb) / maxRgb) * 100;
+    saturationSum += saturation;
+    warmSum += r - b;
+    coolSum += b - r;
+
+    if (radialDistance < 0.45) {
+      centerWeight += value;
+    } else {
+      outerWeight += value;
+    }
+
+    if (x < width / 2) {
+      leftWeight += value;
+    } else {
+      rightWeight += value;
+    }
+
+    if (y < height / 2) {
+      topWeight += value;
+    } else {
+      bottomWeight += value;
+    }
   }
 
   const brightnessAvg = brightnessSum / values.length;
@@ -231,34 +274,141 @@ async function runFlowCheck(imageDataUrl) {
 
   const contrast = Math.sqrt(varianceSum / values.length);
   const edgeDensity = edgeSum / (values.length * 2);
+  const averageSaturation = saturationSum / values.length;
+  const horizontalBias = ((rightWeight - leftWeight) / Math.max(1, rightWeight + leftWeight)) * 100;
+  const verticalBias = ((bottomWeight - topWeight) / Math.max(1, bottomWeight + topWeight)) * 100;
+  const centerBias = ((centerWeight - outerWeight) / Math.max(1, centerWeight + outerWeight)) * 100;
+  const warmth = warmSum / values.length;
+  const coolness = coolSum / values.length;
 
   const brightnessScore = 100 - Math.min(100, Math.abs(brightnessAvg - 128) * 0.8);
   const contrastScore = Math.min(100, contrast * 1.8);
   const edgeScore = Math.min(100, edgeDensity * 1.6);
-  const score = Math.round(brightnessScore * 0.2 + contrastScore * 0.45 + edgeScore * 0.35);
+  const centerScore = 100 - Math.min(100, Math.abs(centerBias) * 2.2);
+  const score = Math.round(
+    brightnessScore * 0.18 +
+      contrastScore * 0.32 +
+      edgeScore * 0.28 +
+      centerScore * 0.22,
+  );
 
   const contrastLabel = contrast >= 58 ? "High" : contrast >= 38 ? "Balanced" : "Soft";
   const edgeLabel = edgeDensity >= 42 ? "Dense" : edgeDensity >= 24 ? "Controlled" : "Loose";
+  const temperatureLabel =
+    warmth > 12 ? "warm-leaning" : coolness > 12 ? "cool-leaning" : "temperature-balanced";
+  const focalLabel =
+    centerBias > 8 ? "center-weighted" : centerBias < -8 ? "edge-weighted" : "evenly distributed";
+  const orientationLabel =
+    Math.abs(horizontalBias) > Math.abs(verticalBias)
+      ? horizontalBias > 0
+        ? "right-drifting"
+        : "left-drifting"
+      : verticalBias > 0
+        ? "bottom-heavy"
+        : "top-heavy";
+  const paletteLabel =
+    averageSaturation > 46 ? "high-chroma" : averageSaturation > 24 ? "moderately saturated" : "muted";
 
-  let recommendation;
-  if (score >= 80) {
-    recommendation = "Strong structural flow. Focus next on refining focal contrast and edge hierarchy.";
-  } else if (score >= 60) {
-    recommendation = "Good base rhythm. Tighten the dominant silhouette and increase contrast around the focal path.";
-  } else {
-    recommendation = "Flow is still loose. Push bigger value separation and simplify edge clusters around the main form.";
-  }
+  const recommendation = buildRecommendation({
+    score,
+    contrast,
+    edgeDensity,
+    brightnessAvg,
+    averageSaturation,
+    horizontalBias,
+    verticalBias,
+    centerBias,
+    temperatureLabel,
+    focalLabel,
+    orientationLabel,
+    paletteLabel,
+  });
 
   return {
     score,
     brightness: Math.round(brightnessAvg),
     contrast: Math.round(contrast),
     edgeDensity: Math.round(edgeDensity),
+    saturation: Math.round(averageSaturation),
+    focalBias: Math.round(centerBias),
+    horizontalBias: Math.round(horizontalBias),
+    verticalBias: Math.round(verticalBias),
     contrastLabel,
     edgeLabel,
+    temperatureLabel,
+    focalLabel,
+    orientationLabel,
+    paletteLabel,
     recommendation,
     analyzedAt: new Date().toISOString(),
   };
+}
+
+function buildRecommendation(metrics) {
+  const openings = [
+    "This sketch reads as",
+    "The current composition feels",
+    "Your uploaded piece is coming through as",
+    "The overall motion here feels",
+  ];
+
+  const opener =
+    openings[
+      Math.abs(
+        Math.round(
+          metrics.score +
+            metrics.contrast +
+            metrics.edgeDensity +
+            metrics.saturation +
+            metrics.horizontalBias +
+            metrics.verticalBias,
+        ),
+      ) % openings.length
+    ];
+
+  const clauses = [
+    `${metrics.focalLabel}, ${metrics.orientationLabel}, and ${metrics.paletteLabel}.`,
+  ];
+
+  if (metrics.contrast < 34) {
+    clauses.push("Push a cleaner value split around the focal path so the main form separates faster.");
+  } else if (metrics.contrast > 62) {
+    clauses.push("The value snap is already strong, so the next win is controlling where the sharpest contrast lands.");
+  } else {
+    clauses.push("The contrast band is usable, but a tighter focal hotspot would make the eye travel more decisively.");
+  }
+
+  if (metrics.edgeDensity < 22) {
+    clauses.push("Edge information is sparse, which makes the silhouette feel soft; sharpen one dominant contour and let the rest stay quiet.");
+  } else if (metrics.edgeDensity > 46) {
+    clauses.push("There is a lot of edge activity, so simplifying the secondary clusters would keep the composition from fragmenting.");
+  } else {
+    clauses.push("Edge density is controlled, and you can now emphasize hierarchy by making one region crisper than the others.");
+  }
+
+  if (metrics.centerBias > 8) {
+    clauses.push("Because the energy is pooling near the center, consider extending one line of force farther outward to create a stronger sweep.");
+  } else if (metrics.centerBias < -8) {
+    clauses.push("The visual pull lives more on the perimeter, so anchoring one central focal mass would make the composition feel more intentional.");
+  } else {
+    clauses.push("The focal distribution is fairly even, so a single dominant anchor would help turn rhythm into a clearer statement.");
+  }
+
+  if (metrics.temperatureLabel === "warm-leaning") {
+    clauses.push("The warmer bias gives it heat; a cooler accent in the focal zone could create cleaner dimensional contrast.");
+  } else if (metrics.temperatureLabel === "cool-leaning") {
+    clauses.push("The cooler bias supports atmosphere well; a restrained warm interruption could make the main subject feel more alive.");
+  } else {
+    clauses.push("The temperature balance is steady, which means your next decision can be more expressive rather than corrective.");
+  }
+
+  if (metrics.brightnessAvg < 92) {
+    clauses.push("Overall it sits dark, so a deliberate lift in the key planes would keep detail from collapsing in presentation.");
+  } else if (metrics.brightnessAvg > 168) {
+    clauses.push("It is reading bright overall, so protecting a few deeper value pockets would give the piece more depth.");
+  }
+
+  return `${opener} ${clauses.join(" ")}`;
 }
 
 function loadImage(src) {
