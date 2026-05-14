@@ -78,6 +78,8 @@ let profileUnsub = null;
 let projectsUnsub = null;
 let profileSaveBound = false;
 let checklistBound = false;
+let currentProjects = [];
+const projectListeners = new Set();
 
 function setStatus(message) {
   statusNodes.forEach((node) => {
@@ -166,6 +168,9 @@ function renderProfile(data) {
 }
 
 function renderProjects(projects) {
+  currentProjects = projects;
+  projectListeners.forEach((listener) => listener(projects));
+
   const cards = Array.from(document.querySelectorAll("[data-project-card]"));
   cards.forEach((card, index) => {
     const project = projects[index];
@@ -362,7 +367,7 @@ function subscribeToData(uid) {
     query(collection(db, "projects"), where("ownerId", "==", uid)),
     (snapshot) => {
       const projects = snapshot.docs
-        .map((item) => item.data())
+        .map((item) => ({id: item.id, ...item.data()}))
         .sort((a, b) => (a.ownerSlot ?? 0) - (b.ownerSlot ?? 0));
       renderProjects(projects);
     },
@@ -371,6 +376,42 @@ function subscribeToData(uid) {
       setStatus("Project sync failed");
     },
   );
+}
+
+function getPrimaryProject() {
+  return currentProjects[0] || null;
+}
+
+async function updatePrimaryProject(patch) {
+  if (!currentUid) {
+    throw new Error("No current user");
+  }
+
+  const primary = getPrimaryProject();
+  const docId = primary?.id || `${currentUid}-${defaultProjects[0].idSuffix}`;
+  const projectRef = doc(db, "projects", docId);
+
+  await setDoc(
+    projectRef,
+    {
+      ownerId: currentUid,
+      ownerSlot: 0,
+      updatedAt: serverTimestamp(),
+      ...patch,
+    },
+    {merge: true},
+  );
+}
+
+function subscribeProjects(listener) {
+  projectListeners.add(listener);
+  if (currentProjects.length > 0) {
+    listener(currentProjects);
+  }
+
+  return () => {
+    projectListeners.delete(listener);
+  };
 }
 
 async function initFirebase() {
@@ -398,6 +439,13 @@ async function initFirebase() {
     try {
       await ensureUser(user.uid);
       subscribeToData(user.uid);
+      window.NovaCanvas = {
+        ...(window.NovaCanvas || {}),
+        uid: user.uid,
+        subscribeProjects,
+        updatePrimaryProject,
+        getPrimaryProject,
+      };
     } catch (error) {
       console.error(error);
       setStatus("Firestore bootstrap failed");
