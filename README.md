@@ -1,7 +1,7 @@
 # NovaCanvas
 
-Minimal GitHub Pages site deployed with GitHub Actions.
+Minimal GitHub Pages site published from the `docs/` folder on the `main` branch.
 
 ## Deploy
 
-Pushes to `main` trigger the Pages workflow in `.github/workflows/deploy-pages.yml`.
+GitHub Pages serves the site from `main` -> `/docs`.
