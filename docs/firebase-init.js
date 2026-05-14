@@ -5,6 +5,7 @@ import {
   signInAnonymously,
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 import {
+  arrayUnion,
   collection,
   doc,
   getDoc,
@@ -60,6 +61,18 @@ const defaultProjects = [
     progress: 74,
     updatedLabel: "2h ago",
     ownerSlot: 0,
+    feedbackThread: [
+      {
+        author: "Nova AI Assistant",
+        role: "ai",
+        message: "The curvature of the primary body could be tightened around the shoulder blade for better anatomical flow.",
+      },
+      {
+        author: "Marcus Chen",
+        role: "mentor",
+        message: "Solid contrast, but try a warmer secondary highlight to make the focal eye pop more.",
+      },
+    ],
   },
   {
     idSuffix: "void-sanctuary-sculpt",
@@ -236,6 +249,24 @@ async function ensureProjects(uid) {
   const projectQuery = query(collection(db, "projects"), where("ownerId", "==", uid));
   const existing = await getDocs(projectQuery);
   if (!existing.empty) {
+    const backfill = existing.docs
+      .map((snapshot) => ({id: snapshot.id, ...snapshot.data()}))
+      .filter((project) => project.ownerSlot === 0 && !Array.isArray(project.feedbackThread))
+      .map((project) =>
+        setDoc(
+          doc(db, "projects", project.id),
+          {
+            feedbackThread: defaultProjects[0].feedbackThread,
+            updatedAt: serverTimestamp(),
+          },
+          {merge: true},
+        ),
+      );
+
+    if (backfill.length > 0) {
+      await Promise.all(backfill);
+    }
+
     return;
   }
 
@@ -248,6 +279,7 @@ async function ensureProjects(uid) {
         progress: project.progress,
         updatedLabel: project.updatedLabel,
         ownerSlot: project.ownerSlot,
+        feedbackThread: project.feedbackThread || [],
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       }),
@@ -403,6 +435,34 @@ async function updatePrimaryProject(patch) {
   );
 }
 
+async function addProjectFeedback(entry) {
+  if (!currentUid) {
+    throw new Error("No current user");
+  }
+
+  const primary = getPrimaryProject();
+  const docId = primary?.id || `${currentUid}-${defaultProjects[0].idSuffix}`;
+  const projectRef = doc(db, "projects", docId);
+  const payload = typeof entry === "string" ? {
+    author: "You",
+    role: "user",
+    message: entry,
+  } : {
+    author: entry?.author || "Nova AI Assistant",
+    role: entry?.role || "ai",
+    message: entry?.message || "",
+  };
+
+  await updateDoc(projectRef, {
+    feedbackThread: arrayUnion({
+      ...payload,
+      createdAt: new Date().toISOString(),
+    }),
+    updatedAt: serverTimestamp(),
+    updatedLabel: "just now",
+  });
+}
+
 function subscribeProjects(listener) {
   projectListeners.add(listener);
   if (currentProjects.length > 0) {
@@ -444,6 +504,7 @@ async function initFirebase() {
         uid: user.uid,
         subscribeProjects,
         updatePrimaryProject,
+        addProjectFeedback,
         getPrimaryProject,
       };
     } catch (error) {

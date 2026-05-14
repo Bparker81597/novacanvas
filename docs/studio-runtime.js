@@ -13,11 +13,16 @@ function initStudio() {
   const contrastNode = document.querySelector("[data-flow-contrast]");
   const edgesNode = document.querySelector("[data-flow-edges]");
   const feedbackNode = document.querySelector("[data-ai-feedback]");
+  const feedbackThread = document.querySelector("[data-feedback-thread]");
+  const feedbackInput = document.querySelector("[data-feedback-input]");
+  const aiCard = document.querySelector("[data-feedback-ai-card]");
+  const peerCard = document.querySelector("[data-feedback-peer-card]");
 
   const state = {
     imageDataUrl: null,
     fileName: null,
     analysis: null,
+    primaryProject: null,
   };
 
   hydrateLocalState();
@@ -64,9 +69,15 @@ function initStudio() {
           return;
         }
 
+        state.primaryProject = primary;
+
         if (primary.flowCheck) {
           state.analysis = primary.flowCheck;
           renderAnalysis(primary.flowCheck);
+        }
+
+        if (primary.feedbackThread) {
+          renderFeedback(primary.feedbackThread);
         }
       });
     };
@@ -104,7 +115,29 @@ function initStudio() {
           progress: Math.max(42, Math.min(96, analysis.score)),
           summary: `Flow score ${analysis.score}% • ${analysis.recommendation}`,
         });
+        await persistFeedback(`Flow Check: ${analysis.recommendation}`);
         ui?.showToast?.("Flow check complete");
+        return;
+      }
+
+      if (action === "studio-send-feedback") {
+        const message = feedbackInput?.value?.trim();
+        if (!message) {
+          ui?.showToast?.("Write feedback before sending");
+          return;
+        }
+
+        await persistFeedback(message);
+        const reply = generateCritiqueReply(message);
+        if (reply) {
+          await persistFeedback({
+            author: "Nova AI Assistant",
+            role: "ai",
+            message: reply,
+          });
+        }
+        feedbackInput.value = "";
+        ui?.showToast?.("Feedback sent");
         return;
       }
 
@@ -169,6 +202,19 @@ function initStudio() {
     }
   }
 
+  async function persistFeedback(entry) {
+    if (!window.NovaCanvas?.addProjectFeedback) {
+      return;
+    }
+
+    try {
+      await window.NovaCanvas.addProjectFeedback(entry);
+    } catch (error) {
+      console.error(error);
+      ui?.showToast?.("Feedback sync failed");
+    }
+  }
+
   function renderAnalysis(analysis) {
     if (!analysis) {
       return;
@@ -178,6 +224,127 @@ function initStudio() {
     contrastNode.textContent = analysis.contrastLabel;
     edgesNode.textContent = analysis.edgeLabel;
     feedbackNode.textContent = `“${analysis.recommendation}”`;
+  }
+
+  function renderFeedback(items) {
+    if (!feedbackThread || !Array.isArray(items)) {
+      return;
+    }
+
+    aiCard?.remove();
+    peerCard?.remove();
+    feedbackThread.innerHTML = "";
+
+    items.forEach((item) => {
+      const card = document.createElement("div");
+      const isAi = item.role === "ai";
+      const isUser = item.role === "user";
+      card.className = isAi
+        ? "rounded-lg border-l-4 border-secondary-container bg-surface-container-high/40 p-4"
+        : "rounded-lg border border-white/10 bg-white/5 p-4";
+      const header = document.createElement("div");
+      header.className = "mb-2 flex gap-3";
+
+      const avatar = document.createElement("div");
+      if (isAi) {
+        avatar.className = "flex h-8 w-8 items-center justify-center rounded-full bg-secondary-container/20";
+        const icon = document.createElement("span");
+        icon.className = "material-symbols-outlined text-sm text-secondary";
+        icon.textContent = "smart_toy";
+        avatar.appendChild(icon);
+      } else {
+        avatar.className = "flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-surface-container-high text-xs text-primary-fixed-dim";
+        avatar.textContent = isUser ? "You" : "MC";
+      }
+
+      const author = document.createElement("span");
+      author.className = `font-label-md ${isAi ? "text-secondary" : "text-on-surface"}`;
+      author.textContent = item.author;
+
+      const body = document.createElement("p");
+      body.className = "text-sm text-on-surface-variant";
+      body.textContent = `“${item.message}”`;
+
+      header.append(avatar, author);
+      card.append(header, body);
+      feedbackThread.appendChild(card);
+    });
+  }
+
+  function generateCritiqueReply(message) {
+    const trimmed = message.trim();
+    if (!trimmed) {
+      return "";
+    }
+
+    const analysis = state.analysis;
+    const projectName = state.primaryProject?.title || state.fileName?.replace(/\.[^.]+$/, "") || "this piece";
+    const topic = inferTopic(trimmed);
+
+    if (!analysis) {
+      return `For ${projectName}, I can give stronger critique after a Flow Check. Right now I would focus first on ${topic.focus}, then test two small variations so the focal read becomes clearer.`;
+    }
+
+    const contrastLine = analysis.contrastLabel === "High"
+      ? "Your contrast separation is already doing useful work, so adjust focal emphasis without flattening the dark-to-light rhythm."
+      : analysis.contrastLabel === "Balanced"
+        ? "The contrast range is balanced, which gives you room to push one area harder for a stronger focal hierarchy."
+        : "The current contrast read is still quiet, so the fastest improvement is a clearer light-vs-shadow split around the subject.";
+
+    const edgeLine = analysis.edgeLabel === "High"
+      ? "Edge energy is dense, so reserve your sharpest transitions for the main subject and let supporting zones breathe."
+      : analysis.edgeLabel === "Balanced"
+        ? "Edge energy is controlled, which means you can selectively sharpen one contour to improve direction and intent."
+        : "The edge structure is soft right now, so one decisive contour pass would help the form hold together.";
+
+    const paletteLine = analysis.recommendation.toLowerCase().includes("cool")
+      ? "Because the image is leaning cooler, one warmer accent would create a cleaner visual anchor."
+      : analysis.recommendation.toLowerCase().includes("warm")
+        ? "Because the palette is running warm, a cooler counterpoint would keep the surface from collapsing into one temperature band."
+        : "The palette is serviceable, but a tighter temperature split would make the composition feel more authored.";
+
+    return `${contrastLine} ${edgeLine} For ${projectName}, on the question of ${topic.label}, I would ${topic.action} ${paletteLine}`;
+  }
+
+  function inferTopic(message) {
+    const normalized = message.toLowerCase();
+    if (normalized.includes("color") || normalized.includes("palette") || normalized.includes("tone")) {
+      return {
+        label: "color and palette control",
+        focus: "color temperature and value grouping",
+        action: "test one dominant palette family with a single accent temperature",
+      };
+    }
+
+    if (normalized.includes("light") || normalized.includes("shadow") || normalized.includes("contrast")) {
+      return {
+        label: "lighting and contrast",
+        focus: "your brightest zone against your quietest dark",
+        action: "tighten the lighting hierarchy around the intended focal point",
+      };
+    }
+
+    if (normalized.includes("composition") || normalized.includes("focal") || normalized.includes("layout")) {
+      return {
+        label: "composition",
+        focus: "focal hierarchy and directional flow",
+        action: "simplify one competing area so the eye lands faster on the main read",
+      };
+    }
+
+    if (normalized.includes("edge") || normalized.includes("line") || normalized.includes("shape")) {
+      return {
+        label: "edge control",
+        focus: "shape clarity and selective sharpness",
+        action: "sharpen only the highest-priority contour and soften secondary transitions",
+      };
+    }
+
+    return {
+      label: "overall refinement",
+      focus: "value grouping and focal clarity",
+      action: "run one pass on hierarchy first, then a second pass on accent detail",
+    };
   }
 }
 

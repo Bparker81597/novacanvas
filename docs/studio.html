@@ -90,15 +90,15 @@
 
           <section class="glass-panel flex flex-col rounded-xl p-6 md:col-span-4">
             <h2 class="mb-6 font-headline-md text-label-md uppercase tracking-widest text-primary-fixed-dim">Creative Feedback</h2>
-            <div class="flex-1 space-y-6">
-              <div class="rounded-lg border-l-4 border-secondary-container bg-surface-container-high/40 p-4">
+            <div class="flex-1 space-y-6" data-feedback-thread>
+              <div class="rounded-lg border-l-4 border-secondary-container bg-surface-container-high/40 p-4" data-feedback-ai-card>
                 <div class="mb-2 flex gap-3">
                   <div class="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-container/20"><span class="material-symbols-outlined text-sm text-secondary">smart_toy</span></div>
                   <span class="font-label-md text-secondary">Nova AI Assistant</span>
                 </div>
                 <p class="text-sm text-on-surface-variant" data-ai-feedback>“The curvature of the primary body could be tightened around the shoulder blade for better anatomical flow.”</p>
               </div>
-              <div class="rounded-lg border border-white/10 bg-white/5 p-4">
+              <div class="rounded-lg border border-white/10 bg-white/5 p-4" data-feedback-peer-card>
                 <div class="mb-2 flex gap-3">
                   <img alt="Peer user" class="h-8 w-8 rounded-full border border-white/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv72SvSADeBJwboTDdnS2AT4kVTQfZJiEkIQws_HAkShEd7gbCW2jEx-QvJMa5CbA_dzj9Loj6fQh_uhck35_oh6ADU3ODYyW7f6DHqr4zgB1H_CMCKNYTdkv2u6KgcoFM_clZ5DOFsZcCnsSB3rtwYnVdHlnSnPidZ5_0lbzURHLNY20yMFsMOf0Ng2QzQR6mWSFlvmkcA2ZQOfJrMRHkjJk1RMK6fjqRWpcirASsH-Jg0A0gSrWbEgnK5lEqQ6-VKV8IdPdRyVU">
                   <span class="font-label-md text-on-surface">Marcus Chen <span class="ml-2 text-xs font-normal text-on-surface-variant/50">Master Artist</span></span>
@@ -108,8 +108,8 @@
             </div>
             <div class="mt-6 border-t border-white/10 pt-6">
               <div class="flex items-center rounded-xl border border-white/5 bg-surface-container-lowest px-4 py-3">
-                <input class="flex-1 border-none bg-transparent text-sm focus:ring-0" type="text" placeholder="Request specific feedback...">
-                <span class="material-symbols-outlined cursor-pointer text-primary-fixed-dim">send</span>
+                <input class="flex-1 border-none bg-transparent text-sm focus:ring-0" data-feedback-input type="text" placeholder="Request specific feedback...">
+                <button class="material-symbols-outlined cursor-pointer text-primary-fixed-dim" data-action="studio-send-feedback">send</button>
               </div>
             </div>
           </section>
