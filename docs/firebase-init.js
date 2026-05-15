@@ -18,6 +18,12 @@ import {
   updateDoc,
   where,
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+import {
+  getDownloadURL,
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-storage.js";
 
 const firebaseConfig = window.NOVACANVAS_FIREBASE_CONFIG;
 const statusNodes = Array.from(document.querySelectorAll("[data-firebase-status]"));
@@ -85,6 +91,7 @@ const defaultProjects = [
 ];
 
 let db;
+let storage;
 let userRef;
 let currentUid = null;
 let profileUnsub = null;
@@ -463,6 +470,43 @@ async function addProjectFeedback(entry) {
   });
 }
 
+function sanitizeFileName(fileName) {
+  return fileName.replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/-+/g, "-");
+}
+
+async function uploadStudioSketch(file, projectId) {
+  if (!currentUid) {
+    throw new Error("No current user");
+  }
+
+  if (!storage) {
+    throw new Error("Storage not initialized");
+  }
+
+  const primary = getPrimaryProject();
+  const docId = projectId || primary?.id || `${currentUid}-${defaultProjects[0].idSuffix}`;
+  const safeFileName = sanitizeFileName(file.name || "sketch.png");
+  const path = `users/${currentUid}/projects/${docId}/sketches/${Date.now()}-${safeFileName}`;
+  const sketchRef = storageRef(storage, path);
+
+  await uploadBytes(sketchRef, file, {
+    contentType: file.type || "application/octet-stream",
+    customMetadata: {
+      ownerId: currentUid,
+      projectId: docId,
+      originalFileName: file.name || "sketch.png",
+    },
+  });
+
+  const downloadUrl = await getDownloadURL(sketchRef);
+  return {
+    storagePath: path,
+    downloadUrl,
+    fileName: file.name || "sketch.png",
+    contentType: file.type || "application/octet-stream",
+  };
+}
+
 function subscribeProjects(listener) {
   projectListeners.add(listener);
   if (currentProjects.length > 0) {
@@ -482,6 +526,7 @@ async function initFirebase() {
 
   const app = initializeApp(firebaseConfig);
   db = getFirestore(app);
+  storage = getStorage(app);
   const auth = getAuth(app);
 
   bindProfileSave();
@@ -505,6 +550,7 @@ async function initFirebase() {
         subscribeProjects,
         updatePrimaryProject,
         addProjectFeedback,
+        uploadStudioSketch,
         getPrimaryProject,
       };
     } catch (error) {

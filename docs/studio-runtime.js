@@ -71,6 +71,15 @@ function initStudio() {
 
         state.primaryProject = primary;
 
+        if (primary.sketchUrl && primary.sketchUrl !== state.imageDataUrl) {
+          state.imageDataUrl = primary.sketchUrl;
+          state.fileName = primary.sketchFileName || state.fileName || "Uploaded sketch";
+          canvasImage.src = primary.sketchUrl;
+          uploadState.textContent = `${state.fileName} synced`;
+          localStorage.setItem(storageKey("image"), primary.sketchUrl);
+          localStorage.setItem(storageKey("fileName"), state.fileName);
+        }
+
         if (primary.flowCheck) {
           state.analysis = primary.flowCheck;
           renderAnalysis(primary.flowCheck);
@@ -174,18 +183,36 @@ function initStudio() {
       state.imageDataUrl = dataUrl;
       state.fileName = file.name;
       canvasImage.src = dataUrl;
-      uploadState.textContent = file.name;
+      uploadState.textContent = `${file.name} uploading...`;
       localStorage.setItem(storageKey("image"), dataUrl);
       localStorage.setItem(storageKey("fileName"), file.name);
 
-      await persistProjectUpdate({
-        title: file.name.replace(/\.[^.]+$/, ""),
-        summary: `Uploaded sketch ready for flow analysis`,
-        updatedLabel: "just now",
-      });
+      try {
+        const uploadResult = await uploadSketchToCloud(file);
+        state.imageDataUrl = uploadResult.downloadUrl;
+        canvasImage.src = uploadResult.downloadUrl;
+        uploadState.textContent = `${uploadResult.fileName} synced`;
+        localStorage.setItem(storageKey("image"), uploadResult.downloadUrl);
+        localStorage.setItem(storageKey("fileName"), uploadResult.fileName);
 
-      ui?.showToast?.("Sketch uploaded");
-      fileInput.value = "";
+        await persistProjectUpdate({
+          title: file.name.replace(/\.[^.]+$/, ""),
+          summary: "Uploaded sketch synced to cloud storage and ready for flow analysis",
+          updatedLabel: "just now",
+          sketchUrl: uploadResult.downloadUrl,
+          sketchStoragePath: uploadResult.storagePath,
+          sketchFileName: uploadResult.fileName,
+          sketchContentType: uploadResult.contentType,
+        });
+
+        ui?.showToast?.("Sketch uploaded to Firebase Storage");
+      } catch (error) {
+        console.error(error);
+        uploadState.textContent = `${file.name} upload failed`;
+        ui?.showToast?.("Storage upload failed");
+      } finally {
+        fileInput.value = "";
+      }
     });
   }
 
@@ -213,6 +240,14 @@ function initStudio() {
       console.error(error);
       ui?.showToast?.("Feedback sync failed");
     }
+  }
+
+  async function uploadSketchToCloud(file) {
+    if (!window.NovaCanvas?.uploadStudioSketch) {
+      throw new Error("Storage upload unavailable");
+    }
+
+    return window.NovaCanvas.uploadStudioSketch(file, state.primaryProject?.id);
   }
 
   function renderAnalysis(analysis) {
