@@ -21,12 +21,13 @@
           <p class="font-label-md text-label-md text-on-surface-variant/70">Creative Cockpit</p>
         </div>
         <nav class="flex-grow space-y-1">
-          <a class="flex translate-x-1 items-center space-x-4 border-l-4 border-primary-fixed-dim bg-primary-container/20 px-6 py-3 text-primary-fixed-dim" href="./dashboard.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">home</span><span class="font-label-md text-label-md">Home</span></a>
+          <a class="flex translate-x-1 items-center space-x-4 border-l-4 border-primary-fixed-dim bg-primary-container/20 px-6 py-3 text-primary-fixed-dim" href="./dashboard.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a>
           <a class="flex items-center space-x-4 px-6 py-3 text-on-surface-variant transition-colors hover:bg-white/5 hover:text-on-surface" href="./studio.html"><span class="material-symbols-outlined">draw</span><span class="font-label-md text-label-md">Studio</span></a>
           <a class="flex items-center space-x-4 px-6 py-3 text-on-surface-variant transition-colors hover:bg-white/5 hover:text-on-surface" href="./explore.html"><span class="material-symbols-outlined">explore</span><span class="font-label-md text-label-md">Explore</span></a>
           <a class="flex items-center space-x-4 px-6 py-3 text-on-surface-variant transition-colors hover:bg-white/5 hover:text-on-surface" href="./artprize.html"><span class="material-symbols-outlined">emoji_events</span><span class="font-label-md text-label-md">ArtPrize Prep</span></a>
           <a class="flex items-center space-x-4 px-6 py-3 text-on-surface-variant transition-colors hover:bg-white/5 hover:text-on-surface" href="./challenges.html"><span class="material-symbols-outlined">military_tech</span><span class="font-label-md text-label-md">Challenges</span></a>
-          <a class="flex items-center space-x-4 px-6 py-3 text-on-surface-variant transition-colors hover:bg-white/5 hover:text-on-surface" href="./profile.html"><span class="material-symbols-outlined">account_circle</span><span class="font-label-md text-label-md">Portfolio</span></a>
+          <a class="flex items-center space-x-4 px-6 py-3 text-on-surface-variant transition-colors hover:bg-white/5 hover:text-on-surface" href="./profile.html#portfolio"><span class="material-symbols-outlined">collections_bookmark</span><span class="font-label-md text-label-md">Portfolio</span></a>
+          <a class="flex items-center space-x-4 px-6 py-3 text-on-surface-variant transition-colors hover:bg-white/5 hover:text-on-surface" href="./profile.html"><span class="material-symbols-outlined">account_circle</span><span class="font-label-md text-label-md">Profile</span></a>
         </nav>
         <div class="mt-auto space-y-4 px-6">
           <a class="block w-full rounded-xl bg-primary-container py-4 text-center font-label-md text-label-md text-on-primary-container shadow-[0_0_20px_rgba(0,243,255,0.3)] transition-transform hover:scale-95 active:scale-90" href="./studio.html">Enter Studio</a>
@@ -36,147 +37,178 @@
       <main class="flex-grow md:ml-[280px]">
         <header class="sticky top-0 z-40 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
           <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-6 py-4 md:px-margin-desktop">
-            <div class="flex items-center space-x-8">
+            <div class="flex items-center gap-8">
               <a class="md:hidden font-headline-md text-headline-md text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
-              <nav class="hidden space-x-6 lg:flex">
-                <a class="active-nav font-label-md text-label-md" href="./dashboard.html">Home</a>
+              <nav class="hidden items-center gap-6 xl:flex">
+                <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./index.html">Home</a>
+                <a class="active-nav font-label-md text-label-md" href="./dashboard.html">Dashboard</a>
                 <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
                 <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
                 <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
+                <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
+                <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./profile.html#portfolio">Portfolio</a>
+                <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./profile.html">Profile</a>
               </nav>
             </div>
-            <div class="flex items-center space-x-6">
-              <span class="hidden sm:inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span>
-              <a class="relative text-on-surface-variant hover:text-on-surface" href="./profile.html"><span class="material-symbols-outlined">account_circle</span></a>
-            </div>
+            <span class="inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span>
           </div>
         </header>
 
-        <div class="mx-auto max-w-container-max space-y-12 px-6 py-8 md:px-margin-desktop">
+        <div class="mx-auto max-w-container-max space-y-10 px-6 py-8 md:px-margin-desktop">
           <section class="glass-card glow-border-cyan relative overflow-hidden rounded-3xl p-8 md:p-12">
-            <div class="relative z-10 grid items-center gap-8 md:grid-cols-2">
+            <div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <div class="space-y-6">
                 <div class="inline-flex items-center space-x-2 rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1">
                   <span class="h-2 w-2 animate-pulse rounded-full bg-primary-container"></span>
-                  <span class="text-[12px] font-label-md text-primary-fixed-dim">Systems online</span>
+                  <span class="text-[12px] font-label-md text-primary-fixed-dim">Demo-ready creative cockpit</span>
                 </div>
-                <h1 class="font-display-lg text-headline-lg leading-tight lg:text-display-lg">Welcome back,<br><span class="text-primary-fixed-dim" data-profile-name>Artist-01</span></h1>
-                <p class="max-w-md font-body-lg text-body-lg text-on-surface-variant">Your ArtPrize mural submission is 65% complete. Firebase status, project progress, and community touchpoints are all now represented in the live shell.</p>
+                <h1 class="font-display-lg text-headline-lg leading-tight text-white lg:text-display-lg">Welcome back,<br><span class="text-primary-fixed-dim" data-profile-name>Elora Vance</span></h1>
+                <p class="max-w-2xl font-body-lg text-body-lg text-on-surface-variant">Track active work, ArtPrize prep, portfolio visibility, creative momentum, and system readiness from one central dashboard.</p>
                 <div class="flex flex-wrap gap-4">
-                  <a class="rounded-xl bg-primary-container px-8 py-3 font-label-md text-label-md text-on-primary-container shadow-lg shadow-primary-container/20 transition-transform hover:scale-105" href="./studio.html">Resume Mural</a>
-                  <a class="rounded-xl border border-white/10 bg-white/5 px-8 py-3 font-label-md text-label-md text-on-surface transition-all hover:bg-white/10" href="./artprize.html">Prep Tracker</a>
+                  <a class="rounded-xl bg-primary-container px-8 py-3 font-label-md text-label-md text-on-primary-container shadow-lg shadow-primary-container/20 transition-transform hover:scale-105" href="./studio.html">Resume Studio</a>
+                  <a class="rounded-xl border border-white/10 bg-white/5 px-8 py-3 font-label-md text-label-md text-on-surface transition-all hover:bg-white/10" href="./artprize.html">Open ArtPrize Prep</a>
                 </div>
               </div>
-              <div class="hidden md:block">
-                <div class="grid gap-4">
-                  <div class="glass-card rounded-2xl p-5">
-                    <div class="mb-2 flex items-center justify-between"><span class="font-label-md text-label-md">Backend Surface</span><span class="font-mono-sm text-mono-sm text-primary-fixed-dim">Firestore live</span></div>
-                    <p class="text-sm text-on-surface-variant">Rules and indexes are deployed. Functions and Storage are scaffolded and waiting on Firebase-side provisioning.</p>
-                  </div>
-                  <div class="glass-card rounded-2xl p-5">
-                    <div class="mb-2 flex items-center justify-between"><span class="font-label-md text-label-md">Frontend Runtime</span><span class="font-mono-sm text-mono-sm text-secondary-fixed-dim">Pages active</span></div>
-                    <p class="text-sm text-on-surface-variant">This dashboard now runs as a real route under GitHub Pages instead of a single placeholder file.</p>
-                  </div>
+              <div class="grid gap-4">
+                <div class="glass-card rounded-2xl p-5">
+                  <p class="mb-2 font-mono-sm uppercase tracking-widest text-primary-fixed-dim">Creative Focus</p>
+                  <h2 class="mb-2 font-headline-md text-white">Public-facing mural package</h2>
+                  <p class="text-sm text-on-surface-variant">Tighten title, statement, and visitor flow before next showcase checkpoint.</p>
+                </div>
+                <div class="glass-card rounded-2xl p-5">
+                  <p class="mb-2 font-mono-sm uppercase tracking-widest text-secondary-fixed-dim">Today’s Goal</p>
+                  <h2 class="mb-2 font-headline-md text-white">Finalize portfolio-ready selects</h2>
+                  <p class="text-sm text-on-surface-variant">Choose 3 hero images, 1 process shot, and 1 concise artist statement.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <div class="grid grid-cols-1 gap-gutter md:grid-cols-12">
-            <section class="glass-card glow-border-cyan rounded-3xl p-6 md:col-span-8">
-              <div class="mb-8 flex items-center justify-between">
-                <h2 class="text-[24px] font-headline-md text-on-surface">Projects In Progress</h2>
-                <a class="flex items-center space-x-2 font-label-md text-label-md text-primary-fixed-dim" href="./studio.html"><span>Open Studio</span><span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
-              </div>
-              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <article class="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-4 transition-all hover:border-primary-container/50" data-project-card="0">
-                  <div class="mb-4 aspect-video overflow-hidden rounded-xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Neo Tokyo project" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbmGloWolGBTI4Yj3FsTRGF6qHcKD_45LU3faOajQl7iZ7eZkgxdZOwiMuxgDsYPAB2-Msg52Il0WmL9biYlJ0KpM51rrBuRohRgKUW1WwJ9bbfeuMnXI_8nZPqSVbFGcZWZFjPBXgfbGD1nfTiw7I1vuLcq1oN_nCvtveBkAdFxe2vWVkjX6_lUMoMwXGPlNspGHGAJ7-Dq4S309q3zG2cqNRXI7FZNYgdk2mwrNqxZRqHFxgKsarQFCAANZLG99vVdSHyqfLFnM">
-                  </div>
-                  <h3 class="mb-1 font-label-md text-body-md" data-project-title>Neo-Tokyo Overgrowth</h3>
-                  <div class="mb-3 flex items-center justify-between">
-                    <span class="text-[12px] text-on-surface-variant" data-project-edited>Last edit: 2h ago</span>
-                    <span class="text-[12px] font-bold text-primary-fixed-dim" data-project-progress>74%</span>
-                  </div>
-                  <div class="h-1 w-full overflow-hidden rounded-full bg-white/10"><div class="h-full w-[74%] bg-gradient-to-r from-primary-container to-secondary-container" data-project-bar></div></div>
-                </article>
-                <article class="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-4 transition-all hover:border-primary-container/50" data-project-card="1">
-                  <div class="mb-4 aspect-video overflow-hidden rounded-xl">
-                    <img class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Void sanctuary project" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW_Pa65Foj5TjqoeDL-iK7A1y3HKvsIpEs_Dovw52BTlt3ReB3ij-h3LvlOXBY72n2F6z4sBLuuluJVdPdPLGbrZ9YPrcrf86mnbo4TScBGj70g6FGvaJWwRohdg0eRVh5jySFMYLNnT57MGKW5tP1rtR8h239f1g1dNaZ2SHPYvnAz8cG93VfoAHyKIX1kmOF9iI1jXP9ghB7XFIFmm1rKqXu3ytvpdcyZbtJ7aAP7_rwTxMtecoB46EZ8ruST_oY0kNlG5jM4Rc">
-                  </div>
-                  <h3 class="mb-1 font-label-md text-body-md" data-project-title>Void Sanctuary Sculpt</h3>
-                  <div class="mb-3 flex items-center justify-between">
-                    <span class="text-[12px] text-on-surface-variant" data-project-edited>Last edit: 1d ago</span>
-                    <span class="text-[12px] font-bold text-primary-fixed-dim" data-project-progress>42%</span>
-                  </div>
-                  <div class="h-1 w-full overflow-hidden rounded-full bg-white/10"><div class="h-full w-[42%] bg-gradient-to-r from-primary-container to-secondary-container" data-project-bar></div></div>
-                </article>
-              </div>
-            </section>
+          <section class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <article class="dashboard-stat-card"><span class="material-symbols-outlined dashboard-stat-card__icon">folder</span><p>Active Projects</p><strong>4 live builds</strong><small>2 need review, 1 ready to present</small></article>
+            <article class="dashboard-stat-card"><span class="material-symbols-outlined dashboard-stat-card__icon">emoji_events</span><p>ArtPrize Prep Progress</p><strong>68% complete</strong><small>Statement draft and checklist nearly done</small></article>
+            <article class="dashboard-stat-card"><span class="material-symbols-outlined dashboard-stat-card__icon">visibility</span><p>Portfolio Views</p><strong>184 this week</strong><small>Up 27% from last showcase cycle</small></article>
+            <article class="dashboard-stat-card"><span class="material-symbols-outlined dashboard-stat-card__icon">cloud_done</span><p>Firebase Status</p><strong>Connected</strong><small>Firestore, Storage, and Functions deployed</small></article>
+          </section>
 
-            <section class="glass-card glow-border-violet rounded-3xl p-6 md:col-span-4">
-              <h2 class="mb-6 text-[24px] font-headline-md text-on-surface">ArtPrize Prep</h2>
-              <div class="flex flex-col items-center justify-center py-4">
-                <div class="relative flex h-40 w-40 items-center justify-center">
-                  <svg class="h-full w-full -rotate-90">
-                    <circle cx="80" cy="80" r="70" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="8"></circle>
-                    <circle cx="80" cy="80" r="70" fill="transparent" stroke="#9c00d2" stroke-dasharray="440" stroke-dashoffset="154" stroke-linecap="round" stroke-width="8"></circle>
-                  </svg>
-                  <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <span class="font-headline-md text-headline-md">65%</span>
-                    <span class="text-[12px] font-label-md text-on-surface-variant">READY</span>
-                  </div>
-                </div>
-              </div>
-              <ul class="mt-6 space-y-4">
-                <li class="flex items-center space-x-3"><span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-body-md text-on-surface-variant">Initial Concept Sketch</span></li>
-                <li class="flex items-center space-x-3"><span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">check_circle</span><span class="text-body-md text-on-surface-variant">Material Study</span></li>
-                <li class="flex items-center space-x-3"><div class="h-5 w-5 rounded-full border-2 border-on-surface-variant/30"></div><span class="text-body-md text-on-surface">Final Color Grading</span></li>
-                <li class="flex items-center space-x-3"><div class="h-5 w-5 rounded-full border-2 border-on-surface-variant/30"></div><span class="text-body-md text-on-surface">Submission Documentation</span></li>
-              </ul>
-              <a class="mt-8 block w-full rounded-xl border border-on-tertiary-container/30 py-3 text-center font-label-md text-on-tertiary-container transition-colors hover:bg-on-tertiary-container/10" href="./artprize.html">Go to Prep Studio</a>
-            </section>
-
-            <section class="glass-card rounded-3xl p-6 md:col-span-4">
-              <h2 class="mb-6 flex items-center justify-between text-[20px] font-headline-md text-on-surface">Creative Missions <span class="rounded bg-primary-container/10 px-2 py-0.5 text-[12px] font-mono-sm text-primary-fixed-dim">WEEKLY</span></h2>
-              <div class="space-y-4">
-                <div class="cursor-pointer rounded-2xl border border-white/5 bg-white/5 p-4 transition-colors hover:bg-white/10">
-                  <div class="mb-2 flex items-start justify-between"><span class="material-symbols-outlined text-secondary-fixed-dim">palette</span><span class="text-[12px] font-bold text-secondary-fixed-dim">+500 XP</span></div>
-                  <p class="mb-1 font-label-md text-body-md">Color Alchemy</p>
-                  <p class="text-[12px] text-on-surface-variant">Use only tertiary violet in a portrait.</p>
-                </div>
-                <div class="cursor-pointer rounded-2xl border border-white/5 bg-white/5 p-4 transition-colors hover:bg-white/10">
-                  <div class="mb-2 flex items-start justify-between"><span class="material-symbols-outlined text-primary-fixed-dim">speed</span><span class="text-[12px] font-bold text-primary-fixed-dim">+250 XP</span></div>
-                  <p class="mb-1 font-label-md text-body-md">Speed Sculpting</p>
-                  <p class="text-[12px] text-on-surface-variant">Finish a sketch in under 15 minutes.</p>
-                </div>
-              </div>
-            </section>
-
-            <section class="glass-card rounded-3xl p-6 md:col-span-8">
+          <section class="grid gap-gutter md:grid-cols-12">
+            <article class="glass-card rounded-3xl p-6 md:col-span-7">
               <div class="mb-6 flex items-center justify-between">
-                <h2 class="text-[20px] font-headline-md text-on-surface">Daily Inspiration</h2>
-                <a class="font-label-md text-label-md text-primary-fixed-dim" href="./explore.html">Open Explore</a>
+                <h2 class="text-[24px] font-headline-md text-on-surface">Active Projects</h2>
+                <a class="font-label-md text-label-md text-primary-fixed-dim" href="./studio.html">Open Studio</a>
               </div>
-              <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                <img class="h-24 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDktL6WK-Mh9mHQkk8y9n2C8Xs16uQc4wYgFVTW5X8J5CIyhw5umbBURHscuEtsXF6xX_vLU5oNjJNjjGvjdr7qehueXzREGBgf-h_4ML4H3VgBFMRH8R28Gj8NVeCAWUAglXw9u31l0yvoG-PSIHH991eLGgbX-OAfmbun1CVbzhB4CAYXqLAIR5Q6RfMMU-1iqmgwinqI5TbyPE78MEic2ClPcdP589d10d4Q7k21IjCOs5_NLRXTGauL87iEVYFOq-Crq8m6I7c">
-                <img class="h-24 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDABvwMY9wvcR_-1icU7fLI-KH05IsJSAOH7dmPCNHqsBaFB7TImgUxcB3ARsOQq1QYCDL8iAeRypYcfPh1Vpq_DDAO6gwx49EdTylMGGmu1YitYYUIIQ6HG0Y8GMKlJWfZV6P1oWamhemto6LIXz8wc_K5Wr5irByVYagrbEsVmMCEGmwaWIgo9HmdkoCjuGrCFuja2BdTlG1h37-FLswUJ8YBXlBw5mRvYnnrlVwAQ6IPlchJJFmtjtqkZUn5svG4frci-oKvfXM">
-                <img class="h-24 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration landscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa8J1R0GRIh55YvPkYsTqZRoohaw7HlOtNQfdfWW0-lCVzsbrK54ZXPhlhoqXoEY5R58bdXCgwswvlIjPCp8AaLxYlTF14yATkHEhFsRaBlK9XD_7ShB5OAdV9cNnBQnk2yLL0gH46fYboidwhkzj-HHY75TRYmH_n4fyP-v-fffasZYXQfxq-d3m37ael3AGbPmHRZTHx9VUqb3Jcnr0-iM2Sn9VG8o_kgeAXn39ebDMo2ivxvP7t0UjfkfWYpfgODVVU49guT3Y">
-                <img class="h-24 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration crystal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpRRyhQWJnnilkricNjLPylR_Hh6VxTZ-5bONmNh3jf0_6eghPPwInou9M80nM7Co3ATgN0q9CWPakGegofxiIULgpwPF1nqjVp0LanX9ywXbLpS9UFmOlWU1UhI3w6wPrLf1Q0QWqgtFFUzSSjauNU43qBoav8a21Qpvl45yiG3iXEIQT3bKW97zCbNjyVEQckNmUixT2q0jKjiy-RMdyKxUIZNvkoMBPzX8azrqk0rG-fp0RYu1WmZfP4GVDk_tOwkt69r-KBAo">
+              <div class="space-y-4">
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <div class="mb-2 flex items-center justify-between"><h3 class="font-label-md text-body-md">Neo-Tokyo Overgrowth</h3><span class="text-sm font-bold text-primary-fixed-dim">74%</span></div>
+                  <p class="mb-3 text-sm text-on-surface-variant">Hero mural package, portfolio selects, and statement refinement in progress.</p>
+                  <div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[74%] bg-gradient-to-r from-primary-container to-secondary-container"></div></div>
+                </div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <div class="mb-2 flex items-center justify-between"><h3 class="font-label-md text-body-md">Grand Rapids Install Study</h3><span class="text-sm font-bold text-secondary-fixed-dim">58%</span></div>
+                  <p class="mb-3 text-sm text-on-surface-variant">Physical layout notes, visitor flow, and venue-facing presentation draft.</p>
+                  <div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[58%] bg-gradient-to-r from-secondary-fixed-dim to-fuchsia-300"></div></div>
+                </div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <div class="mb-2 flex items-center justify-between"><h3 class="font-label-md text-body-md">Tattoo Flash System</h3><span class="text-sm font-bold text-fuchsia-300">31%</span></div>
+                  <p class="mb-3 text-sm text-on-surface-variant">Need cleaner grouping, stronger naming, and a better client-facing gallery flow.</p>
+                  <div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[31%] bg-gradient-to-r from-fuchsia-300 to-primary-container"></div></div>
+                </div>
               </div>
-            </section>
-          </div>
+            </article>
+
+            <article class="glass-card glow-border-violet rounded-3xl p-6 md:col-span-5">
+              <h2 class="mb-6 text-[24px] font-headline-md text-on-surface">ArtPrize Prep Progress</h2>
+              <div class="mb-6 flex items-center gap-5">
+                <div class="relative flex h-32 w-32 items-center justify-center">
+                  <svg class="h-full w-full -rotate-90">
+                    <circle cx="64" cy="64" r="54" fill="transparent" stroke="rgba(255,255,255,0.06)" stroke-width="10"></circle>
+                    <circle cx="64" cy="64" r="54" fill="transparent" stroke="#9c00d2" stroke-dasharray="339" stroke-dashoffset="108" stroke-linecap="round" stroke-width="10"></circle>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center"><strong class="font-headline-md text-white">68%</strong><span class="text-[11px] text-on-surface-variant">READYING</span></div>
+                </div>
+                <div class="space-y-3 text-sm text-on-surface-variant">
+                  <p><span class="text-white">Done:</span> project concept, draft statement, first portfolio pass.</p>
+                  <p><span class="text-white">Next:</span> title refinement, visitor QR flow, final checklist.</p>
+                  <p><span class="text-white">Deadline rhythm:</span> local showcase prep this week.</p>
+                </div>
+              </div>
+              <a class="block rounded-xl border border-on-tertiary-container/30 py-3 text-center font-label-md text-on-tertiary-container transition-colors hover:bg-on-tertiary-container/10" href="./artprize.html">Go to Prep Studio</a>
+            </article>
+
+            <article class="glass-card rounded-3xl p-6 md:col-span-4">
+              <h2 class="mb-5 font-headline-md text-white">Saved Inspirations</h2>
+              <div class="grid grid-cols-2 gap-3">
+                <img class="h-28 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDktL6WK-Mh9mHQkk8y9n2C8Xs16uQc4wYgFVTW5X8J5CIyhw5umbBURHscuEtsXF6xX_vLU5oNjJNjjGvjdr7qehueXzREGBgf-h_4ML4H3VgBFMRH8R28Gj8NVeCAWUAglXw9u31l0yvoG-PSIHH991eLGgbX-OAfmbun1CVbzhB4CAYXqLAIR5Q6RfMMU-1iqmgwinqI5TbyPE78MEic2ClPcdP589d10d4Q7k21IjCOs5_NLRXTGauL87iEVYFOq-Crq8m6I7c">
+                <img class="h-28 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDABvwMY9wvcR_-1icU7fLI-KH05IsJSAOH7dmPCNHqsBaFB7TImgUxcB3ARsOQq1QYCDL8iAeRypYcfPh1Vpq_DDAO6gwx49EdTylMGGmu1YitYYUIIQ6HG0Y8GMKlJWfZV6P1oWamhemto6LIXz8wc_K5Wr5irByVYagrbEsVmMCEGmwaWIgo9HmdkoCjuGrCFuja2BdTlG1h37-FLswUJ8YBXlBw5mRvYnnrlVwAQ6IPlchJJFmtjtqkZUn5svG4frci-oKvfXM">
+                <img class="h-28 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa8J1R0GRIh55YvPkYsTqZRoohaw7HlOtNQfdfWW0-lCVzsbrK54ZXPhlhoqXoEY5R58bdXCgwswvlIjPCp8AaLxYlTF14yATkHEhFsRaBlK9XD_7ShB5OAdV9cNnBQnk2yLL0gH46fYboidwhkzj-HHY75TRYmH_n4fyP-v-fffasZYXQfxq-d3m37ael3AGbPmHRZTHx9VUqb3Jcnr0-iM2Sn9VG8o_kgeAXn39ebDMo2ivxvP7t0UjfkfWYpfgODVVU49guT3Y">
+                <img class="h-28 w-full rounded-xl border border-white/10 object-cover" alt="Inspiration 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpRRyhQWJnnilkricNjLPylR_Hh6VxTZ-5bONmNh3jf0_6eghPPwInou9M80nM7Co3ATgN0q9CWPakGegofxiIULgpwPF1nqjVp0LanX9ywXbLpS9UFmOlWU1UhI3w6wPrLf1Q0QWqgtFFUzSSjauNU43qBoav8a21Qpvl45yiG3iXEIQT3bKW97zCbNjyVEQckNmUixT2q0jKjiy-RMdyKxUIZNvkoMBPzX8azrqk0rG-fp0RYu1WmZfP4GVDk_tOwkt69r-KBAo">
+              </div>
+            </article>
+
+            <article class="glass-card rounded-3xl p-6 md:col-span-4">
+              <h2 class="mb-5 font-headline-md text-white">Creative Missions</h2>
+              <div class="space-y-4">
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <div class="mb-2 flex items-center justify-between"><span class="font-label-md text-white">Narrative Tightening</span><span class="text-xs font-bold text-primary-fixed-dim">+500 XP</span></div>
+                  <p class="text-sm text-on-surface-variant">Revise one artist statement to sound clearer, shorter, and more public-facing.</p>
+                </div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <div class="mb-2 flex items-center justify-between"><span class="font-label-md text-white">Portfolio Refresh</span><span class="text-xs font-bold text-secondary-fixed-dim">+320 XP</span></div>
+                  <p class="text-sm text-on-surface-variant">Replace one weak image with a stronger process or hero shot.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="glass-card rounded-3xl p-6 md:col-span-4">
+              <h2 class="mb-5 font-headline-md text-white">Recent Feedback</h2>
+              <div class="space-y-4">
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <p class="mb-2 text-sm text-secondary-fixed-dim">Nova AI Assistant</p>
+                  <p class="text-sm text-on-surface-variant">Push more separation between your focal highlight and the surrounding support shapes.</p>
+                </div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <p class="mb-2 text-sm text-primary-fixed-dim">Marcus Chen</p>
+                  <p class="text-sm text-on-surface-variant">The project title is close. Make it more memorable and less descriptive.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="glass-card rounded-3xl p-6 md:col-span-6">
+              <h2 class="mb-5 font-headline-md text-white">Collab Requests</h2>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <div><h3 class="font-label-md text-white">Grand Rapids Install Group</h3><p class="text-sm text-on-surface-variant">Seeking projection mapping support for an interactive mural wall.</p></div>
+                  <span class="creator-chip">High fit</span>
+                </div>
+                <div class="flex items-center justify-between rounded-2xl border border-white/8 bg-white/5 p-4">
+                  <div><h3 class="font-label-md text-white">Luna_X Collective</h3><p class="text-sm text-on-surface-variant">Looking for mixed-media collaborators for a cyber-nature showcase.</p></div>
+                  <span class="creator-chip">Open</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="glass-card rounded-3xl p-6 md:col-span-6">
+              <h2 class="mb-5 font-headline-md text-white">Firebase Status</h2>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4"><p class="mb-2 text-sm text-primary-fixed-dim">Firestore</p><strong class="block text-white">Rules and indexes deployed</strong><small class="text-on-surface-variant">Project documents and prep state are ready.</small></div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4"><p class="mb-2 text-sm text-primary-fixed-dim">Storage</p><strong class="block text-white">Sketch uploads live</strong><small class="text-on-surface-variant">Studio uploads now sync to cloud-backed storage.</small></div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4"><p class="mb-2 text-sm text-primary-fixed-dim">Functions</p><strong class="block text-white">2nd gen active</strong><small class="text-on-surface-variant">Health check and profile bootstrap are deployed.</small></div>
+                <div class="rounded-2xl border border-white/8 bg-white/5 p-4"><p class="mb-2 text-sm text-primary-fixed-dim">Pages Shell</p><strong class="block text-white">Demo route system active</strong><small class="text-on-surface-variant">GitHub Pages is serving the full static experience.</small></div>
+              </div>
+            </article>
+          </section>
         </div>
 
         <footer class="mt-12 w-full rounded-t-xl border-t border-white/5 bg-surface-container-lowest">
           <div class="mx-auto flex w-full max-w-container-max flex-col items-center justify-between px-6 py-12 md:flex-row md:px-margin-desktop">
             <div class="mb-8 md:mb-0">
               <h3 class="mb-2 font-headline-md text-headline-md text-on-surface">NovaCanvas</h3>
-              <p class="max-w-xs font-body-md text-body-md text-on-surface-variant">Empowering the next generation of digital masters in the cyber-luxe era.</p>
+              <p class="max-w-xs font-body-md text-body-md text-on-surface-variant">Creative growth systems for visual creators, local showcases, and public-facing presentation.</p>
             </div>
             <div class="flex flex-wrap justify-center gap-8">
               <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./index.html">Home</a>
-              <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./explore.html">Community</a>
+              <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./studio.html">Studio</a>
+              <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./profile.html#portfolio">Portfolio</a>
               <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./profile.html">Profile</a>
             </div>
           </div>
@@ -185,7 +217,7 @@
     </div>
 
     <div class="fixed bottom-0 left-0 right-0 z-[60] flex justify-around border-t border-white/10 glass-card px-4 py-3 md:hidden">
-      <a class="flex flex-col items-center text-primary-fixed-dim" href="./dashboard.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">home</span><span class="mt-1 text-[10px] font-label-md">Home</span></a>
+      <a class="flex flex-col items-center text-primary-fixed-dim" href="./dashboard.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">dashboard</span><span class="mt-1 text-[10px] font-label-md">Dashboard</span></a>
       <a class="flex flex-col items-center text-on-surface-variant" href="./studio.html"><span class="material-symbols-outlined">draw</span><span class="mt-1 text-[10px] font-label-md">Studio</span></a>
       <a class="relative -top-8" href="./studio.html"><span class="flex h-14 w-14 items-center justify-center rounded-full bg-primary-container text-[32px] text-on-primary-container shadow-[0_0_20px_rgba(0,243,255,0.4)] material-symbols-outlined">add</span></a>
       <a class="flex flex-col items-center text-on-surface-variant" href="./artprize.html"><span class="material-symbols-outlined">emoji_events</span><span class="mt-1 text-[10px] font-label-md">ArtPrize</span></a>

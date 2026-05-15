@@ -16,23 +16,25 @@
     <header class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 shadow-2xl backdrop-blur-2xl">
       <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
         <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
-        <nav class="hidden items-center gap-8 md:flex">
-          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./dashboard.html">Home</a>
-          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
-          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
-          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
-          <a class="text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
-          <a class="active-nav" href="./profile.html">Portfolio</a>
+        <nav class="hidden items-center gap-6 xl:flex">
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./index.html">Home</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./dashboard.html">Dashboard</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="#portfolio">Portfolio</a>
+          <a class="active-nav font-label-md text-label-md" href="./profile.html">Profile</a>
         </nav>
         <button class="rounded-full bg-primary-container px-6 py-2 font-label-md text-on-primary-container" data-action="open-profile-panel">Edit Profile</button>
       </div>
     </header>
 
     <main class="mx-auto max-w-container-max px-margin-mobile py-12 md:px-margin-desktop">
-      <section class="relative mb-20">
+      <section class="relative mb-16">
         <div class="absolute -left-24 -top-24 -z-10 h-96 w-96 rounded-full bg-primary-container/10 blur-[120px]"></div>
         <div class="absolute right-0 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-secondary-container/5 blur-[150px]"></div>
-        <div class="flex flex-col items-start gap-12 md:flex-row md:items-center">
+        <div class="flex flex-col items-start gap-12 lg:flex-row lg:items-center">
           <div class="group relative">
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary-fixed-dim to-secondary-fixed-dim opacity-20 blur-xl transition-opacity group-hover:opacity-40"></div>
             <div class="glass-card h-48 w-48 rounded-2xl p-1 md:h-64 md:w-64">
@@ -40,17 +42,16 @@
             </div>
             <div class="absolute -bottom-4 -right-4 flex items-center gap-2 rounded-xl border border-white/10 bg-surface-container-highest px-4 py-2"><span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">verified</span><span class="font-label-md text-on-surface">Pro Master</span></div>
           </div>
-
           <div class="flex-1 space-y-6">
             <div>
               <div class="mb-2 flex flex-wrap items-center gap-4">
                 <h1 class="font-headline-lg text-headline-lg text-white" data-profile-name>Elora Vance</h1>
                 <div class="flex gap-2">
-                  <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Muralist</span>
-                  <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">Cyber-Illustrator</span>
+                  <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Mixed Media</span>
+                  <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">ArtPrize Creator</span>
                 </div>
               </div>
-              <p class="max-w-2xl font-body-lg text-on-surface-variant" data-profile-bio>Architect of digital dreamscapes and urban neon narratives. Specializing in high-fidelity glassmorphism and large-scale augmented reality murals that bridge the physical and digital void.</p>
+              <p class="max-w-2xl font-body-lg text-on-surface-variant" data-profile-bio>Architect of digital dreamscapes and urban neon narratives. Specializing in installation-minded visual storytelling, cyber-luxe presentation, and public-facing project development.</p>
             </div>
             <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
               <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Followers</div><div class="font-headline-md text-headline-md text-primary-fixed-dim" data-stat-followers>12.8k</div></div>
@@ -65,35 +66,83 @@
       <div class="grid grid-cols-1 gap-gutter lg:grid-cols-12">
         <aside class="space-y-8 lg:col-span-4">
           <section class="glass-card rounded-2xl p-8">
-            <h2 class="mb-6 text-[24px] font-headline-md text-white">Mission Badges</h2>
-            <div class="grid grid-cols-3 gap-4">
-              <div class="flex flex-col items-center gap-2"><div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-surface-container-highest"><span class="material-symbols-outlined text-primary-fixed-dim">palette</span></div><span class="text-center text-mono-sm">Color Theory Expert</span></div>
-              <div class="flex flex-col items-center gap-2"><div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-surface-container-highest"><span class="material-symbols-outlined text-secondary-fixed-dim">architecture</span></div><span class="text-center text-mono-sm">Structuralist</span></div>
-              <div class="flex flex-col items-center gap-2"><div class="flex h-16 w-16 items-center justify-center rounded-full border border-white/10 bg-surface-container-highest"><span class="material-symbols-outlined text-on-tertiary-container">rocket_launch</span></div><span class="text-center text-mono-sm">Early Adopter</span></div>
+            <h2 class="mb-4 text-[24px] font-headline-md text-white">Creator Bio</h2>
+            <p class="text-on-surface-variant">Elora builds visual experiences that blend mural language, mixed media thinking, and event-ready presentation. Her work focuses on helping viewers enter a world quickly, then stay with the piece long enough to discover narrative detail.</p>
+          </section>
+
+          <section class="glass-card rounded-2xl p-8">
+            <h2 class="mb-4 text-[24px] font-headline-md text-white">Artistic Focus</h2>
+            <div class="flex flex-wrap gap-3">
+              <span class="creator-chip">Public Installations</span>
+              <span class="creator-chip">Mixed Media</span>
+              <span class="creator-chip">Cyber-Luxe Portraiture</span>
+              <span class="creator-chip">Narrative Murals</span>
+              <span class="creator-chip">Digital Process Studies</span>
             </div>
           </section>
 
           <section class="glass-card rounded-2xl p-8">
-            <h2 class="mb-6 text-[24px] font-headline-md text-white">Collaborations</h2>
-            <div class="space-y-4">
-              <div class="flex items-center gap-4 rounded-xl border border-transparent p-3 transition-colors hover:border-white/5 hover:bg-white/5"><img class="h-12 w-12 rounded-lg object-cover" alt="Kael AI" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJSHCRZGCd2ubfr8l0aWl5XCMo8JIDujAgbkHJBt9bLyGqmfCPr5STuuW3DudtXWFYwbfPq5ey5xVtbyhoCoGWafeAYRwtRYh5yJGGkawibkIXmLryYuGX1SdMhI94EVScadwR67rzQ8TmhFJNi6jnK1ZR25jDhjgWgRnYLPleIJt79etbLcJXmEhLX5Flgwi23acmj7z-Hbagf8FTovcWVQi6PeEHN5uzDUU9GCiY2-RhbflIZHJdEOwanyHFef_PpCmxUN-oCBQ"><div><div class="font-label-md text-white">NeonCity Project</div><div class="text-mono-sm text-on-surface-variant">Lead Illustrator with @Kael.AI</div></div></div>
-              <div class="flex items-center gap-4 rounded-xl border border-transparent p-3 transition-colors hover:border-white/5 hover:bg-white/5"><img class="h-12 w-12 rounded-lg object-cover" alt="Sia" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjSR6eAaBIGndcjFa8ZGt-HAmdW3cotXPvMELoHv4Mr5jcZWKT2ASNIkfl8Rxd7z6v7nkkVZw_fMs6TRnyo75XgyxeUTJ3LhQLgFDs4Hb52InlN8nb--xbod0NyrNRgeh57_qkS2fzfNbfS5_DWlDrD8t-uduvpKfM3DZjOwr_3m8hEB-MV2DN1qrdjJTZucpiSgVrdcQqMA-9ll0lTEoyEEFVyjosFG8Up4AxduYB5L8_Drr28FzQb4WqwUV9wx3XKNNs6SKVwZY"><div><div class="font-label-md text-white">ArtPrize ‘24 Collab</div><div class="text-mono-sm text-on-surface-variant">Interactive Installation with @Sia</div></div></div>
+            <h2 class="mb-4 text-[24px] font-headline-md text-white">Completed Missions</h2>
+            <ul class="space-y-3 text-on-surface-variant">
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span>Artist statement condensed for event signage</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span>Portfolio hero image set refreshed</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed-dim">check_circle</span>Visitor QR page draft approved</li>
+            </ul>
+          </section>
+
+          <section class="glass-card rounded-2xl p-8">
+            <h2 class="mb-4 text-[24px] font-headline-md text-white">ArtPrize Prep Progress</h2>
+            <div class="mb-3 flex items-center justify-between"><span class="text-on-surface-variant">Current cycle</span><strong class="text-primary-fixed-dim">71%</strong></div>
+            <div class="mb-4 h-2 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[71%] bg-gradient-to-r from-primary-container to-secondary-container"></div></div>
+            <p class="text-sm text-on-surface-variant">Statement, title, and portfolio page are in strong shape. Final exhibit planning and visitor engagement assets are next.</p>
+          </section>
+
+          <section class="glass-card rounded-2xl p-8">
+            <h2 class="mb-4 text-[24px] font-headline-md text-white">Portfolio Link</h2>
+            <a class="inline-flex rounded-full border border-primary-fixed-dim/30 bg-primary-container/10 px-4 py-2 font-label-md text-primary-fixed-dim transition-colors hover:bg-primary-container/20" href="https://bparker81597.github.io/novacanvas/profile.html#portfolio">novacanvas/profile.html#portfolio</a>
+          </section>
+
+          <section class="glass-card rounded-2xl p-8">
+            <h2 class="mb-4 text-[24px] font-headline-md text-white">Collaboration Interest</h2>
+            <p class="mb-4 text-on-surface-variant">Open to installation collaborators, photographers, projection artists, and event-facing visual storytellers.</p>
+            <div class="flex flex-wrap gap-3">
+              <span class="creator-chip">Open to Local Collabs</span>
+              <span class="creator-chip">ArtPrize Teams</span>
+              <span class="creator-chip">Mural Concepts</span>
             </div>
           </section>
         </aside>
 
-        <section class="lg:col-span-8">
-          <div class="mb-8 flex items-end justify-between">
-            <div><h2 class="font-headline-md text-white">Featured Portfolio</h2><p class="text-on-surface-variant">Latest curated works and ArtPrize entries</p></div>
-            <span class="inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span>
-          </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <article class="glass-card overflow-hidden rounded-2xl md:col-span-2">
-              <div class="relative aspect-[16/9] w-full"><img class="h-full w-full object-cover transition-transform duration-700 hover:scale-105" alt="Obsidian Genesis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8XkYPJrpw-qn7EjqmgskbxXYuqHCIDbn4TGMV0Ff41-cYmuQMpvI1zNfEdwg2ZyfjmTQkTc9o7LFXZEHipSkyhH7F8usvHB0Nj-DhVTtOO84Eo5rzULyGwPoCfYQQcD5iXtLvPKfu_UMbLInM4EMRubESqrIuCmWlrmcCwFZbmrkEuzJ-FS2MS2blEYnqgo9pjlKiVDJVvc-cC8HiuqJVMPSxzYLCu1FtYU7ahwVYKrhGAcVwQhWLwfRvcL19DqH_sMc5K2GeSsM"><div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background/90 via-transparent to-transparent p-8"><div class="flex items-end justify-between"><div><span class="mb-2 inline-block rounded-full bg-on-tertiary-container px-3 py-1 text-mono-sm text-white">ArtPrize Gold Selection</span><h3 class="text-[28px] font-headline-md text-white">Obsidian Genesis</h3><p class="text-on-surface-variant">Mixed Media Digital Collage • 2024</p></div><button class="rounded-full bg-primary-container px-6 py-2 font-label-md text-on-primary-container" data-action="view-artwork-details" data-artwork-title="Obsidian Genesis" data-artwork-medium="Mixed Media Digital Collage" data-artwork-year="2024">View Details</button></div></div></div>
-            </article>
-            <article class="glass-card overflow-hidden rounded-2xl"><img class="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" alt="Neural Flux" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6DNR48iap1pBu5-8M_tv4qP-qgxuAeULc2ZbtincEJyrVT21N_w4kz7ZS4asL-eM53yUh5BFEyn7aVsFNa19E-s5mY2ARtusSXWN0H9zo1e7d_4GLEWdPByrcZPrVXwmSOjVsNet7W-biy1JpclYJsLwYcBZ07n5nd8us5M2_O_2EGMt4GAuozaIUXW2qUGNvEHNZelQWEWvxPgLv9ag_JPPBo9QwDFyBsCI7eiDzNzos8amQBPfnbk955OzRm1yVz1BjvMKpTBA"><div class="p-6"><h3 class="text-[20px] font-headline-md text-white">Neural Flux</h3><p class="text-mono-sm text-on-surface-variant">Generative Sculpture</p></div></article>
-            <article class="glass-card overflow-hidden rounded-2xl"><img class="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" alt="Chroma Spike" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKUnLwvKmtEzZYn4pqK61SKSR1HmGOXArQJDBh7Accx_N34T28Ls-0OBpVVEF1wJii9N_5DWx93PggfKGR7qEBr9dQhjeDCtoCKDotC5CqxdosGFGeLQdkf45KJSKgRL6GGdltFpdo4glIG5YXN9nMX8g2T1I8Ug3ydamod-pjN_UaEWrh8YUp0xL3NhCV4jwmjtNv_am2kWCbCe1u1Z5tiXraHxY07lu1XxZZjoBwlH-5cFWLAvSPxpusQjRj4lMYI9KnfobelJs"><div class="p-6"><h3 class="text-[20px] font-headline-md text-white">Chroma Spike</h3><p class="text-mono-sm text-on-surface-variant">AR Mural Concept</p></div></article>
-          </div>
+        <section class="space-y-8 lg:col-span-8">
+          <section class="glass-card rounded-2xl p-8" id="portfolio">
+            <div class="mb-6 flex items-end justify-between">
+              <div>
+                <h2 class="text-[28px] font-headline-md text-white">Featured Projects</h2>
+                <p class="text-on-surface-variant">Mock portfolio data for the early-stage demo surface.</p>
+              </div>
+              <span class="inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span>
+            </div>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <article class="glass-card overflow-hidden rounded-2xl md:col-span-2">
+                <div class="relative aspect-[16/9] w-full">
+                  <img class="h-full w-full object-cover transition-transform duration-700 hover:scale-105" alt="Obsidian Genesis" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8XkYPJrpw-qn7EjqmgskbxXYuqHCIDbn4TGMV0Ff41-cYmuQMpvI1zNfEdwg2ZyfjmTQkTc9o7LFXZEHipSkyhH7F8usvHB0Nj-DhVTtOO84Eo5rzULyGwPoCfYQQcD5iXtLvPKfu_UMbLInM4EMRubESqrIuCmWlrmcCwFZbmrkEuzJ-FS2MS2blEYnqgo9pjlKiVDJVvc-cC8HiuqJVMPSxzYLCu1FtYU7ahwVYKrhGAcVwQhWLwfRvcL19DqH_sMc5K2GeSsM">
+                  <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background/90 via-transparent to-transparent p-8">
+                    <span class="mb-2 inline-block rounded-full bg-on-tertiary-container px-3 py-1 text-mono-sm text-white">Featured Showcase Piece</span>
+                    <h3 class="text-[28px] font-headline-md text-white">Obsidian Genesis</h3>
+                    <p class="max-w-2xl text-on-surface-variant">A mixed-media digital collage built around urban light, fractured memory, and event-scale presence.</p>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card overflow-hidden rounded-2xl">
+                <img class="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" alt="Neural Flux" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6DNR48iap1pBu5-8M_tv4qP-qgxuAeULc2ZbtincEJyrVT21N_w4kz7ZS4asL-eM53yUh5BFEyn7aVsFNa19E-s5mY2ARtusSXWN0H9zo1e7d_4GLEWdPByrcZPrVXwmSOjVsNet7W-biy1JpclYJsLwYcBZ07n5nd8us5M2_O_2EGMt4GAuozaIUXW2qUGNvEHNZelQWEWvxPgLv9ag_JPPBo9QwDFyBsCI7eiDzNzos8amQBPfnbk955OzRm1yVz1BjvMKpTBA">
+                <div class="p-6"><h3 class="text-[20px] font-headline-md text-white">Neural Flux</h3><p class="text-mono-sm text-on-surface-variant">Generative sculpture study</p></div>
+              </article>
+              <article class="glass-card overflow-hidden rounded-2xl">
+                <img class="aspect-square w-full object-cover transition-transform duration-700 hover:scale-105" alt="Chroma Spike" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKUnLwvKmtEzZYn4pqK61SKSR1HmGOXArQJDBh7Accx_N34T28Ls-0OBpVVEF1wJii9N_5DWx93PggfKGR7qEBr9dQhjeDCtoCKDotC5CqxdosGFGeLQdkf45KJSKgRL6GGdltFpdo4glIG5YXN9nMX8g2T1I8Ug3ydamod-pjN_UaEWrh8YUp0xL3NhCV4jwmjtNv_am2kWCbCe1u1Z5tiXraHxY07lu1XxZZjoBwlH-5cFWLAvSPxpusQjRj4lMYI9KnfobelJs">
+                <div class="p-6"><h3 class="text-[20px] font-headline-md text-white">Chroma Spike</h3><p class="text-mono-sm text-on-surface-variant">AR mural concept</p></div>
+              </article>
+            </div>
+          </section>
         </section>
       </div>
     </main>

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NovaCanvas | Build. Refine. Present.</title>
+    <title>NovaCanvas | Creative Growth Studio for Visual Artists</title>
     <meta
       name="description"
-      content="NovaCanvas is a creative growth ecosystem for artists, now wired for Firebase-backed experiences."
+      content="NovaCanvas is a creative growth studio for visual artists, ArtPrize creators, tattoo artists, makers, and digital creatives."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,17 +19,17 @@
   <body class="bg-background text-on-background font-body-md page-shell">
     <header class="sticky top-0 z-50 border-b border-white/10 bg-surface/40 backdrop-blur-2xl shadow-2xl">
       <div class="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
-        <div class="flex items-center gap-8">
-          <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
-          <nav class="hidden items-center gap-6 lg:flex">
-            <a class="active-nav font-label-md text-label-md" href="./index.html">Home</a>
-            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
-            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
-            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
-            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
-            <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./profile.html">Portfolio</a>
-          </nav>
-        </div>
+        <a class="font-headline-md text-headline-md font-bold tracking-tight text-primary-fixed-dim" href="./index.html">NovaCanvas</a>
+        <nav class="hidden items-center gap-5 xl:flex">
+          <a class="active-nav font-label-md text-label-md" href="./index.html">Home</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./dashboard.html">Dashboard</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./studio.html">Studio</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./explore.html">Explore</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./artprize.html">ArtPrize Prep</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./challenges.html">Challenges</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./profile.html#portfolio">Portfolio</a>
+          <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="./profile.html">Profile</a>
+        </nav>
         <div class="flex items-center gap-4">
           <span class="hidden sm:inline-flex firebase-pill"><span class="firebase-dot"></span><span data-firebase-status>Checking Firebase</span></span>
           <a class="rounded-full bg-primary-container px-6 py-2 font-label-md text-label-md text-on-primary-container transition-transform active:scale-95" href="./dashboard.html">Open Dashboard</a>
@@ -38,106 +38,175 @@
     </header>
 
     <main>
-      <section class="relative flex min-h-[88vh] items-center overflow-hidden px-margin-mobile pt-20 md:px-margin-desktop">
+      <section class="relative overflow-hidden px-margin-mobile pb-20 pt-16 md:px-margin-desktop md:pb-28 md:pt-20">
         <div class="absolute inset-0 z-0">
-          <div class="absolute top-1/4 -left-20 h-96 w-96 opacity-50 blur-3xl" style="background: radial-gradient(circle, rgba(0,220,230,0.12) 0%, rgba(17,20,23,0) 70%);"></div>
-          <div class="absolute bottom-1/4 -right-20 h-[500px] w-[500px] opacity-30 blur-3xl" style="background: radial-gradient(circle, rgba(197,192,255,0.18) 0%, rgba(17,20,23,0) 70%);"></div>
-          <img alt="Cinematic artistic background" class="h-full w-full object-cover opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJidMlj5htU28aOtHtOd3QMVFmsEOBlwelPQ3Xjj0r8hsec5YywN1uKZ5A9-zQWwbhKr_0UHJCYiY_ow_oyexUjt5rl83wxLAKR_9euvLf0ju-pPVh_3MIXLpOqfSzaicD5eAo4WqWXCSCBQwOcaIspNZUISmxQhEOY6YssbCzHeIDviEaIbQ4ws_Y0aUnwmPrvF8OXCFS2JAQ4hag4UXU-Ds9aQI-P210xgk4YQvTo7Cz5CI33sRNAn3Cidmf0UpfKzz6HyuWtI0">
+          <div class="absolute left-[-6rem] top-20 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl"></div>
+          <div class="absolute bottom-0 right-[-5rem] h-[26rem] w-[26rem] rounded-full bg-violet-500/10 blur-3xl"></div>
+          <img alt="Creative background" class="h-full w-full object-cover opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJidMlj5htU28aOtHtOd3QMVFmsEOBlwelPQ3Xjj0r8hsec5YywN1uKZ5A9-zQWwbhKr_0UHJCYiY_ow_oyexUjt5rl83wxLAKR_9euvLf0ju-pPVh_3MIXLpOqfSzaicD5eAo4WqWXCSCBQwOcaIspNZUISmxQhEOY6YssbCzHeIDviEaIbQ4ws_Y0aUnwmPrvF8OXCFS2JAQ4hag4UXU-Ds9aQI-P210xgk4YQvTo7Cz5CI33sRNAn3Cidmf0UpfKzz6HyuWtI0">
         </div>
-        <div class="relative z-10 mx-auto grid w-full max-w-container-max grid-cols-1 items-center gap-16 lg:grid-cols-2">
+        <div class="relative z-10 mx-auto grid max-w-container-max items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div class="space-y-8">
-            <div class="inline-block rounded-full border border-primary/20 glass-card px-4 py-1.5">
-              <span class="font-mono-sm text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Version 2.0 Digital Atelier</span>
+            <div class="inline-flex rounded-full border border-primary-fixed-dim/20 bg-white/5 px-4 py-1.5">
+              <span class="font-mono-sm uppercase tracking-widest text-primary-fixed-dim">Creative Growth Studio</span>
             </div>
-            <h1 class="font-display-lg text-[3.6rem] leading-none text-white md:text-display-lg">
-              Build. Refine.<br>
-              <span class="bg-gradient-to-r from-primary-fixed-dim to-secondary-fixed-dim bg-clip-text text-transparent">Present Your Vision.</span>
-            </h1>
-            <p class="max-w-xl font-body-lg text-body-lg text-on-surface-variant">
-              A creative growth ecosystem designed to help artists grow, not replace them. NovaCanvas now has a GitHub Pages front end and a Firebase foundation for auth, projects, portfolios, and community workflows.
-            </p>
-            <div class="flex flex-wrap gap-4 pt-4">
-              <a class="rounded-xl bg-gradient-to-r from-primary-container to-secondary-container px-8 py-4 font-label-md text-label-md font-bold text-white shadow-[0_0_24px_rgba(0,220,230,0.28)] transition-all hover:scale-105 active:scale-95" href="./studio.html">Launch Creator Studio</a>
-              <a class="rounded-xl border border-white/20 glass-card px-8 py-4 font-label-md text-label-md font-bold text-white transition-all hover:bg-white/10" href="./artprize.html">Explore ArtPrize Tools</a>
+            <div class="space-y-5">
+              <h1 class="font-display-lg text-[3.4rem] leading-none text-white md:text-[4.75rem]">
+                Refine and Present
+                <span class="block bg-gradient-to-r from-primary-fixed-dim via-cyan-200 to-secondary-fixed-dim bg-clip-text text-transparent">Your Visual Vision</span>
+              </h1>
+              <p class="max-w-2xl font-body-lg text-body-lg text-on-surface-variant">
+                NovaCanvas is a creative growth studio for visual artists, ArtPrize creators, tattoo artists, makers, and digital creatives
+                built to help creators refine and present their vision, not replace them.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a class="rounded-xl bg-gradient-to-r from-primary-container to-secondary-container px-8 py-4 font-label-md text-label-md font-bold text-white shadow-[0_0_24px_rgba(0,220,230,0.28)] transition-all hover:scale-105 active:scale-95" href="./studio.html">Explore NovaCanvas</a>
+              <a class="rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-label-md text-label-md font-bold text-white transition-all hover:bg-white/10" href="./artprize.html">Open ArtPrize Prep</a>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+              <div class="mb-3 flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary-fixed-dim">hub</span>
+                <h2 class="font-headline-md text-[1.3rem] text-white">From NovaTone to NovaCanvas</h2>
+              </div>
+              <p class="mb-5 max-w-3xl text-on-surface-variant">
+                NovaTone supports music creators. NovaCanvas supports visual creators. Together, they are part of a growing creative ecosystem
+                built to help artists develop, organize, present, and share their work.
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <a class="rounded-full bg-primary-container px-5 py-2.5 font-label-md text-on-primary-container" href="./index.html">Explore NovaCanvas</a>
+                <a class="rounded-full border border-secondary-fixed-dim/30 bg-secondary-container/10 px-5 py-2.5 font-label-md text-secondary-fixed-dim transition-colors hover:bg-secondary-container/20" href="https://bparker81597.github.io/NovaTone/" target="_blank" rel="noreferrer">View NovaTone</a>
+              </div>
             </div>
           </div>
           <div class="relative hidden lg:block">
-            <div class="glass-card relative overflow-hidden rounded-2xl border-white/10 p-4 shadow-2xl">
-              <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50"></div>
-              <img alt="Creative dashboard preview" class="aspect-[4/3] w-full rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKHoexreDQIb31FMCudWgLRHzxqhsYmXYnLU9k9aGG9y8Jp_SbFa4ofCKm94PBpS4_BpwaHzuB88ewYbchLZC1Pog8rvRl_FZxrQcAMBYh-qH92XVtYL9Al4GOTCcgQfgpsuRZTj_mXsDumh4Ri-HYN65XLFp31A1sVv-NzGpmNj8NhVrf7TWmdh5eb2edbggQKtVi60TL_tNubhBFUVGaJnpzEXnnEvpnFRW9V1HucVO_JrDQ3lvs-2KCEWs0v9qpWKouudmS860">
-              <div class="absolute top-8 -left-12 w-48 rounded-xl border border-primary/30 glass-card p-4 shadow-xl">
-                <div class="mb-2 flex items-center gap-3">
-                  <span class="material-symbols-outlined text-primary-fixed-dim">brush</span>
-                  <span class="font-label-md text-label-md text-white">Dynamic Flow</span>
-                </div>
-                <div class="h-1 w-full overflow-hidden rounded-full bg-white/10">
-                  <div class="h-full w-2/3 bg-primary-fixed-dim"></div>
-                </div>
+            <div class="glass-card relative overflow-hidden rounded-[2rem] p-5 shadow-2xl">
+              <img alt="Creative dashboard preview" class="aspect-[4/3] w-full rounded-[1.5rem] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKHoexreDQIb31FMCudWgLRHzxqhsYmXYnLU9k9aGG9y8Jp_SbFa4ofCKm94PBpS4_BpwaHzuB88ewYbchLZC1Pog8rvRl_FZxrQcAMBYh-qH92XVtYL9Al4GOTCcgQfgpsuRZTj_mXsDumh4Ri-HYN65XLFp31A1sVv-NzGpmNj8NhVrf7TWmdh5eb2edbggQKtVi60TL_tNubhBFUVGaJnpzEXnnEvpnFRW9V1HucVO_JrDQ3lvs-2KCEWs0v9qpWKouudmS860">
+              <div class="creator-chip absolute left-5 top-5"><span class="material-symbols-outlined text-sm text-primary-fixed-dim">draw</span>Live Studio Demo</div>
+              <div class="absolute -left-8 top-24 w-48 rounded-2xl border border-primary-fixed-dim/25 bg-background/75 p-4 shadow-xl backdrop-blur-xl">
+                <div class="mb-2 flex items-center gap-2 text-primary-fixed-dim"><span class="material-symbols-outlined text-sm">auto_awesome</span><span class="font-label-md text-sm">Feedback Layer</span></div>
+                <p class="text-sm text-on-surface-variant">Composition, clarity, presentation, and audience-read guidance.</p>
               </div>
-              <div class="absolute bottom-12 -right-8 w-56 rounded-xl border border-secondary/30 glass-card p-4 shadow-xl">
-                <div class="mb-2 flex items-center gap-3">
-                  <span class="material-symbols-outlined text-secondary-fixed-dim">layers</span>
-                  <span class="font-label-md text-label-md text-white">ArtPrize Entry</span>
-                </div>
-                <div class="flex gap-1">
-                  <div class="h-8 w-8 rounded bg-surface-container"></div>
-                  <div class="h-8 w-8 rounded bg-surface-container-high"></div>
-                  <div class="h-8 w-8 rounded bg-primary-container/20"></div>
-                </div>
+              <div class="absolute -bottom-8 right-5 w-56 rounded-2xl border border-secondary-fixed-dim/25 bg-background/75 p-4 shadow-xl backdrop-blur-xl">
+                <div class="mb-2 flex items-center gap-2 text-secondary-fixed-dim"><span class="material-symbols-outlined text-sm">qr_code_2</span><span class="font-label-md text-sm">Portfolio Output</span></div>
+                <p class="text-sm text-on-surface-variant">Shareable portfolio pages, QR-ready layouts, and event presentation support.</p>
               </div>
             </div>
-            <div class="absolute inset-0 -z-10 blur-2xl" style="background: linear-gradient(135deg, rgba(0,243,255,0.08), transparent 40%, rgba(64,9,255,0.12));"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-container-max px-margin-mobile py-10 md:px-margin-desktop">
+        <div class="grid gap-gutter md:grid-cols-3">
+          <div class="glass-card rounded-3xl p-6">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-container/15 text-primary-fixed-dim">
+              <span class="material-symbols-outlined">insights</span>
+            </div>
+            <h3 class="mb-2 font-headline-md text-white">Creative Feedback</h3>
+            <p class="text-on-surface-variant">Guide composition, color, clarity, story, and presentation without flattening your style.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary-container/15 text-secondary-fixed-dim">
+              <span class="material-symbols-outlined">emoji_events</span>
+            </div>
+            <h3 class="mb-2 font-headline-md text-white">ArtPrize Readiness</h3>
+            <p class="text-on-surface-variant">Prepare statements, titles, portfolio pages, visitor engagement ideas, and exhibit checklists.</p>
+          </div>
+          <div class="glass-card rounded-3xl p-6">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-fuchsia-500/15 text-fuchsia-300">
+              <span class="material-symbols-outlined">dashboard</span>
+            </div>
+            <h3 class="mb-2 font-headline-md text-white">Presentation Systems</h3>
+            <p class="text-on-surface-variant">Turn active work into a cleaner portfolio, a stronger public story, and a clearer next step.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-container-max px-margin-mobile py-20 md:px-margin-desktop">
+        <div class="mb-10 max-w-3xl">
+          <p class="mb-3 font-mono-sm uppercase tracking-widest text-primary-fixed-dim">Who It’s For</p>
+          <h2 class="mb-4 font-headline-lg text-headline-lg text-white">Built for Visual Creators</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant">NovaCanvas supports artists who want to refine, present, and grow their creative work — without replacing their originality.</p>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">brush</span><h3>Painters</h3><p>Shape stronger composition, exhibition language, and portfolio-ready presentation around finished or in-progress pieces.</p></article>
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">ink_pen</span><h3>Illustrators</h3><p>Refine visual storytelling, audience clarity, and shareable presentation for series work, commissions, or editorial concepts.</p></article>
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">stylus_fountain_pen</span><h3>Tattoo Artists</h3><p>Support concept development, anatomical flow, portfolio prep, and cleaner client-facing explanation for custom work.</p></article>
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">gesture</span><h3>Sketch Artists</h3><p>Capture quick ideas, test direction, and organize rough concepts into a more presentable creative pipeline.</p></article>
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">precision_manufacturing</span><h3>Makers &amp; Tinkerers</h3><p>Turn prototypes, builds, and installation ideas into clearer project stories, planning notes, and showcase material.</p></article>
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">location_city</span><h3>ArtPrize Creators</h3><p>Organize statements, titles, exhibit planning, visitor engagement, and presentation assets for local events and public-facing work.</p></article>
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">layers</span><h3>Mixed Media Artists</h3><p>Clarify multi-surface ideas and communicate process, material choices, and installation intent with more confidence.</p></article>
+          <article class="creator-card"><span class="material-symbols-outlined creator-card__icon">grid_view</span><h3>Digital Creators</h3><p>Move from concept and iteration to polished portfolio pages, social-ready exports, and stronger public presentation.</p></article>
+        </div>
+      </section>
+
+      <section class="bg-surface-container-lowest/35 py-24">
+        <div class="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">
+          <div class="mb-10 max-w-3xl">
+            <p class="mb-3 font-mono-sm uppercase tracking-widest text-secondary-fixed-dim">How It Works</p>
+            <h2 class="mb-4 font-headline-lg text-headline-lg text-white">From Idea to Presentation</h2>
+          </div>
+          <div class="grid gap-5 lg:grid-cols-5">
+            <article class="workflow-card"><span class="workflow-step">Step 1</span><h3>Upload or Describe Your Work</h3><p>Start with a sketch, painting, tattoo concept, installation idea, or project description.</p></article>
+            <article class="workflow-card"><span class="workflow-step">Step 2</span><h3>Get Creative Feedback</h3><p>Receive guidance on composition, presentation, story, clarity, color, and audience impact.</p></article>
+            <article class="workflow-card"><span class="workflow-step">Step 3</span><h3>Polish Your Statement</h3><p>Refine your artist statement, project title, display notes, and social captions.</p></article>
+            <article class="workflow-card"><span class="workflow-step">Step 4</span><h3>Build Your Portfolio Page</h3><p>Create a clean shareable page with your work, bio, QR code-ready layout, and contact links.</p></article>
+            <article class="workflow-card"><span class="workflow-step">Step 5</span><h3>Present With Confidence</h3><p>Prepare your work for local showcases, community events, ArtPrize, or client presentations.</p></article>
           </div>
         </div>
       </section>
 
       <section class="mx-auto max-w-container-max px-margin-mobile py-24 md:px-margin-desktop">
-        <div class="grid grid-cols-1 gap-gutter md:grid-cols-12">
-          <div class="glass-card relative col-span-1 flex h-[400px] flex-col justify-end overflow-hidden rounded-3xl border-white/5 p-10 md:col-span-8">
-            <div class="absolute right-0 top-0 p-8">
-              <span class="material-symbols-outlined text-5xl text-primary-fixed-dim">draw</span>
-            </div>
-            <div class="relative z-10">
-              <h3 class="mb-4 font-headline-md text-headline-md text-white">Precision Canvas Engine</h3>
-              <p class="max-w-lg font-body-md text-body-md text-on-surface-variant">Use the Studio, Dashboard, and Explore surfaces as the public shell while Firebase powers projects, progress, critiques, and artist identity behind the scenes.</p>
-            </div>
-            <div class="absolute inset-0 -z-10 opacity-40">
-              <img alt="Engine detail" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7IHqeyICj8vVSi6OPjXoVLhiH6ZfBWMZ2XIb9M6QhB8UH2QsKx37W1d_lB-K_AxB-wdnGjS77zKeST0dJ2hsPiFgMinr7qxxgKHYwURS-ZCxLLr1tZNTTGsWXMkT0G_DwICK68IBSQDS_SQhdiAmtSLDSFGZ9Bprj6RFY8uQ7xxRhxKCieUAQuFOVWcnjxab1BC13TV59rtSlnw9_smrSkrwoeZiSgjIFtjNMTQuODL3wiG6c7mYN2FtOfq8eextnzXYUQDqZtkw">
-            </div>
-          </div>
-
-          <div class="glass-card col-span-1 flex flex-col justify-between rounded-3xl border-white/5 bg-primary-container/5 p-10 md:col-span-4">
+        <div class="glow-border-violet glass-card overflow-hidden rounded-[2rem] p-8 md:p-12">
+          <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-container/20">
-                <span class="material-symbols-outlined text-primary-fixed-dim">cloud_sync</span>
+              <p class="mb-3 font-mono-sm uppercase tracking-widest text-on-tertiary-container">ArtPrize Focus</p>
+              <h2 class="mb-4 font-headline-lg text-headline-lg text-white">Made With Grand Rapids Creators in Mind</h2>
+              <p class="max-w-3xl font-body-lg text-body-lg text-on-surface-variant">
+                NovaCanvas is being shaped with local artists, makers, and ArtPrize creators in mind — helping creatives organize their ideas,
+                polish their presentation, and share their work with more confidence.
+              </p>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <span class="creator-chip">Artist Statement Support</span>
+                <span class="creator-chip">Project Title Ideas</span>
+                <span class="creator-chip">Exhibit Planning</span>
+                <span class="creator-chip">Visitor Engagement</span>
+                <span class="creator-chip">QR Portfolio Pages</span>
+                <span class="creator-chip">Social Media Captions</span>
+                <span class="creator-chip">Presentation Checklist</span>
               </div>
-              <h3 class="mb-4 font-headline-md text-headline-md text-white">Firebase Backbone</h3>
-              <p class="font-body-md text-body-md text-on-surface-variant">Project `novacanvas` is registered and ready for auth, Firestore, and later Functions/Storage once Firebase provisioning is finished.</p>
+              <a class="mt-8 inline-flex rounded-xl bg-primary-container px-7 py-3 font-label-md text-on-primary-container shadow-[0_0_18px_rgba(0,243,255,0.26)] transition-transform hover:scale-105" href="./artprize.html">Open ArtPrize Prep</a>
             </div>
-            <a class="mt-8 flex items-center gap-2 font-label-md text-label-md text-primary-fixed-dim" href="./dashboard.html">
-              View live surfaces
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </a>
+            <div class="grid gap-4">
+              <div class="glass-card rounded-2xl p-5">
+                <div class="mb-2 flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed-dim">description</span><h3 class="font-headline-md text-white">Statement Forge</h3></div>
+                <p class="text-on-surface-variant">Draft cleaner artist statements and more concise project descriptions for juries, visitors, and local press.</p>
+              </div>
+              <div class="glass-card rounded-2xl p-5">
+                <div class="mb-2 flex items-center gap-3"><span class="material-symbols-outlined text-secondary-fixed-dim">qr_code_2</span><h3 class="font-headline-md text-white">QR Portfolio Pages</h3></div>
+                <p class="text-on-surface-variant">Build a fast public-facing portfolio surface for visitors, collaborators, and event discovery.</p>
+              </div>
+              <div class="glass-card rounded-2xl p-5">
+                <div class="mb-2 flex items-center gap-3"><span class="material-symbols-outlined text-fuchsia-300">checklist</span><h3 class="font-headline-md text-white">Presentation Checklist</h3></div>
+                <p class="text-on-surface-variant">Stay organized across logistics, signage, display notes, social promotion, and final prep.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="bg-surface-container-lowest/30 py-24">
-        <div class="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">
-          <div class="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 class="mb-4 font-headline-lg text-headline-lg text-white">Core Routes</h2>
-              <p class="font-body-lg text-body-lg text-on-surface-variant">The pasted designs are now mapped into actual pages you can iterate on.</p>
-            </div>
+      <section class="mx-auto max-w-container-max px-margin-mobile pb-24 md:px-margin-desktop">
+        <div class="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="mb-3 font-mono-sm uppercase tracking-widest text-primary-fixed-dim">Explore the Demo</p>
+            <h2 class="font-headline-lg text-headline-lg text-white">Core Routes</h2>
           </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./dashboard.html"><h3 class="mb-2 font-headline-md text-white">Dashboard</h3><p class="text-on-surface-variant">Creative cockpit home, progress snapshots, and system status.</p></a>
-            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./studio.html"><h3 class="mb-2 font-headline-md text-white">Creator Studio</h3><p class="text-on-surface-variant">Upload, analyze, critique, and iterate on active work.</p></a>
-            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./explore.html"><h3 class="mb-2 font-headline-md text-white">Explore Community</h3><p class="text-on-surface-variant">Feed, spotlights, collaborations, and creator discovery.</p></a>
-            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./artprize.html"><h3 class="mb-2 font-headline-md text-white">ArtPrize Prep</h3><p class="text-on-surface-variant">Exhibit planning, statement tools, checklist, and engagement prep.</p></a>
-            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./challenges.html"><h3 class="mb-2 font-headline-md text-white">Challenges</h3><p class="text-on-surface-variant">XP loops, missions, tiers, and leaderboard logic surface.</p></a>
-            <a class="glass-card rounded-2xl p-6 transition-all hover:border-primary-fixed-dim/40 hover:bg-white/5" href="./profile.html"><h3 class="mb-2 font-headline-md text-white">Artist Profile</h3><p class="text-on-surface-variant">Portfolio, creator bio, badges, and profile editing shell.</p></a>
-          </div>
+          <p class="max-w-xl text-on-surface-variant">A polished early-stage demo across dashboard, studio, ArtPrize prep, profile, and community surfaces.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <a class="route-card" href="./dashboard.html"><span class="material-symbols-outlined route-card__icon">dashboard</span><h3>Dashboard</h3><p>See active projects, prep progress, saved inspiration, and system status in one place.</p></a>
+          <a class="route-card" href="./studio.html"><span class="material-symbols-outlined route-card__icon">draw</span><h3>Studio</h3><p>Upload work, get feedback, track flow checks, and iterate inside the live creative workspace.</p></a>
+          <a class="route-card" href="./artprize.html"><span class="material-symbols-outlined route-card__icon">emoji_events</span><h3>ArtPrize Prep</h3><p>Prepare statements, titles, planning, checklists, and public-facing presentation assets.</p></a>
+          <a class="route-card" href="./profile.html"><span class="material-symbols-outlined route-card__icon">account_circle</span><h3>Portfolio &amp; Profile</h3><p>Present your identity, featured projects, progress, collaboration stance, and portfolio link.</p></a>
         </div>
       </section>
     </main>
@@ -146,13 +215,13 @@
       <div class="mx-auto flex w-full max-w-container-max flex-col items-center justify-between px-margin-mobile py-12 md:flex-row md:px-margin-desktop">
         <div class="mb-8 md:mb-0">
           <span class="mb-2 block font-headline-md text-headline-md font-bold tracking-tight text-on-surface">NovaCanvas</span>
-          <p class="max-w-xs font-body-md text-body-md text-on-surface-variant">Empowering the next generation of digital masters with a cyber-luxe creative cockpit.</p>
+          <p class="max-w-md font-body-md text-body-md text-on-surface-variant">A creative growth studio for visual artists, ArtPrize creators, tattoo artists, makers, and digital creatives.</p>
         </div>
         <div class="flex flex-wrap justify-center gap-8">
           <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./dashboard.html">Dashboard</a>
           <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./studio.html">Studio</a>
-          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./explore.html">Explore</a>
-          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./profile.html">Profile</a>
+          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./artprize.html">ArtPrize Prep</a>
+          <a class="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary" href="./profile.html#portfolio">Portfolio</a>
         </div>
       </div>
     </footer>
