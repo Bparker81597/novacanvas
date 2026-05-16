@@ -88,6 +88,40 @@ body {
   padding-bottom: 0.25rem;
 }
 
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.site-brand__logo {
+  width: 2.9rem;
+  height: 2.9rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(0, 243, 255, 0.22));
+}
+
+.site-brand__wordmark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+
+.site-brand__title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #6ff6ff;
+}
+
+.site-brand__subtitle {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(225, 226, 231, 0.62);
+}
+
 .page-shell {
   position: relative;
 }
@@ -127,6 +161,15 @@ body {
 @media (max-width: 767px) {
   body {
     padding-bottom: 5rem;
+  }
+
+  .site-brand__logo {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .site-brand__subtitle {
+    display: none;
   }
 }
 
