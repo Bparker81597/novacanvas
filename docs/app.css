@@ -91,12 +91,14 @@ body {
 .site-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.85rem;
+  flex-shrink: 0;
+  margin-right: 1.1rem;
 }
 
 .site-brand__logo {
-  width: 2.9rem;
-  height: 2.9rem;
+  width: 7rem;
+  height: auto;
+  border-radius: 0.9rem;
   object-fit: contain;
   filter: drop-shadow(0 0 18px rgba(0, 243, 255, 0.22));
 }
@@ -125,18 +127,19 @@ body {
 .hero-logo-lockup {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.8rem 1rem;
-  border-radius: 1.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(20px);
+  justify-content: center;
+  padding: 0.75rem;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(0, 243, 255, 0.14);
+  background: rgba(12, 14, 18, 0.32);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(18px);
 }
 
 .hero-logo-lockup__image {
-  width: 4.25rem;
-  height: 4.25rem;
+  width: 11rem;
+  height: auto;
+  border-radius: 1.1rem;
   object-fit: contain;
   filter: drop-shadow(0 0 22px rgba(0, 243, 255, 0.24));
 }
@@ -159,6 +162,21 @@ body {
   font-size: 1.7rem;
   font-weight: 700;
   color: #6ff6ff;
+}
+
+.hero-info-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 14, 20, 0.9);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(20px);
+}
+
+.hero-info-card--left {
+  border-color: rgba(0, 243, 255, 0.24);
+}
+
+.hero-info-card--right {
+  border-color: rgba(197, 192, 255, 0.24);
 }
 
 .page-shell {
@@ -203,26 +221,26 @@ body {
   }
 
   .site-brand__logo {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 5.2rem;
   }
 
-  .site-brand__subtitle {
-    display: none;
+  .site-brand {
+    margin-right: 0.45rem;
   }
 
   .hero-logo-lockup {
-    width: 100%;
-    justify-content: flex-start;
+    width: auto;
   }
 
   .hero-logo-lockup__image {
-    width: 3.6rem;
-    height: 3.6rem;
+    width: 8.75rem;
   }
 
-  .hero-logo-lockup__title {
-    font-size: 1.35rem;
+  .hero-info-card--left,
+  .hero-info-card--right {
+    position: static;
+    width: 100%;
+    margin-top: 1rem;
   }
 }
 
