@@ -122,6 +122,45 @@ body {
   color: rgba(225, 226, 231, 0.62);
 }
 
+.hero-logo-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+}
+
+.hero-logo-lockup__image {
+  width: 4.25rem;
+  height: 4.25rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 22px rgba(0, 243, 255, 0.24));
+}
+
+.hero-logo-lockup__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-logo-lockup__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(225, 226, 231, 0.62);
+}
+
+.hero-logo-lockup__title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #6ff6ff;
+}
+
 .page-shell {
   position: relative;
 }
@@ -170,6 +209,20 @@ body {
 
   .site-brand__subtitle {
     display: none;
+  }
+
+  .hero-logo-lockup {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero-logo-lockup__image {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+  .hero-logo-lockup__title {
+    font-size: 1.35rem;
   }
 }
 
