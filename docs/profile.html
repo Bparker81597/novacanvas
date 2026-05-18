@@ -30,7 +30,7 @@
           <a class="font-label-md text-label-md text-on-surface-variant/70 hover:text-on-surface" href="#portfolio">Portfolio</a>
           <a class="active-nav font-label-md text-label-md" href="./profile.html">Profile</a>
         </nav>
-        <button class="rounded-full bg-primary-container px-6 py-2 font-label-md text-on-primary-container" data-action="open-profile-panel">Edit Profile</button>
+        <button class="rounded-full bg-primary-container px-6 py-2 font-label-md text-on-primary-container" data-action="open-profile-panel" data-profile-panel-trigger>Edit Profile</button>
       </div>
     </header>
 
@@ -42,26 +42,34 @@
           <div class="group relative">
             <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary-fixed-dim to-secondary-fixed-dim opacity-20 blur-xl transition-opacity group-hover:opacity-40"></div>
             <div class="glass-card h-48 w-48 rounded-2xl p-1 md:h-64 md:w-64">
-              <img class="h-full w-full rounded-xl object-cover" alt="Elora Vance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDKYM6ylSMTg48ogJNdVDZqUxXliTkSwx8MUYMf9I8Jlq21Oawlswva_kHh_E5lSfRy8dJmE4jpGyHlM_LSo4_UZRxzmkLw2hZlBYu0AKqb355fEaJPtlX8dxxMyoOB1EVc3wUCcIm-2iDkPCBcl61YhononbO3IWcGtqcjpL3-zKkuF51nY6tJzVQKeiPcSHax2G9Zvv7moaLF6HYe93Hp4owumunoMHtQvv-IgtlvN37Lk2OvreTVYNgXpJcoMdQC9pq_qc_QSg">
+              <img class="h-full w-full rounded-xl object-cover" data-profile-avatar alt="Profile avatar placeholder" src="./assets/novacanvas-brand-logo.png?v=3">
             </div>
-            <div class="absolute -bottom-4 -right-4 flex items-center gap-2 rounded-xl border border-white/10 bg-surface-container-highest px-4 py-2"><span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">verified</span><span class="font-label-md text-on-surface">Pro Master</span></div>
+            <div class="absolute -bottom-4 -right-4 flex items-center gap-2 rounded-xl border border-white/10 bg-surface-container-highest px-4 py-2"><span class="material-symbols-outlined text-[20px] text-primary-fixed-dim" style="font-variation-settings:'FILL' 1;">badge</span><span class="font-label-md text-on-surface" data-profile-badge>New Creator</span></div>
           </div>
           <div class="flex-1 space-y-6">
             <div>
               <div class="mb-2 flex flex-wrap items-center gap-4">
-                <h1 class="font-headline-lg text-headline-lg text-white" data-profile-name>Elora Vance</h1>
-                <div class="flex gap-2">
-                  <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Mixed Media</span>
-                  <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">ArtPrize Creator</span>
+                <h1 class="font-headline-lg text-headline-lg text-white" data-profile-name>Create your NovaCanvas profile</h1>
+                <div class="flex gap-2" data-profile-tags>
+                  <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Profile Setup</span>
+                  <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">New Creator</span>
                 </div>
               </div>
-              <p class="max-w-2xl font-body-lg text-on-surface-variant" data-profile-bio>Architect of digital dreamscapes and urban neon narratives. Specializing in installation-minded visual storytelling, cyber-luxe presentation, and public-facing project development.</p>
+              <p class="max-w-2xl font-body-lg text-on-surface-variant" data-profile-bio>Add your name, a short bio, and an avatar to start shaping your creator profile.</p>
             </div>
             <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Followers</div><div class="font-headline-md text-headline-md text-primary-fixed-dim" data-stat-followers>12.8k</div></div>
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Artworks</div><div class="font-headline-md text-headline-md text-white" data-stat-artworks>342</div></div>
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">ArtPrize Wins</div><div class="font-headline-md text-headline-md text-on-tertiary-container" data-stat-artprize-wins>12</div></div>
-              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Streak</div><div class="font-headline-md text-headline-md text-secondary"><span data-stat-streak>48</span><span class="ml-1 text-label-md font-normal">days</span></div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Followers</div><div class="font-headline-md text-headline-md text-primary-fixed-dim" data-stat-followers>0</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Artworks</div><div class="font-headline-md text-headline-md text-white" data-stat-artworks>0</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">ArtPrize Wins</div><div class="font-headline-md text-headline-md text-on-tertiary-container" data-stat-artprize-wins>0</div></div>
+              <div class="glass-card rounded-xl p-4"><div class="mb-1 text-mono-sm uppercase text-on-surface-variant">Streak</div><div class="font-headline-md text-headline-md text-secondary"><span data-stat-streak>0</span><span class="ml-1 text-label-md font-normal">days</span></div></div>
+            </div>
+            <div class="glass-card rounded-2xl p-6" data-profile-empty-state>
+              <div class="mb-3 flex items-center gap-3 text-primary-fixed-dim">
+                <span class="material-symbols-outlined">person_add</span>
+                <strong class="text-white">Set up your creator profile</strong>
+              </div>
+              <p class="mb-5 max-w-2xl text-on-surface-variant">Start with your display name, avatar, and a short introduction. This keeps the profile blank until a real user creates it.</p>
+              <button class="rounded-full bg-primary-container px-5 py-3 font-label-md text-on-primary-container" data-action="open-profile-panel">Create Profile</button>
             </div>
           </div>
         </div>
@@ -71,7 +79,7 @@
         <aside class="space-y-8 lg:col-span-4">
           <section class="glass-card rounded-2xl p-8">
             <h2 class="mb-4 text-[24px] font-headline-md text-white">Creator Bio</h2>
-            <p class="text-on-surface-variant">Elora builds visual experiences that blend mural language, mixed media thinking, and event-ready presentation. Her work focuses on helping viewers enter a world quickly, then stay with the piece long enough to discover narrative detail.</p>
+            <p class="text-on-surface-variant" data-profile-bio-secondary>Your artist story will appear here once you create the profile.</p>
           </section>
 
           <section class="glass-card rounded-2xl p-8">
@@ -154,13 +162,24 @@
     <div class="fixed inset-0 z-[100] translate-x-full transition-transform duration-500" id="edit-profile-panel">
       <div class="absolute inset-0 bg-background/60 backdrop-blur-sm" data-action="close-profile-panel"></div>
       <div class="glass-card absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-white/10 p-8 shadow-2xl">
-        <div class="mb-10 flex items-center justify-between"><h2 class="text-2xl font-headline-md text-white">Profile Settings</h2><button class="text-on-surface-variant hover:text-white" data-action="close-profile-panel"><span class="material-symbols-outlined">close</span></button></div>
+        <div class="mb-10 flex items-center justify-between"><h2 class="text-2xl font-headline-md text-white" data-profile-panel-title>Profile Settings</h2><button class="text-on-surface-variant hover:text-white" data-action="close-profile-panel"><span class="material-symbols-outlined">close</span></button></div>
         <div class="flex-1 space-y-8">
-          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Display Name</label><input class="w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" data-profile-input="displayName" type="text" value="Elora Vance"></div>
-          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Bio Preview</label><textarea class="h-32 w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" data-profile-input="bio">Architect of digital dreamscapes and urban neon narratives...</textarea></div>
-          <div class="rounded-2xl border border-primary-container/10 bg-primary-container/5 p-6"><div class="flex items-center gap-4 text-primary-fixed-dim"><span class="material-symbols-outlined">verified</span><div class="text-label-md">Verified Artist Status Active</div></div></div>
+          <div class="space-y-3">
+            <label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Avatar Photo</label>
+            <div class="flex items-center gap-4">
+                <img class="h-20 w-20 rounded-2xl border border-white/10 object-cover" data-profile-avatar-preview alt="Profile preview" src="./assets/novacanvas-brand-logo.png?v=3">
+              <div class="space-y-3">
+                <input accept="image/*" class="hidden" data-profile-avatar-input type="file">
+                <button class="rounded-full border border-white/10 bg-surface-container-low px-4 py-2 font-label-md text-white transition-all hover:bg-white/5" data-action="choose-profile-avatar" type="button">Choose Photo</button>
+                <p class="text-sm text-on-surface-variant" data-profile-avatar-label>PNG, JPG, or WebP. Saved after you press Save Changes.</p>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Display Name</label><input class="w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" data-profile-input="displayName" type="text" value="" placeholder="Enter your artist or creator name"></div>
+          <div class="space-y-2"><label class="text-xs font-label-md uppercase tracking-widest text-primary-fixed-dim">Bio Preview</label><textarea class="h-32 w-full rounded-xl border border-white/10 bg-surface-container-low px-4 py-3 text-white outline-none transition-all focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim" data-profile-input="bio" placeholder="Write a short introduction for your profile"></textarea></div>
+          <div class="rounded-2xl border border-primary-container/10 bg-primary-container/5 p-6"><div class="flex items-center gap-4 text-primary-fixed-dim"><span class="material-symbols-outlined">person</span><div class="text-label-md">Profile creation is open. Full account auth comes next.</div></div></div>
         </div>
-        <div class="mt-auto flex flex-col gap-4"><button class="w-full rounded-full bg-primary-container py-4 font-label-md text-on-primary-container shadow-lg shadow-primary-container/20 transition-all hover:scale-[1.02]" id="save-profile-button">Save Changes</button><button class="w-full rounded-full border border-white/10 py-4 font-label-md uppercase tracking-widest text-on-surface-variant transition-all hover:bg-white/5" data-action="close-profile-panel">Cancel</button></div>
+        <div class="mt-auto flex flex-col gap-4"><button class="w-full rounded-full bg-primary-container py-4 font-label-md text-on-primary-container shadow-lg shadow-primary-container/20 transition-all hover:scale-[1.02]" id="save-profile-button" data-profile-save-label>Save Changes</button><button class="w-full rounded-full border border-white/10 py-4 font-label-md uppercase tracking-widest text-on-surface-variant transition-all hover:bg-white/5" data-action="close-profile-panel">Cancel</button></div>
       </div>
     </div>
 

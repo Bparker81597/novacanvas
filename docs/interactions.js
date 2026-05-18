@@ -112,6 +112,11 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  if (action === "choose-profile-avatar") {
+    document.querySelector("[data-profile-avatar-input]")?.click();
+    return;
+  }
+
   if (action === "close-modal") {
     closeModal();
     return;

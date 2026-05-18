@@ -27,21 +27,25 @@ import {
 
 const firebaseConfig = window.NOVACANVAS_FIREBASE_CONFIG;
 const statusNodes = Array.from(document.querySelectorAll("[data-firebase-status]"));
+const defaultAvatarUrl = "./assets/novacanvas-brand-logo.png?v=3";
 
 const defaultUserData = {
-  displayName: "Elora Vance",
-  bio: "Architect of digital dreamscapes and urban neon narratives. Specializing in high-fidelity glassmorphism and large-scale augmented reality murals that bridge the physical and digital void.",
+  profileVersion: 2,
+  createdProfile: false,
+  displayName: "",
+  bio: "",
+  avatarUrl: defaultAvatarUrl,
   stats: {
-    followers: "12.8k",
-    artworks: 342,
-    artprizeWins: 12,
-    streakDays: 48,
+    followers: "0",
+    artworks: 0,
+    artprizeWins: 0,
+    streakDays: 0,
   },
   challenge: {
-    level: 14,
-    rank: "#482",
-    currentXp: 2450,
-    nextXp: 5000,
+    level: 1,
+    rank: "--",
+    currentXp: 0,
+    nextXp: 100,
   },
   artprizeChecklist: {
     framingMounting: false,
@@ -90,6 +94,12 @@ const defaultProjects = [
   },
 ];
 
+const localProfileStorageKey = "novacanvas.profile";
+
+function isCreatedProfile(data) {
+  return Boolean(data?.createdProfile && data?.profileVersion === defaultUserData.profileVersion);
+}
+
 let db;
 let storage;
 let userRef;
@@ -98,7 +108,11 @@ let profileUnsub = null;
 let projectsUnsub = null;
 let profileSaveBound = false;
 let checklistBound = false;
+let avatarInputBound = false;
 let currentProjects = [];
+let pendingAvatarDataUrl = null;
+let pendingAvatarName = "";
+let currentProfileData = {...defaultUserData};
 const projectListeners = new Set();
 
 function setStatus(message) {
@@ -111,20 +125,131 @@ function formatPercent(value) {
   return `${Math.max(0, Math.min(100, Math.round(value)))}%`;
 }
 
-function renderProfile(data) {
-  if (!data) {
-    return;
+function readLocalProfile() {
+  try {
+    const raw = localStorage.getItem(localProfileStorageKey);
+    if (!raw) {
+      return null;
+    }
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+function writeLocalProfile(data) {
+  try {
+    localStorage.setItem(localProfileStorageKey, JSON.stringify(data));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function normalizeProfile(data) {
+  if (!isCreatedProfile(data)) {
+    return {...defaultUserData};
   }
 
+  return {
+    ...defaultUserData,
+    ...data,
+    createdProfile: true,
+    profileVersion: defaultUserData.profileVersion,
+    avatarUrl: data.avatarUrl || defaultAvatarUrl,
+    stats: {
+      ...defaultUserData.stats,
+      ...(data.stats || {}),
+    },
+    challenge: {
+      ...defaultUserData.challenge,
+      ...(data.challenge || {}),
+    },
+    artprizeChecklist: {
+      ...defaultUserData.artprizeChecklist,
+      ...(data.artprizeChecklist || {}),
+    },
+  };
+}
+
+function renderProfile(data) {
+  currentProfileData = normalizeProfile(data);
+  const hasProfile = isCreatedProfile(currentProfileData);
+  const displayName = hasProfile
+    ? currentProfileData.displayName || "Untitled Creator"
+    : "Create your NovaCanvas profile";
+  const bioText = hasProfile
+    ? currentProfileData.bio || "Tell visitors about your creative focus."
+    : "Add your name, a short bio, and an avatar to start shaping your creator profile.";
+  const secondaryBioText = hasProfile
+    ? currentProfileData.bio || "Tell visitors about your creative focus."
+    : "Your artist story will appear here once you create the profile.";
+
   document.querySelectorAll("[data-profile-name]").forEach((node) => {
-    node.textContent = data.displayName || defaultUserData.displayName;
+    node.textContent = displayName;
   });
 
   document.querySelectorAll("[data-profile-bio]").forEach((node) => {
-    node.textContent = data.bio || defaultUserData.bio;
+    node.textContent = bioText;
   });
 
-  const stats = data.stats || {};
+  document.querySelectorAll("[data-profile-bio-secondary]").forEach((node) => {
+    node.textContent = secondaryBioText;
+  });
+
+  const avatarUrl = pendingAvatarDataUrl || currentProfileData.avatarUrl || defaultAvatarUrl;
+  document.querySelectorAll("[data-profile-avatar], [data-profile-avatar-preview]").forEach((node) => {
+    node.src = avatarUrl;
+    node.alt = `${displayName} avatar`;
+  });
+
+  const avatarLabel = document.querySelector("[data-profile-avatar-label]");
+  if (avatarLabel) {
+    avatarLabel.textContent = pendingAvatarName
+      ? `Selected: ${pendingAvatarName}. Saved after you press Save Changes.`
+      : "PNG, JPG, or WebP. Saved after you press Save Changes.";
+  }
+
+  const badge = document.querySelector("[data-profile-badge]");
+  if (badge) {
+    badge.textContent = hasProfile ? "Creator Profile Live" : "New Creator";
+  }
+
+  const tags = document.querySelector("[data-profile-tags]");
+  if (tags) {
+    tags.innerHTML = hasProfile
+      ? `
+        <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Profile Active</span>
+        <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">Creator Setup Complete</span>
+      `
+      : `
+        <span class="rounded-full border border-primary-container/20 bg-primary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-primary-fixed-dim">Profile Setup</span>
+        <span class="rounded-full border border-secondary-container/20 bg-secondary-container/10 px-3 py-1 text-mono-sm uppercase tracking-widest text-secondary-fixed-dim">New Creator</span>
+      `;
+  }
+
+  const emptyState = document.querySelector("[data-profile-empty-state]");
+  if (emptyState) {
+    emptyState.classList.toggle("hidden", hasProfile);
+  }
+
+  const panelTrigger = document.querySelector("[data-profile-panel-trigger]");
+  if (panelTrigger) {
+    panelTrigger.textContent = hasProfile ? "Edit Profile" : "Create Profile";
+  }
+
+  const panelTitle = document.querySelector("[data-profile-panel-title]");
+  if (panelTitle) {
+    panelTitle.textContent = hasProfile ? "Profile Settings" : "Create Your Profile";
+  }
+
+  const saveLabel = document.querySelector("[data-profile-save-label]");
+  if (saveLabel) {
+    saveLabel.textContent = hasProfile ? "Save Changes" : "Create Profile";
+  }
+
+  const stats = currentProfileData.stats || {};
   const followers = document.querySelector("[data-stat-followers]");
   const artworks = document.querySelector("[data-stat-artworks]");
   const artprizeWins = document.querySelector("[data-stat-artprize-wins]");
@@ -148,17 +273,17 @@ function renderProfile(data) {
 
   document.querySelectorAll("[data-profile-input='displayName']").forEach((node) => {
     if (document.activeElement !== node) {
-      node.value = data.displayName || defaultUserData.displayName;
+      node.value = hasProfile ? currentProfileData.displayName || "" : "";
     }
   });
 
   document.querySelectorAll("[data-profile-input='bio']").forEach((node) => {
     if (document.activeElement !== node) {
-      node.value = data.bio || defaultUserData.bio;
+      node.value = hasProfile ? currentProfileData.bio || "" : "";
     }
   });
 
-  const challenge = data.challenge || {};
+  const challenge = currentProfileData.challenge || {};
   const level = document.querySelector("[data-user-level]");
   const rank = document.querySelector("[data-user-rank]");
   const xpText = document.querySelector("[data-user-xp]");
@@ -184,7 +309,7 @@ function renderProfile(data) {
     xpBar.style.width = formatPercent(xpPercent);
   }
 
-  renderChecklist(data.artprizeChecklist || defaultUserData.artprizeChecklist);
+  renderChecklist(currentProfileData.artprizeChecklist || defaultUserData.artprizeChecklist);
 }
 
 function renderProjects(projects) {
@@ -297,13 +422,23 @@ async function ensureProjects(uid) {
 async function ensureUser(uid) {
   userRef = doc(db, "users", uid);
   const snapshot = await getDoc(userRef);
+  const localProfile = normalizeProfile(readLocalProfile());
 
   if (!snapshot.exists()) {
     await setDoc(userRef, {
-      ...defaultUserData,
+      ...localProfile,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
+  } else if (isCreatedProfile(localProfile)) {
+    await setDoc(
+      userRef,
+      {
+        ...localProfile,
+        updatedAt: serverTimestamp(),
+      },
+      {merge: true},
+    );
   }
 
   await ensureProjects(uid);
@@ -321,33 +456,143 @@ function bindProfileSave() {
 
   profileSaveBound = true;
   button.addEventListener("click", async () => {
-    if (!userRef) {
-      return;
-    }
-
     const displayNameInput = document.querySelector("[data-profile-input='displayName']");
     const bioInput = document.querySelector("[data-profile-input='bio']");
 
-    const displayName = displayNameInput?.value?.trim() || defaultUserData.displayName;
-    const bio = bioInput?.value?.trim() || defaultUserData.bio;
+    const displayName = displayNameInput?.value?.trim() || "";
+    const bio = bioInput?.value?.trim() || "";
+    const fallbackBio = "Creator bio coming soon.";
+    const finalDisplayName = displayName || "Untitled Creator";
+    const finalBio = bio || fallbackBio;
+    const localProfile = {
+      ...currentProfileData,
+      profileVersion: defaultUserData.profileVersion,
+      createdProfile: true,
+      displayName: finalDisplayName,
+      bio: finalBio,
+    };
+
+    if (pendingAvatarDataUrl) {
+      localProfile.avatarUrl = pendingAvatarDataUrl;
+    }
+
+    const updatePayload = {
+      profileVersion: defaultUserData.profileVersion,
+      createdProfile: true,
+      displayName: finalDisplayName,
+      bio: finalBio,
+      updatedAt: serverTimestamp(),
+    };
+
+    if (pendingAvatarDataUrl) {
+      updatePayload.avatarUrl = pendingAvatarDataUrl;
+    }
 
     button.disabled = true;
     button.textContent = "Saving...";
 
     try {
-      await updateDoc(userRef, {
-        displayName,
-        bio,
-        updatedAt: serverTimestamp(),
-      });
-      setStatus(`Saved profile for ${displayName}`);
+      writeLocalProfile(localProfile);
+      renderProfile(localProfile);
+      pendingAvatarDataUrl = null;
+      pendingAvatarName = "";
       document.getElementById("edit-profile-panel")?.classList.add("translate-x-full");
+      window.NovaCanvasUI?.showToast?.("Profile saved");
+
+      if (userRef) {
+        await updateDoc(userRef, updatePayload);
+        setStatus(`Saved profile for ${finalDisplayName}`);
+      } else {
+        setStatus(`Saved locally for ${finalDisplayName}`);
+      }
     } catch (error) {
       console.error(error);
       setStatus("Profile save failed");
+      window.NovaCanvasUI?.showToast?.("Profile save failed");
     } finally {
       button.disabled = false;
-      button.textContent = "Save Changes";
+      button.textContent = isCreatedProfile(currentProfileData) ? "Save Changes" : "Create Profile";
+    }
+  });
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error("Avatar read failed"));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function resizeAvatar(file) {
+  const source = await readFileAsDataUrl(file);
+  const image = new Image();
+
+  await new Promise((resolve, reject) => {
+    image.onload = resolve;
+    image.onerror = () => reject(new Error("Avatar load failed"));
+    image.src = source;
+  });
+
+  const maxSize = 512;
+  const scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+  const width = Math.max(1, Math.round(image.width * scale));
+  const height = Math.max(1, Math.round(image.height * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+
+  const context = canvas.getContext("2d");
+  if (!context) {
+    throw new Error("Avatar canvas unavailable");
+  }
+
+  context.drawImage(image, 0, 0, width, height);
+  return canvas.toDataURL("image/jpeg", 0.82);
+}
+
+function bindAvatarInput() {
+  if (avatarInputBound) {
+    return;
+  }
+
+  const input = document.querySelector("[data-profile-avatar-input]");
+  if (!input) {
+    return;
+  }
+
+  avatarInputBound = true;
+  input.addEventListener("change", async (event) => {
+    const [file] = event.currentTarget.files || [];
+    if (!file) {
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      setStatus("Choose an image file");
+      event.currentTarget.value = "";
+      return;
+    }
+
+    try {
+      pendingAvatarDataUrl = await resizeAvatar(file);
+      pendingAvatarName = file.name || "avatar.jpg";
+      document.querySelectorAll("[data-profile-avatar], [data-profile-avatar-preview]").forEach((node) => {
+        node.src = pendingAvatarDataUrl;
+      });
+      const avatarLabel = document.querySelector("[data-profile-avatar-label]");
+      if (avatarLabel) {
+        avatarLabel.textContent = `Selected: ${pendingAvatarName}. Saved after you press Save Changes.`;
+      }
+      setStatus("Avatar ready to save");
+    } catch (error) {
+      console.error(error);
+      pendingAvatarDataUrl = null;
+      pendingAvatarName = "";
+      setStatus("Avatar processing failed");
+    } finally {
+      event.currentTarget.value = "";
     }
   });
 }
@@ -394,7 +639,7 @@ function subscribeToData(uid) {
       if (!snapshot.exists()) {
         return;
       }
-      renderProfile(snapshot.data());
+      renderProfile(normalizeProfile(snapshot.data()));
     },
     (error) => {
       console.error(error);
@@ -519,8 +764,15 @@ function subscribeProjects(listener) {
 }
 
 async function initFirebase() {
+  renderProfile(normalizeProfile(readLocalProfile()));
+
   if (!firebaseConfig) {
     setStatus("Firebase config missing");
+    if (!isCreatedProfile(currentProfileData)) {
+      window.requestAnimationFrame(() => {
+        window.NovaCanvasUI?.openProfilePanel?.();
+      });
+    }
     return;
   }
 
@@ -530,8 +782,15 @@ async function initFirebase() {
   const auth = getAuth(app);
 
   bindProfileSave();
+  bindAvatarInput();
   bindChecklist();
   setStatus("Connecting...");
+
+  if (!isCreatedProfile(currentProfileData)) {
+    window.requestAnimationFrame(() => {
+      window.NovaCanvasUI?.openProfilePanel?.();
+    });
+  }
 
   onAuthStateChanged(auth, async (user) => {
     if (!user) {
