@@ -1,6 +1,7 @@
 import {onCall} from "firebase-functions/v2/https";
 import {onDocumentCreated} from "firebase-functions/v2/firestore";
 import * as admin from "firebase-admin";
+import { FieldValue } from "firebase-admin/firestore";
 
 admin.initializeApp();
 
@@ -36,8 +37,8 @@ export const bootstrapUserProfile = onDocumentCreated(
 
     await snapshot.ref.set(
       {
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        createdAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
       },
       {merge: true},
     );
