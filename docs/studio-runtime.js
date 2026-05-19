@@ -9,12 +9,18 @@ function initStudio() {
   const fileInput = document.querySelector("[data-studio-file-input]");
   const canvasImage = document.querySelector("[data-active-canvas-image]");
   const uploadState = document.querySelector("[data-upload-state]");
+  const activeProjectTitle = document.querySelector("[data-active-project-title]");
+  const activeProjectSummary = document.querySelector("[data-active-project-summary]");
+  const activeUploadLabel = document.querySelector("[data-active-upload-label]");
   const scoreNode = document.querySelector("[data-flow-score]");
   const contrastNode = document.querySelector("[data-flow-contrast]");
   const edgesNode = document.querySelector("[data-flow-edges]");
   const feedbackNode = document.querySelector("[data-ai-feedback]");
   const feedbackThread = document.querySelector("[data-feedback-thread]");
   const feedbackInput = document.querySelector("[data-feedback-input]");
+  const feedbackContext = document.querySelector("[data-feedback-context]");
+  const uploadHistory = document.querySelector("[data-upload-history]");
+  const uploadHistoryCount = document.querySelector("[data-upload-history-count]");
   const aiCard = document.querySelector("[data-feedback-ai-card]");
   const peerCard = document.querySelector("[data-feedback-peer-card]");
 
@@ -23,6 +29,10 @@ function initStudio() {
     fileName: null,
     analysis: null,
     primaryProject: null,
+    uploads: [],
+    activeUploadId: null,
+    uploadsUnsubscribe: null,
+    activeFeedbackThread: [],
   };
 
   hydrateLocalState();
@@ -34,10 +44,119 @@ function initStudio() {
     return `novacanvas:studio:${uid}:${suffix}`;
   }
 
+  function safeStorageSet(key, value) {
+    try {
+      localStorage.setItem(key, value);
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  function safeStorageRemove(key) {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function readLocalUploads() {
+    try {
+      const raw = localStorage.getItem(storageKey("uploads"));
+      if (!raw) {
+        return [];
+      }
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
+  function writeLocalUploads(uploads) {
+    try {
+      localStorage.setItem(storageKey("uploads"), JSON.stringify(uploads));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function mergeUploads(remoteUploads) {
+    const localUploads = readLocalUploads();
+    const merged = [...remoteUploads];
+
+    localUploads.forEach((localUpload) => {
+      if (!merged.some((remoteUpload) => remoteUpload.id === localUpload.id)) {
+        merged.push(localUpload);
+      }
+    });
+
+    return merged.sort((a, b) => {
+      const aTime = Date.parse(a.updatedAt || a.createdAt || 0) || 0;
+      const bTime = Date.parse(b.updatedAt || b.createdAt || 0) || 0;
+      return bTime - aTime;
+    });
+  }
+
+  function upsertLocalUpload(upload) {
+    const uploads = readLocalUploads();
+    const index = uploads.findIndex((item) => item.id === upload.id);
+    if (index >= 0) {
+      uploads[index] = {...uploads[index], ...upload};
+    } else {
+      uploads.unshift(upload);
+    }
+    writeLocalUploads(uploads);
+    state.uploads = mergeUploads(state.uploads.filter((item) => !item.isLocalOnly));
+    return upload;
+  }
+
+  function updateLocalUpload(uploadId, patch) {
+    const uploads = readLocalUploads();
+    const index = uploads.findIndex((item) => item.id === uploadId);
+    if (index === -1) {
+      const stateUpload = state.uploads.find((item) => item.id === uploadId);
+      if (!stateUpload) {
+        return null;
+      }
+
+      const mergedUpload = {
+        ...stateUpload,
+        ...patch,
+        updatedAt: new Date().toISOString(),
+      };
+      upsertLocalUpload(mergedUpload);
+      return mergedUpload;
+    }
+
+    uploads[index] = {
+      ...uploads[index],
+      ...patch,
+      updatedAt: new Date().toISOString(),
+    };
+    writeLocalUploads(uploads);
+    state.uploads = mergeUploads(state.uploads.filter((item) => !item.isLocalOnly));
+    return uploads[index];
+  }
+
+  function removeLocalUpload(uploadId) {
+    const uploads = readLocalUploads().filter((item) => item.id !== uploadId);
+    writeLocalUploads(uploads);
+    state.uploads = mergeUploads(state.uploads.filter((item) => !item.isLocalOnly));
+  }
+
   function hydrateLocalState() {
     const savedImage = localStorage.getItem(storageKey("image"));
     const savedFileName = localStorage.getItem(storageKey("fileName"));
     const savedAnalysis = localStorage.getItem(storageKey("analysis"));
+    const savedUploadId = localStorage.getItem(storageKey("activeUploadId"));
+
+    if (savedUploadId) {
+      state.activeUploadId = savedUploadId;
+    }
 
     if (savedImage) {
       state.imageDataUrl = savedImage;
@@ -53,6 +172,13 @@ function initStudio() {
       } catch (error) {
         console.error(error);
       }
+    }
+
+    state.uploads = readLocalUploads();
+    const active = resolveActiveUpload(state.uploads);
+    renderUploadHistory(state.uploads, active?.id);
+    if (active) {
+      applyActiveUpload(active);
     }
   }
 
@@ -70,14 +196,28 @@ function initStudio() {
         }
 
         state.primaryProject = primary;
+        if (primary.activeUploadId) {
+          state.activeUploadId = primary.activeUploadId;
+          safeStorageSet(storageKey("activeUploadId"), primary.activeUploadId);
+        }
 
-        if (primary.sketchUrl && primary.sketchUrl !== state.imageDataUrl) {
+        if (activeProjectTitle) {
+          activeProjectTitle.textContent = primary.title || "Active Canvas";
+        }
+
+        if (activeProjectSummary) {
+          activeProjectSummary.textContent = primary.summary || "Upload a sketch to start a flow check and critique thread.";
+        }
+
+        subscribeUploadState(primary.id);
+
+        if (!state.uploads.length && primary.sketchUrl && primary.sketchUrl !== state.imageDataUrl) {
           state.imageDataUrl = primary.sketchUrl;
           state.fileName = primary.sketchFileName || state.fileName || "Uploaded sketch";
           canvasImage.src = primary.sketchUrl;
           uploadState.textContent = `${state.fileName} synced`;
-          localStorage.setItem(storageKey("image"), primary.sketchUrl);
-          localStorage.setItem(storageKey("fileName"), state.fileName);
+          safeStorageSet(storageKey("image"), primary.sketchUrl);
+          safeStorageSet(storageKey("fileName"), state.fileName);
         }
 
         if (primary.flowCheck) {
@@ -85,7 +225,7 @@ function initStudio() {
           renderAnalysis(primary.flowCheck);
         }
 
-        if (primary.feedbackThread) {
+        if (!state.uploads.length && primary.feedbackThread) {
           renderFeedback(primary.feedbackThread);
         }
       });
@@ -94,7 +234,125 @@ function initStudio() {
     bind();
   }
 
+  function subscribeUploadState(projectId) {
+    if (!projectId || !window.NovaCanvas?.subscribeProjectUploads) {
+      return;
+    }
+
+    state.uploadsUnsubscribe?.();
+    state.uploadsUnsubscribe = window.NovaCanvas.subscribeProjectUploads(projectId, (uploads) => {
+      state.uploads = mergeUploads(uploads);
+      writeLocalUploads(state.uploads);
+      const active = resolveActiveUpload(state.uploads);
+      renderUploadHistory(state.uploads, active?.id);
+      if (active) {
+        applyActiveUpload(active);
+      }
+    });
+  }
+
+  function resolveActiveUpload(uploads) {
+    if (!Array.isArray(uploads) || uploads.length === 0) {
+      state.activeUploadId = null;
+      safeStorageRemove(storageKey("activeUploadId"));
+      renderUploadHistory([], null);
+      return null;
+    }
+
+    const matched = uploads.find((upload) => upload.id === state.activeUploadId)
+      || uploads.find((upload) => upload.id === state.primaryProject?.activeUploadId)
+      || uploads[0];
+
+    if (matched) {
+      state.activeUploadId = matched.id;
+      safeStorageSet(storageKey("activeUploadId"), matched.id);
+    }
+
+    return matched;
+  }
+
   function bindActions() {
+    function appendFeedbackEntries(uploadId, entries) {
+      const localUpload = state.uploads.find((item) => item.id === uploadId);
+      state.activeFeedbackThread = [...(state.activeFeedbackThread || []), ...entries];
+      renderFeedback(state.activeFeedbackThread);
+      if (feedbackContext) {
+        feedbackContext.textContent = `${state.activeFeedbackThread.length} saved messages tied to this upload. Reopen this version anytime from Upload History.`;
+      }
+
+      if (!localUpload) {
+        return null;
+      }
+
+      const updatedUpload = updateLocalUpload(uploadId, {
+        feedbackThread: [...(localUpload.feedbackThread || []), ...entries],
+        updatedLabel: "just now",
+      });
+
+      if (updatedUpload && uploadId === state.activeUploadId) {
+        applyActiveUpload(updatedUpload);
+        renderUploadHistory(state.uploads, uploadId);
+      }
+
+      return updatedUpload;
+    }
+
+    async function sendFeedbackMessage() {
+      const activeUpload = ensureConversationUpload();
+      const message = feedbackInput?.value?.trim();
+      if (!activeUpload) {
+        ui?.showToast?.("Upload a sketch first");
+        return;
+      }
+      if (!message) {
+        ui?.showToast?.("Write feedback before sending");
+        return;
+      }
+
+      feedbackInput.value = "";
+
+      const reply = generateCritiqueReply(message);
+      const userEntry = {
+        author: "You",
+        role: "user",
+        message,
+        createdAt: new Date().toISOString(),
+      };
+      const aiEntry = reply
+        ? {
+          author: "Nova AI Assistant",
+          role: "ai",
+          message: reply,
+          createdAt: new Date().toISOString(),
+        }
+        : null;
+
+      appendFeedbackEntries(activeUpload.id, aiEntry ? [userEntry, aiEntry] : [userEntry]);
+
+      await persistFeedback({
+        projectId: activeUpload.projectId || state.primaryProject?.id,
+        uploadId: activeUpload.id,
+        entry: message,
+        skipLocalUpdate: true,
+      });
+
+      if (aiEntry) {
+        await persistFeedback({
+          projectId: activeUpload.projectId || state.primaryProject?.id,
+          uploadId: activeUpload.id,
+          entry: {
+            author: "Nova AI Assistant",
+            role: "ai",
+            message: reply,
+          },
+          skipLocalUpdate: true,
+        });
+      }
+
+      feedbackInput?.focus();
+      ui?.showToast?.("Feedback sent");
+    }
+
     document.addEventListener("click", async (event) => {
       const actionNode = event.target.closest("[data-action]");
       if (!actionNode) {
@@ -108,45 +366,46 @@ function initStudio() {
         return;
       }
 
+      if (action === "studio-select-upload") {
+        const uploadId = actionNode.getAttribute("data-upload-id");
+        await selectUpload(uploadId);
+        return;
+      }
+
       if (action === "studio-flow-check") {
-        if (!state.imageDataUrl) {
+        const activeUpload = ensureConversationUpload();
+        if (!state.imageDataUrl || !activeUpload) {
           ui?.showToast?.("Upload a sketch first");
           return;
         }
 
         const analysis = await runFlowCheck(state.imageDataUrl);
         state.analysis = analysis;
-        localStorage.setItem(storageKey("analysis"), JSON.stringify(analysis));
+        safeStorageSet(storageKey("analysis"), JSON.stringify(analysis));
         renderAnalysis(analysis);
-        await persistProjectUpdate({
+        await persistUploadUpdate({
+          projectId: activeUpload.projectId || state.primaryProject?.id,
+          uploadId: activeUpload.id,
           flowCheck: analysis,
           updatedLabel: "just now",
           progress: Math.max(42, Math.min(96, analysis.score)),
           summary: `Flow score ${analysis.score}% • ${analysis.recommendation}`,
         });
-        await persistFeedback(`Flow Check: ${analysis.recommendation}`);
+        await persistFeedback({
+          projectId: activeUpload.projectId || state.primaryProject?.id,
+          uploadId: activeUpload.id,
+          entry: {
+            author: "Nova AI Assistant",
+            role: "ai",
+            message: `Flow Check: ${analysis.recommendation}`,
+          },
+        });
         ui?.showToast?.("Flow check complete");
         return;
       }
 
       if (action === "studio-send-feedback") {
-        const message = feedbackInput?.value?.trim();
-        if (!message) {
-          ui?.showToast?.("Write feedback before sending");
-          return;
-        }
-
-        await persistFeedback(message);
-        const reply = generateCritiqueReply(message);
-        if (reply) {
-          await persistFeedback({
-            author: "Nova AI Assistant",
-            role: "ai",
-            message: reply,
-          });
-        }
-        feedbackInput.value = "";
-        ui?.showToast?.("Feedback sent");
+        await sendFeedbackMessage();
         return;
       }
 
@@ -173,6 +432,15 @@ function initStudio() {
       }
     });
 
+    feedbackInput?.addEventListener("keydown", async (event) => {
+      if (event.key !== "Enter" || event.shiftKey) {
+        return;
+      }
+
+      event.preventDefault();
+      await sendFeedbackMessage();
+    });
+
     fileInput.addEventListener("change", async (event) => {
       const [file] = event.target.files || [];
       if (!file) {
@@ -180,40 +448,157 @@ function initStudio() {
       }
 
       const dataUrl = await readFileAsDataUrl(file);
+      const analysis = await runFlowCheck(dataUrl);
+      const localUpload = {
+        id: `local-${Date.now()}`,
+        projectId: state.primaryProject?.id || null,
+        title: file.name.replace(/\.[^.]+$/, ""),
+        summary: `Flow score ${analysis.score}% • ${analysis.recommendation}`,
+        progress: Math.max(42, Math.min(96, analysis.score)),
+        updatedLabel: "just now",
+        sketchUrl: dataUrl,
+        sketchStoragePath: null,
+        sketchFileName: file.name,
+        sketchContentType: file.type || "application/octet-stream",
+        flowCheck: analysis,
+        feedbackThread: [
+          {
+            author: "Nova AI Assistant",
+            role: "ai",
+            message: analysis.recommendation,
+            createdAt: new Date().toISOString(),
+          },
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        isLocalOnly: true,
+      };
+
       state.imageDataUrl = dataUrl;
       state.fileName = file.name;
+      state.analysis = analysis;
       canvasImage.src = dataUrl;
-      uploadState.textContent = `${file.name} uploading...`;
-      localStorage.setItem(storageKey("image"), dataUrl);
-      localStorage.setItem(storageKey("fileName"), file.name);
+      uploadState.textContent = `${file.name} critique ready`;
+      const storedPreview = safeStorageSet(storageKey("image"), dataUrl);
+      safeStorageSet(storageKey("fileName"), file.name);
+      safeStorageSet(storageKey("analysis"), JSON.stringify(analysis));
+
+      upsertLocalUpload(localUpload);
+      state.activeUploadId = localUpload.id;
+      safeStorageSet(storageKey("activeUploadId"), localUpload.id);
+      renderAnalysis(analysis);
+      state.activeFeedbackThread = [...localUpload.feedbackThread];
+      renderFeedback(state.activeFeedbackThread);
+      if (feedbackContext) {
+        feedbackContext.textContent = "1 saved message tied to this upload. Reopen this version anytime from Upload History.";
+      }
+      renderUploadHistory(state.uploads, localUpload.id);
+      applyActiveUpload(localUpload);
+      if (!storedPreview) {
+        ui?.showToast?.("Large image loaded. Preview storage was skipped, but critique still runs.");
+      }
+      ui?.showToast?.("Sketch loaded and critique generated");
 
       try {
         const uploadResult = await uploadSketchToCloud(file);
         state.imageDataUrl = uploadResult.downloadUrl;
+        state.fileName = uploadResult.fileName;
         canvasImage.src = uploadResult.downloadUrl;
         uploadState.textContent = `${uploadResult.fileName} synced`;
-        localStorage.setItem(storageKey("image"), uploadResult.downloadUrl);
-        localStorage.setItem(storageKey("fileName"), uploadResult.fileName);
+        safeStorageSet(storageKey("image"), uploadResult.downloadUrl);
+        safeStorageSet(storageKey("fileName"), uploadResult.fileName);
 
-        await persistProjectUpdate({
+        const createdUpload = await createUploadVersion({
+          projectId: state.primaryProject?.id,
+          fileName: uploadResult.fileName,
           title: file.name.replace(/\.[^.]+$/, ""),
-          summary: "Uploaded sketch synced to cloud storage and ready for flow analysis",
+          summary: `Flow score ${analysis.score}% • ${analysis.recommendation}`,
+          progress: Math.max(42, Math.min(96, analysis.score)),
           updatedLabel: "just now",
-          sketchUrl: uploadResult.downloadUrl,
-          sketchStoragePath: uploadResult.storagePath,
-          sketchFileName: uploadResult.fileName,
-          sketchContentType: uploadResult.contentType,
+          downloadUrl: uploadResult.downloadUrl,
+          storagePath: uploadResult.storagePath,
+          contentType: uploadResult.contentType,
+          flowCheck: analysis,
         });
-
-        ui?.showToast?.("Sketch uploaded to Firebase Storage");
+        if (createdUpload?.id) {
+          removeLocalUpload(localUpload.id);
+          const syncedUpload = {
+            ...localUpload,
+            ...createdUpload,
+            sketchUrl: uploadResult.downloadUrl,
+            sketchStoragePath: uploadResult.storagePath,
+            sketchFileName: uploadResult.fileName,
+            sketchContentType: uploadResult.contentType,
+            isLocalOnly: false,
+            feedbackThread: createdUpload.feedbackThread || localUpload.feedbackThread,
+          };
+          upsertLocalUpload(syncedUpload);
+          state.activeUploadId = createdUpload.id;
+          safeStorageSet(storageKey("activeUploadId"), createdUpload.id);
+          renderUploadHistory(state.uploads, createdUpload.id);
+          applyActiveUpload(syncedUpload);
+        }
       } catch (error) {
         console.error(error);
-        uploadState.textContent = `${file.name} upload failed`;
-        ui?.showToast?.("Storage upload failed");
+        uploadState.textContent = `${file.name} local only`;
+        ui?.showToast?.("Cloud storage unavailable. This upload and conversation are staying local in this browser.");
       } finally {
         fileInput.value = "";
       }
     });
+  }
+
+  function getActiveUpload() {
+    return state.uploads.find((upload) => upload.id === state.activeUploadId)
+      || state.uploads[0]
+      || null;
+  }
+
+  function ensureConversationUpload() {
+    const existing = getActiveUpload();
+    if (existing) {
+      return existing;
+    }
+
+    if (!state.imageDataUrl) {
+      return null;
+    }
+
+    const fallbackUpload = {
+      id: `memory-${Date.now()}`,
+      projectId: state.primaryProject?.id || null,
+      title: state.fileName?.replace(/\.[^.]+$/, "") || state.primaryProject?.title || "Current Canvas",
+      summary: state.analysis?.recommendation
+        ? `Flow score ${state.analysis.score}% • ${state.analysis.recommendation}`
+        : "Current canvas ready for critique.",
+      progress: state.analysis?.score || state.primaryProject?.progress || 42,
+      updatedLabel: "just now",
+      sketchUrl: state.imageDataUrl,
+      sketchStoragePath: null,
+      sketchFileName: state.fileName || "Current canvas",
+      sketchContentType: "image/*",
+      flowCheck: state.analysis || null,
+      feedbackThread: state.analysis?.recommendation
+        ? [
+          {
+            author: "Nova AI Assistant",
+            role: "ai",
+            message: state.analysis.recommendation,
+            createdAt: new Date().toISOString(),
+          },
+        ]
+        : [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      isLocalOnly: true,
+    };
+
+    upsertLocalUpload(fallbackUpload);
+    state.activeUploadId = fallbackUpload.id;
+    safeStorageSet(storageKey("activeUploadId"), fallbackUpload.id);
+    renderUploadHistory(state.uploads, fallbackUpload.id);
+    applyActiveUpload(fallbackUpload);
+    return fallbackUpload;
   }
 
   async function persistProjectUpdate(patch) {
@@ -229,13 +614,73 @@ function initStudio() {
     }
   }
 
-  async function persistFeedback(entry) {
-    if (!window.NovaCanvas?.addProjectFeedback) {
+  async function createUploadVersion(payload) {
+    if (!window.NovaCanvas?.createProjectUploadVersion) {
+      return null;
+    }
+
+    try {
+      return await window.NovaCanvas.createProjectUploadVersion(payload);
+    } catch (error) {
+      console.error(error);
+      ui?.showToast?.("Upload record sync failed");
+      return null;
+    }
+  }
+
+  async function persistUploadUpdate({projectId, uploadId, ...patch}) {
+    const localUpload = updateLocalUpload(uploadId, patch);
+    if (localUpload && uploadId === state.activeUploadId) {
+      applyActiveUpload(localUpload);
+      renderUploadHistory(state.uploads, uploadId);
+    }
+
+    if (!window.NovaCanvas?.updateProjectUpload) {
       return;
     }
 
     try {
-      await window.NovaCanvas.addProjectFeedback(entry);
+      await window.NovaCanvas.updateProjectUpload(projectId, uploadId, patch);
+    } catch (error) {
+      console.error(error);
+      ui?.showToast?.("Upload sync failed");
+    }
+  }
+
+  async function persistFeedback({projectId, uploadId, entry, skipLocalUpdate = false}) {
+    const localUpload = state.uploads.find((item) => item.id === uploadId);
+    const payload = typeof entry === "string"
+      ? {
+        author: "You",
+        role: "user",
+        message: entry,
+        createdAt: new Date().toISOString(),
+      }
+      : {
+        author: entry?.author || "Nova AI Assistant",
+        role: entry?.role || "ai",
+        message: entry?.message || "",
+        createdAt: new Date().toISOString(),
+      };
+
+    if (!skipLocalUpdate && localUpload) {
+      const feedbackThread = [...(localUpload.feedbackThread || []), payload];
+      const updatedUpload = updateLocalUpload(uploadId, {
+        feedbackThread,
+        updatedLabel: "just now",
+      });
+      if (updatedUpload && uploadId === state.activeUploadId) {
+        applyActiveUpload(updatedUpload);
+        renderUploadHistory(state.uploads, uploadId);
+      }
+    }
+
+    if (!window.NovaCanvas?.addUploadFeedback) {
+      return;
+    }
+
+    try {
+      await window.NovaCanvas.addUploadFeedback(projectId, uploadId, entry);
     } catch (error) {
       console.error(error);
       ui?.showToast?.("Feedback sync failed");
@@ -250,8 +695,119 @@ function initStudio() {
     return window.NovaCanvas.uploadStudioSketch(file, state.primaryProject?.id);
   }
 
+  async function selectUpload(uploadId) {
+    const upload = state.uploads.find((item) => item.id === uploadId);
+    if (!upload) {
+      return;
+    }
+
+    state.activeUploadId = uploadId;
+    safeStorageSet(storageKey("activeUploadId"), uploadId);
+    applyActiveUpload(upload);
+    renderUploadHistory(state.uploads, uploadId);
+    await persistProjectUpdate({
+      activeUploadId: upload.id,
+      title: upload.title,
+      summary: upload.summary,
+      progress: upload.progress,
+      updatedLabel: upload.updatedLabel || "just now",
+      sketchUrl: upload.sketchUrl,
+      sketchStoragePath: upload.sketchStoragePath,
+      sketchFileName: upload.sketchFileName,
+      sketchContentType: upload.sketchContentType,
+      flowCheck: upload.flowCheck || null,
+    });
+  }
+
+  function applyActiveUpload(upload) {
+    state.imageDataUrl = upload.sketchUrl || state.imageDataUrl;
+    state.fileName = upload.sketchFileName || state.fileName;
+    state.analysis = upload.flowCheck || null;
+    state.activeUploadId = upload.id;
+    canvasImage.src = state.imageDataUrl;
+    uploadState.textContent = upload.sketchFileName ? `${upload.sketchFileName} synced` : "Upload ready";
+    if (typeof state.imageDataUrl === "string" && state.imageDataUrl.startsWith("http")) {
+      safeStorageSet(storageKey("image"), state.imageDataUrl);
+    }
+    safeStorageSet(storageKey("fileName"), state.fileName || "");
+    safeStorageSet(storageKey("activeUploadId"), upload.id);
+
+    if (activeProjectTitle) {
+      activeProjectTitle.textContent = upload.title || state.primaryProject?.title || "Active Canvas";
+    }
+
+    if (activeProjectSummary) {
+      activeProjectSummary.textContent = upload.summary || state.primaryProject?.summary || "Critique thread ready.";
+    }
+
+    if (activeUploadLabel) {
+      activeUploadLabel.textContent = `Selected upload • ${upload.sketchFileName || upload.title || "Untitled Upload"}`;
+    }
+
+    if (feedbackContext) {
+      const feedbackCount = Array.isArray(upload.feedbackThread) ? upload.feedbackThread.length : 0;
+      feedbackContext.textContent = `${feedbackCount} saved messages tied to this upload. Reopen this version anytime from Upload History.`;
+    }
+
+    if (upload.flowCheck) {
+      safeStorageSet(storageKey("analysis"), JSON.stringify(upload.flowCheck));
+      renderAnalysis(upload.flowCheck);
+    } else {
+      clearAnalysis();
+    }
+
+    state.activeFeedbackThread = Array.isArray(upload.feedbackThread) ? [...upload.feedbackThread] : [];
+    renderFeedback(state.activeFeedbackThread);
+  }
+
+  function renderUploadHistory(items, activeId) {
+    if (!uploadHistory) {
+      return;
+    }
+
+    if (uploadHistoryCount) {
+      uploadHistoryCount.textContent = `${items.length} ${items.length === 1 ? "upload" : "uploads"}`;
+    }
+
+    uploadHistory.innerHTML = "";
+    if (!items.length) {
+      uploadHistory.innerHTML = `
+        <div class="rounded-xl border border-dashed border-white/10 bg-white/5 p-4 text-sm text-on-surface-variant">
+          Upload a sketch to start a versioned critique thread.
+        </div>
+      `;
+      return;
+    }
+
+    items.forEach((item) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("data-action", "studio-select-upload");
+      button.setAttribute("data-upload-id", item.id);
+      button.className = `w-full rounded-xl border p-4 text-left transition-all ${
+        item.id === activeId
+          ? "border-primary-fixed-dim/50 bg-primary-container/10 shadow-lg shadow-primary-container/10"
+          : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
+      }`;
+      const messageCount = Array.isArray(item.feedbackThread) ? item.feedbackThread.length : 0;
+      button.innerHTML = `
+        <div class="mb-2 flex items-center justify-between gap-3">
+          <span class="truncate font-label-md text-white">${item.title || item.sketchFileName || "Untitled Upload"}</span>
+          <span class="text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">${item.updatedLabel || "saved"}</span>
+        </div>
+        <p class="mb-3 line-clamp-2 text-sm text-on-surface-variant">${item.summary || "Critique thread ready."}</p>
+        <div class="flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-on-surface-variant/80">
+          <span>${messageCount} messages</span>
+          <span>${item.flowCheck ? `${item.flowCheck.score}% flow` : "No flow check"}</span>
+        </div>
+      `;
+      uploadHistory.appendChild(button);
+    });
+  }
+
   function renderAnalysis(analysis) {
     if (!analysis) {
+      clearAnalysis();
       return;
     }
 
@@ -261,14 +817,30 @@ function initStudio() {
     feedbackNode.textContent = `“${analysis.recommendation}”`;
   }
 
+  function clearAnalysis() {
+    scoreNode.textContent = "Pending";
+    contrastNode.textContent = "Pending";
+    edgesNode.textContent = "Pending";
+    feedbackNode.textContent = "“Run Flow Check to generate critique for this upload.”";
+  }
+
   function renderFeedback(items) {
-    if (!feedbackThread || !Array.isArray(items)) {
+    if (!feedbackThread) {
       return;
     }
 
     aiCard?.remove();
     peerCard?.remove();
     feedbackThread.innerHTML = "";
+
+    if (!Array.isArray(items) || items.length === 0) {
+      feedbackThread.innerHTML = `
+        <div class="rounded-lg border border-dashed border-white/10 bg-white/5 p-4 text-sm text-on-surface-variant">
+          This upload does not have a saved conversation yet. Run a flow check or ask for critique to start one.
+        </div>
+      `;
+      return;
+    }
 
     items.forEach((item) => {
       const card = document.createElement("div");
@@ -313,7 +885,7 @@ function initStudio() {
     }
 
     const analysis = state.analysis;
-    const projectName = state.primaryProject?.title || state.fileName?.replace(/\.[^.]+$/, "") || "this piece";
+    const projectName = getActiveUpload()?.title || state.primaryProject?.title || state.fileName?.replace(/\.[^.]+$/, "") || "this piece";
     const topic = inferTopic(trimmed);
 
     if (!analysis) {

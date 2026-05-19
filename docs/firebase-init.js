@@ -666,6 +666,78 @@ function getPrimaryProject() {
   return currentProjects[0] || null;
 }
 
+function formatUploadTitle(fileName) {
+  return (fileName || "Untitled Upload").replace(/\.[^.]+$/, "");
+}
+
+function createUploadSummary(flowCheck, fileName) {
+  if (flowCheck?.recommendation) {
+    return `Flow score ${flowCheck.score}% • ${flowCheck.recommendation}`;
+  }
+
+  return `${formatUploadTitle(fileName)} ready for critique and flow analysis`;
+}
+
+function createInitialUploadFeedback(flowCheck) {
+  if (!flowCheck?.recommendation) {
+    return [];
+  }
+
+  return [
+    {
+      author: "Nova AI Assistant",
+      role: "ai",
+      message: flowCheck.recommendation,
+      createdAt: new Date().toISOString(),
+    },
+  ];
+}
+
+function buildProjectMirrorFromUpload(uploadId, patch) {
+  const projectPatch = {
+    activeUploadId: uploadId,
+    updatedAt: serverTimestamp(),
+  };
+
+  if (patch.title) {
+    projectPatch.title = patch.title;
+  }
+
+  if (patch.summary) {
+    projectPatch.summary = patch.summary;
+  }
+
+  if (typeof patch.progress === "number") {
+    projectPatch.progress = patch.progress;
+  }
+
+  if (patch.updatedLabel) {
+    projectPatch.updatedLabel = patch.updatedLabel;
+  }
+
+  if (patch.sketchUrl) {
+    projectPatch.sketchUrl = patch.sketchUrl;
+  }
+
+  if (patch.sketchStoragePath) {
+    projectPatch.sketchStoragePath = patch.sketchStoragePath;
+  }
+
+  if (patch.sketchFileName) {
+    projectPatch.sketchFileName = patch.sketchFileName;
+  }
+
+  if (patch.sketchContentType) {
+    projectPatch.sketchContentType = patch.sketchContentType;
+  }
+
+  if (patch.flowCheck) {
+    projectPatch.flowCheck = patch.flowCheck;
+  }
+
+  return projectPatch;
+}
+
 async function updatePrimaryProject(patch) {
   if (!currentUid) {
     throw new Error("No current user");
@@ -687,6 +759,49 @@ async function updatePrimaryProject(patch) {
   );
 }
 
+async function createProjectUploadVersion(upload) {
+  if (!currentUid) {
+    throw new Error("No current user");
+  }
+
+  const primary = getPrimaryProject();
+  const projectId = upload?.projectId || primary?.id || `${currentUid}-${defaultProjects[0].idSuffix}`;
+  const uploadsRef = collection(db, "projects", projectId, "uploads");
+  const uploadRef = doc(uploadsRef);
+  const title = upload.title || formatUploadTitle(upload.fileName);
+  const flowCheck = upload.flowCheck || null;
+  const payload = {
+    ownerId: currentUid,
+    projectId,
+    title,
+    summary: upload.summary || createUploadSummary(flowCheck, upload.fileName),
+    progress: typeof upload.progress === "number" ? upload.progress : flowCheck?.score || 42,
+    updatedLabel: upload.updatedLabel || "just now",
+    sketchUrl: upload.downloadUrl,
+    sketchStoragePath: upload.storagePath,
+    sketchFileName: upload.fileName || "Uploaded sketch",
+    sketchContentType: upload.contentType || "application/octet-stream",
+    flowCheck,
+    feedbackThread: Array.isArray(upload.feedbackThread)
+      ? upload.feedbackThread
+      : createInitialUploadFeedback(flowCheck),
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  };
+
+  await setDoc(uploadRef, payload);
+  await setDoc(
+    doc(db, "projects", projectId),
+    buildProjectMirrorFromUpload(uploadRef.id, payload),
+    {merge: true},
+  );
+
+  return {
+    id: uploadRef.id,
+    ...payload,
+  };
+}
+
 async function addProjectFeedback(entry) {
   if (!currentUid) {
     throw new Error("No current user");
@@ -706,6 +821,59 @@ async function addProjectFeedback(entry) {
   };
 
   await updateDoc(projectRef, {
+    feedbackThread: arrayUnion({
+      ...payload,
+      createdAt: new Date().toISOString(),
+    }),
+    updatedAt: serverTimestamp(),
+    updatedLabel: "just now",
+  });
+}
+
+async function updateProjectUpload(projectId, uploadId, patch) {
+  if (!currentUid) {
+    throw new Error("No current user");
+  }
+
+  if (!projectId || !uploadId) {
+    throw new Error("Upload target missing");
+  }
+
+  const uploadRef = doc(db, "projects", projectId, "uploads", uploadId);
+  const payload = {
+    ...patch,
+    updatedAt: serverTimestamp(),
+  };
+
+  await setDoc(uploadRef, payload, {merge: true});
+  await setDoc(
+    doc(db, "projects", projectId),
+    buildProjectMirrorFromUpload(uploadId, payload),
+    {merge: true},
+  );
+}
+
+async function addUploadFeedback(projectId, uploadId, entry) {
+  if (!currentUid) {
+    throw new Error("No current user");
+  }
+
+  if (!projectId || !uploadId) {
+    throw new Error("Upload target missing");
+  }
+
+  const uploadRef = doc(db, "projects", projectId, "uploads", uploadId);
+  const payload = typeof entry === "string" ? {
+    author: "You",
+    role: "user",
+    message: entry,
+  } : {
+    author: entry?.author || "Nova AI Assistant",
+    role: entry?.role || "ai",
+    message: entry?.message || "",
+  };
+
+  await updateDoc(uploadRef, {
     feedbackThread: arrayUnion({
       ...payload,
       createdAt: new Date().toISOString(),
@@ -750,6 +918,30 @@ async function uploadStudioSketch(file, projectId) {
     fileName: file.name || "sketch.png",
     contentType: file.type || "application/octet-stream",
   };
+}
+
+function subscribeProjectUploads(projectId, listener) {
+  if (!projectId) {
+    return () => {};
+  }
+
+  return onSnapshot(
+    collection(db, "projects", projectId, "uploads"),
+    (snapshot) => {
+      const uploads = snapshot.docs
+        .map((item) => ({id: item.id, ...item.data()}))
+        .sort((a, b) => {
+          const aTime = a.updatedAt?.seconds || a.createdAt?.seconds || 0;
+          const bTime = b.updatedAt?.seconds || b.createdAt?.seconds || 0;
+          return bTime - aTime;
+        });
+      listener(uploads);
+    },
+    (error) => {
+      console.error(error);
+      setStatus("Upload sync failed");
+    },
+  );
 }
 
 function subscribeProjects(listener) {
@@ -808,8 +1000,12 @@ async function initFirebase() {
         uid: user.uid,
         subscribeProjects,
         updatePrimaryProject,
+        createProjectUploadVersion,
+        updateProjectUpload,
         addProjectFeedback,
+        addUploadFeedback,
         uploadStudioSketch,
+        subscribeProjectUploads,
         getPrimaryProject,
       };
     } catch (error) {

@@ -62,6 +62,7 @@
               <div>
                 <h2 class="mb-2 font-headline-md text-headline-md text-primary" data-active-project-title>Active Canvas</h2>
                 <p class="text-on-surface-variant" data-active-project-summary>Flow Analysis: Neo-Traditional Backpiece v2</p>
+                <p class="mt-2 text-xs uppercase tracking-[0.24em] text-on-surface-variant/70" data-active-upload-label>No upload selected</p>
               </div>
               <div class="flex gap-2">
                 <span class="rounded-full border border-on-tertiary-container/30 bg-on-tertiary-container/20 px-3 py-1 font-mono-sm text-mono-sm text-on-tertiary-container">ArtPrize Prep</span>
@@ -119,8 +120,21 @@
             </div>
             <div class="mt-6 border-t border-white/10 pt-6">
               <div class="flex items-center rounded-xl border border-white/5 bg-surface-container-lowest px-4 py-3">
-                <input class="flex-1 border-none bg-transparent text-sm focus:ring-0" data-feedback-input type="text" placeholder="Request specific feedback...">
+                <input class="flex-1 border-none bg-transparent text-sm focus:ring-0" data-feedback-input type="text" placeholder="Reply to this critique or ask a follow-up...">
                 <button class="material-symbols-outlined cursor-pointer text-primary-fixed-dim" data-action="studio-send-feedback">send</button>
+              </div>
+              <p class="mt-3 text-xs text-on-surface-variant" data-feedback-context>Feedback is saved to the selected upload so you can reopen the same conversation later.</p>
+            </div>
+          </section>
+
+          <section class="glass-panel rounded-xl p-6 md:col-span-4">
+            <div class="mb-6 flex items-center justify-between">
+              <h2 class="font-headline-md text-label-md uppercase tracking-widest text-primary-fixed-dim">Upload History</h2>
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" data-upload-history-count>0 uploads</span>
+            </div>
+            <div class="space-y-3" data-upload-history>
+              <div class="rounded-xl border border-dashed border-white/10 bg-white/5 p-4 text-sm text-on-surface-variant">
+                Upload a sketch to start a versioned critique thread.
               </div>
             </div>
           </section>
@@ -162,10 +176,6 @@
         </div>
       </section>
     </main>
-
-    <button class="fixed bottom-10 right-10 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-tr from-primary-fixed-dim to-secondary-container text-on-primary shadow-2xl shadow-primary-container/40 transition-transform hover:scale-110 active:scale-90" data-action="quick-create">
-      <span class="material-symbols-outlined text-3xl">ink_pen</span>
-    </button>
 
     <script src="./firebase-config.example.js"></script>
     <script type="module" src="./firebase-init.js"></script>
